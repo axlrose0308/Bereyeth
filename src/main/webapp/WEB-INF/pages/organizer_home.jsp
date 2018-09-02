@@ -11,6 +11,16 @@
     <title>Title</title>
 </head>
 <body>
-
+<h2>Organizer info</h2>
+<table>
+    <tr>
+        <td>organizer username:</td>
+        <td>${sessionScope.organizer.username}</td>
+    </tr>
+    <tr>
+        <td>organizer password:</td>
+        <td>${sessionScope.organizer.password}</td>
+    </tr>
+</table>
 </body>
 </html>

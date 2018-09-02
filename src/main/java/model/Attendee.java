@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "attendee", schema = "seminar_management_system")
 public class Attendee {
     private int id;
     private String email;

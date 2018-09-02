@@ -11,6 +11,16 @@
     <title>Title</title>
 </head>
 <body>
-
+<h2>host info</h2>
+<table>
+    <tr>
+        <td>host username:</td>
+        <td>${sessionScope.host.username}</td>
+    </tr>
+    <tr>
+        <td>host password:</td>
+        <td>${sessionScope.host.password}</td>
+    </tr>
+</table>
 </body>
 </html>

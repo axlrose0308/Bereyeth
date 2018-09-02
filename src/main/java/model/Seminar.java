@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "seminar", schema = "seminar_management_system")
 public class Seminar {
     private int id;
     private String location;

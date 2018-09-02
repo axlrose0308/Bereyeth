@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: eaton
@@ -11,6 +12,31 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1>Organizer</h1>
+<form:form action="/login/organizer" method="POST">
+    <table>
+        <tr>
+            <td>
+                <label for="username">username</label>
+            </td>
+            <td>
+                <input type="text" id="username" name="username"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">password</label>
+            </td>
+            <td>
+                <input type="password" id="password" name="password"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Login"/>
+            </td>
+        </tr>
+    </table>
+</form:form>
 </body>
 </html>

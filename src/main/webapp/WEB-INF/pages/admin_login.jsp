@@ -12,7 +12,8 @@
     <title>Title</title>
 </head>
 <body>
-<form:form action="loginAdmin" method="POST">
+<h1>Admin Login:</h1>
+<form:form action="/login/admin" method="POST">
     <table>
         <tr>
             <td>

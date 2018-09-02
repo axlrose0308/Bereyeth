@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "organizer", schema = "seminar_management_system")
 public class Organizer {
     private int id;
     private String username;

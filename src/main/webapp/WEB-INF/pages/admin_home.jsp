@@ -21,5 +21,6 @@
         <td>admin password:</td>
         <td>${sessionScope.admin.password}</td>
     </tr>
+</table>
 </body>
 </html>
