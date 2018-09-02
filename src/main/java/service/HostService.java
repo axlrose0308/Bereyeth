@@ -16,4 +16,8 @@ public class HostService {
     public Host login(String username, String password) {
         return hostRepository.findByUsernameAndPassword(username, password);
     }
+
+    public void addHost(Host host) {
+        hostRepository.save(host);
+    }
 }
