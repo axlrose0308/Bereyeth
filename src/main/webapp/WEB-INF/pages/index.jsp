@@ -1,4 +1,6 @@
-<%--
+<%@ page import="model.Admin" %>
+<%@ page import="model.Host" %>
+<%@ page import="model.Organizer" %><%--
   Created by IntelliJ IDEA.
   User: eaton
   Date: 31/08/18
@@ -32,6 +34,31 @@
 <a href="/redirect/admin">Admin Login</a>
 <a href="/redirect/host">Host Login</a>
 <a href="/redirect/organizer">Organizer Login</a>
+<h2>current session test</h2>
+<table>
+    <tr>
+        <td>${sessionScope.admin.username}</td>
+    </tr>
+    <tr>
+        <td>${sessionScope.host.username}</td>
+    </tr>
+    <tr>
+        <td>${sessionScope.organizer.username}</td>
+    </tr>
+</table>
+
+<%
+    Admin admin = null;
+    Host host = null;
+    Organizer organizer = null;
+    if (session.getAttribute("admin") != null) {
+        admin = (Admin) session.getAttribute("admin");
+    } else if (session.getAttribute("host") != null) {
+        host = (Host) session.getAttribute("admin");
+    } else if (session.getAttribute("organizer") != null) {
+        organizer = (Organizer) session.getAttribute("organizer");
+    }
+%>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>

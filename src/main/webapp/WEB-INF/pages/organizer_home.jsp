@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<%@include file="logout_component.jsp"%>
 <h2>Organizer info</h2>
 <table>
     <tr>
