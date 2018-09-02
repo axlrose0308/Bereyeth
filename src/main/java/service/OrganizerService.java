@@ -16,4 +16,8 @@ public class OrganizerService {
     public Organizer login(String username, String password) {
         return organizerRepository.findByUsernameAndPassword(username, password);
     }
+
+    public void addOrganizer(Organizer organizer) {
+        organizerRepository.save(organizer);
+    }
 }
