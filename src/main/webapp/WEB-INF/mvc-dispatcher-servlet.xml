@@ -14,6 +14,12 @@
     <!--指明 controller 所在包，并扫描其中的注解-->
     <context:component-scan base-package="controller"/>
 
+    <!--指明 service 所在包，并扫描注解-->
+    <context:component-scan base-package="service"/>
+
+    <!-- 指明JPA Repository所在包，并扫描注解 -->
+    <jpa:repositories base-package="repository"/>
+
     <!-- 静态资源(js、image等)的访问 -->
     <mvc:default-servlet-handler/>
 
@@ -27,9 +33,6 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-    <!-- 表示JPA Repository所在的包 -->
-    <jpa:repositories base-package="repository"/>
 
     <!-- 链接到persistence.xml -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
