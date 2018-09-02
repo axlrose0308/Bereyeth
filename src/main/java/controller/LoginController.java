@@ -1,6 +1,8 @@
 package controller;
 
 import model.Admin;
+import model.Host;
+import model.Organizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import service.AdminService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @SessionAttributes("admin")
 public class LoginController {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    HttpServletRequest request;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -43,6 +50,6 @@ public class LoginController {
                            ModelMap modelMap) {
         Admin admin = adminService.login(username, password);
         modelMap.addAttribute("admin",admin);
-        return "login";
+        return "admin_home";
     }
 }

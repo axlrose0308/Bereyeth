@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="SDP:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="SDP.war">
+    <root id="archive" name="SDP_war.war">
       <element id="artifact" artifact-name="SDP:war exploded" />
     </root>
   </artifact>
