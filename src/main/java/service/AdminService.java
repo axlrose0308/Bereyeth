@@ -13,7 +13,8 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-    public Admin login(String username, String password) {
+    public Admin login(String username,
+                       String password) {
         return adminRepository.findByUsernameAndPassword(username, password);
     }
 }

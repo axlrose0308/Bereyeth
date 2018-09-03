@@ -39,6 +39,8 @@ public class LoginController {
                            ModelMap modelMap) {
         Admin admin = adminService.login(username, password);
         modelMap.addAttribute("admin", admin);
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizer",organizerService.getAll());
         return "admin_home";
     }
 

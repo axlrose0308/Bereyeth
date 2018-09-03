@@ -5,12 +5,12 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "admin")
 public class Admin {
     private int id;
     private String username;
     private String password;
     private String email;
-    private Collection<Attendee> attendeesById;
     private Collection<Host> hostsById;
     private Collection<Organizer> organizersById;
     private Collection<Seminar> seminarsById;
@@ -69,15 +69,6 @@ public class Admin {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, email);
-    }
-
-    @OneToMany(mappedBy = "adminByAdminId")
-    public Collection<Attendee> getAttendeesById() {
-        return attendeesById;
-    }
-
-    public void setAttendeesById(Collection<Attendee> attendeesById) {
-        this.attendeesById = attendeesById;
     }
 
     @OneToMany(mappedBy = "adminByAdminId")

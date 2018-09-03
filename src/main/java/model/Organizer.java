@@ -5,12 +5,13 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "organizer")
 public class Organizer {
     private int id;
     private String username;
     private String password;
     private String email;
-    private byte deleted;
+    private boolean deleted;
     private Admin adminByAdminId;
     private Collection<Seminar> seminarsById;
 
@@ -56,11 +57,11 @@ public class Organizer {
 
     @Basic
     @Column(name = "deleted", nullable = false)
-    public byte getDeleted() {
+    public boolean isDeleted() {
         return deleted;
     }
 
-    public void setDeleted(byte deleted) {
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
 

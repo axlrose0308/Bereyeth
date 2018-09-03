@@ -35,7 +35,7 @@
 <a href="/redirect/host">Host Login</a>
 <a href="/redirect/organizer">Organizer Login</a>
 <h2>current session test</h2>
-<table>
+<%--<table>
     <tr>
         <td>${sessionScope.admin.username}</td>
     </tr>
@@ -45,7 +45,7 @@
     <tr>
         <td>${sessionScope.organizer.username}</td>
     </tr>
-</table>
+</table>--%>
 
 <%
     Admin admin = null;
