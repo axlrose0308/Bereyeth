@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "attendee", schema = "seminar_management_system")
 public class Attendee {
     private int id;
     private String email;
     private String code;
+    private int adminId;
+    private byte deleted;
     private Admin adminByAdminId;
     private Seminar seminarBySeminarId;
 
@@ -42,19 +43,41 @@ public class Attendee {
         this.code = code;
     }
 
+    @Basic
+    @Column(name = "admin_id", nullable = false)
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    @Basic
+    @Column(name = "deleted", nullable = false)
+    public byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(byte deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Attendee attendee = (Attendee) o;
         return id == attendee.id &&
+                adminId == attendee.adminId &&
+                deleted == attendee.deleted &&
                 Objects.equals(email, attendee.email) &&
                 Objects.equals(code, attendee.code);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, code);
+        return Objects.hash(id, email, code, adminId, deleted);
     }
 
     @ManyToOne

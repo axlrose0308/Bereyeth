@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "seminar", schema = "seminar_management_system")
 public class Seminar {
     private int id;
     private String location;
@@ -14,6 +13,7 @@ public class Seminar {
     private String subject;
     private String description;
     private Time duration;
+    private byte deleted;
     private Collection<Attendee> attendeesById;
     private Admin adminByAdminId;
     private Organizer organizerByOrganizerId;
@@ -79,12 +79,23 @@ public class Seminar {
         this.duration = duration;
     }
 
+    @Basic
+    @Column(name = "deleted", nullable = false)
+    public byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(byte deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seminar seminar = (Seminar) o;
         return id == seminar.id &&
+                deleted == seminar.deleted &&
                 Objects.equals(location, seminar.location) &&
                 Objects.equals(time, seminar.time) &&
                 Objects.equals(subject, seminar.subject) &&
@@ -94,7 +105,7 @@ public class Seminar {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, location, time, subject, description, duration);
+        return Objects.hash(id, location, time, subject, description, duration, deleted);
     }
 
     @OneToMany(mappedBy = "seminarBySeminarId")

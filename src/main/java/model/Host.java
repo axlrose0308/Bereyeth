@@ -5,13 +5,13 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "host", schema = "seminar_management_system")
 public class Host {
     private int id;
     private String username;
     private String password;
     private String phone;
     private String email;
+    private byte deleted;
     private Admin adminByAdminId;
     private Collection<Seminar> seminarsById;
 
@@ -65,12 +65,23 @@ public class Host {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "deleted", nullable = false)
+    public byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(byte deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Host host = (Host) o;
         return id == host.id &&
+                deleted == host.deleted &&
                 Objects.equals(username, host.username) &&
                 Objects.equals(password, host.password) &&
                 Objects.equals(phone, host.phone) &&
@@ -79,7 +90,7 @@ public class Host {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, phone, email);
+        return Objects.hash(id, username, password, phone, email, deleted);
     }
 
     @ManyToOne
