@@ -34,6 +34,7 @@ public class AdminController {
                             @RequestParam("email") String email) {
         hostService.addHost(session, username, password, phone, email);
         modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 
@@ -72,7 +73,8 @@ public class AdminController {
                                   @RequestParam("password") String password,
                                   @RequestParam("email") String email) {
         organizerService.add(session, username, password, email);
-        modelMap.addAttribute("organizer", )
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 
