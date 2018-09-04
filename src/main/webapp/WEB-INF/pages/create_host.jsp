@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>Please enter the host information needed for creation.</h1>
-<form:form action="/admin/addhost" method="POST">
+<form:form action="/admin/add_host" method="POST">
     <table>
         <tr>
             <td>

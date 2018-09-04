@@ -53,4 +53,8 @@ public class OrganizerService {
         organizer.setAdminByAdminId(admin);
         organizerRepository.saveAndFlush(organizer);
     }
+
+    public void delete(Integer id) {
+        organizerRepository.delete(id);
+    }
 }

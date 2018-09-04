@@ -25,7 +25,7 @@ public class AdminController {
     @Autowired
     OrganizerService organizerService;
 
-    @RequestMapping(value = "/addhost", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_host", method = RequestMethod.POST)
     public String creatHost(HttpSession session,
                             ModelMap modelMap,
                             @RequestParam("username") String username,
@@ -37,27 +37,8 @@ public class AdminController {
         return "admin_home";
     }
 
-    @RequestMapping(value = "/deletehost", method = RequestMethod.GET)
-    public String deleteHost(HttpServletRequest request,
-                             ModelMap modelMap) {
-        hostService.delete(Integer.parseInt(request.getParameter("id")));
-        modelMap.addAttribute("hosts",hostService.getAll());
-        return "admin_home";
-    }
-
-    @RequestMapping(value = "/addorganizer", method = RequestMethod.POST)
-    public String createOrganizer(HttpSession session,
-                                  ModelMap modelMap,
-                                  @RequestParam("username") String username,
-                                  @RequestParam("password") String password,
-                                  @RequestParam("email") String email) {
-        organizerService.add(session, username, password, email);
-        return "admin_home";
-    }
-
     @RequestMapping(value = "/modify_host", method = RequestMethod.GET)
-    public String modifyHost(HttpServletRequest request,
-                             ModelMap modelMap) {
+    public String modifyHost(HttpServletRequest request) {
         tempHostId = Integer.parseInt(request.getParameter("id"));
         return "modify_host";
     }
@@ -73,6 +54,52 @@ public class AdminController {
             hostService.modify(session, tempHostId, username, password, phone, email);
             tempHostId = null;
         }
+        return "admin_home";
+    }
+
+    @RequestMapping(value = "/delete_host", method = RequestMethod.GET)
+    public String deleteHost(HttpServletRequest request,
+                             ModelMap modelMap) {
+        hostService.delete(Integer.parseInt(request.getParameter("id")));
+        modelMap.addAttribute("hosts",hostService.getAll());
+        return "admin_home";
+    }
+
+    @RequestMapping(value = "/add_organizer", method = RequestMethod.POST)
+    public String createOrganizer(HttpSession session,
+                                  ModelMap modelMap,
+                                  @RequestParam("username") String username,
+                                  @RequestParam("password") String password,
+                                  @RequestParam("email") String email) {
+        organizerService.add(session, username, password, email);
+        modelMap.addAttribute("organizer", )
+        return "admin_home";
+    }
+
+    @RequestMapping(value = "/modify_organizer", method = RequestMethod.POST)
+    public String modifyOrganizer(HttpServletRequest request) {
+        tempOrganizerId = Integer.parseInt(request.getParameter("id"));
+        return "modify_organizer";
+    }
+
+    @RequestMapping(value = "/save_changed_organizer", method = RequestMethod.POST)
+    public String saveChangedOrganizer(HttpSession session,
+                                       @RequestParam("username") String username,
+                                       @RequestParam("password") String password,
+                                       @RequestParam("repeatpassword") String repeatPassword,
+                                       @RequestParam("email") String email) {
+        if (password.equals(repeatPassword)) {
+            organizerService.modify(session, tempOrganizerId, username, password, email);
+            tempOrganizerId = null;
+        }
+        return "admin_home";
+    }
+
+    @RequestMapping(value = "/delete_organizer", method = RequestMethod.GET)
+    public String deleteOrganizer(HttpServletRequest request,
+                                  ModelMap modelMap) {
+        organizerService.delete(Integer.parseInt(request.getParameter("id")));
+        modelMap.addAttribute("organizer", organizerService.getAll());
         return "admin_home";
     }
 

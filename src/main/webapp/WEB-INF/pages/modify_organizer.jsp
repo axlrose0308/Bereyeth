@@ -1,9 +1,8 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: eaton
-  Date: 2/09/18
-  Time: 11:18 PM
+  Date: 4/09/18
+  Time: 11:29 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,8 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Please enter the organizer information needed for creation.</h1>
-<form:form action="/admin/add_organizer" method="POST">
+<form:form action="/admin/save_changed_host" method="POST">
     <table>
         <tr>
             <td>
@@ -28,7 +26,23 @@
                 <label for="password">password</label>
             </td>
             <td>
-                <input type="password" id="password" name="password"/>
+                <input type="text" id="password" name="password"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="repeatpassword">repeat password</label>
+            </td>
+            <td>
+                <input type="text" id="repeatpassword" name="repeatpassword"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="phone">phone</label>
+            </td>
+            <td>
+                <input type="text" id="phone" name="phone"/>
             </td>
         </tr>
         <tr>
@@ -36,12 +50,12 @@
                 <label for="email">email</label>
             </td>
             <td>
-                <input type="email" id="email" name="email"/>
+                <input type="text" id="email" name="email"/>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="submit" value="Login"/>
+                <input type="submit" value="Confirm"/>
             </td>
         </tr>
     </table>

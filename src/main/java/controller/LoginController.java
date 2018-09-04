@@ -40,7 +40,7 @@ public class LoginController {
         Admin admin = adminService.login(username, password);
         modelMap.addAttribute("admin", admin);
         modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizer",organizerService.getAll());
+        modelMap.addAttribute("organizers",organizerService.getAll());
         return "admin_home";
     }
 
