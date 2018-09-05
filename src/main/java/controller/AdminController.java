@@ -50,11 +50,14 @@ public class AdminController {
                                   @RequestParam("password") String password,
                                   @RequestParam("repeatpassword") String repeatPassword,
                                   @RequestParam("phone") String phone,
-                                  @RequestParam("email") String email) {
+                                  @RequestParam("email") String email,
+                                  ModelMap modelMap) {
         if (password.equals(repeatPassword)) {
             hostService.modify(session, tempHostId, username, password, phone, email);
             tempHostId = null;
         }
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 
@@ -62,7 +65,8 @@ public class AdminController {
     public String deleteHost(HttpServletRequest request,
                              ModelMap modelMap) {
         hostService.delete(Integer.parseInt(request.getParameter("id")));
-        modelMap.addAttribute("hosts",hostService.getAll());
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 
@@ -78,7 +82,7 @@ public class AdminController {
         return "admin_home";
     }
 
-    @RequestMapping(value = "/modify_organizer", method = RequestMethod.POST)
+    @RequestMapping(value = "/modify_organizer", method = RequestMethod.GET)
     public String modifyOrganizer(HttpServletRequest request) {
         tempOrganizerId = Integer.parseInt(request.getParameter("id"));
         return "modify_organizer";
@@ -89,11 +93,14 @@ public class AdminController {
                                        @RequestParam("username") String username,
                                        @RequestParam("password") String password,
                                        @RequestParam("repeatpassword") String repeatPassword,
-                                       @RequestParam("email") String email) {
+                                       @RequestParam("email") String email,
+                                       ModelMap modelMap) {
         if (password.equals(repeatPassword)) {
             organizerService.modify(session, tempOrganizerId, username, password, email);
             tempOrganizerId = null;
         }
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 
@@ -101,7 +108,8 @@ public class AdminController {
     public String deleteOrganizer(HttpServletRequest request,
                                   ModelMap modelMap) {
         organizerService.delete(Integer.parseInt(request.getParameter("id")));
-        modelMap.addAttribute("organizer", organizerService.getAll());
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 

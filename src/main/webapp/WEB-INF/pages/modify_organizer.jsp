@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: eaton
@@ -11,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<form:form action="/admin/save_changed_host" method="POST">
+<form:form action="/admin/save_changed_organizer" method="POST">
     <table>
         <tr>
             <td>
