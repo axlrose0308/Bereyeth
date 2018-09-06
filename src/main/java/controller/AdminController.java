@@ -33,8 +33,7 @@ public class AdminController {
                             @RequestParam("phone") String phone,
                             @RequestParam("email") String email) {
         hostService.addHost(session, username, password, phone, email);
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
+        refreshPageContent(modelMap);
         return "admin_home";
     }
 
@@ -56,8 +55,7 @@ public class AdminController {
             hostService.modify(session, tempHostId, username, password, phone, email);
             tempHostId = null;
         }
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
+        refreshPageContent(modelMap);
         return "admin_home";
     }
 
@@ -65,8 +63,7 @@ public class AdminController {
     public String deleteHost(HttpServletRequest request,
                              ModelMap modelMap) {
         hostService.delete(Integer.parseInt(request.getParameter("id")));
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
+        refreshPageContent(modelMap);
         return "admin_home";
     }
 
@@ -77,8 +74,7 @@ public class AdminController {
                                   @RequestParam("password") String password,
                                   @RequestParam("email") String email) {
         organizerService.add(session, username, password, email);
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
+        refreshPageContent(modelMap);
         return "admin_home";
     }
 
@@ -99,8 +95,7 @@ public class AdminController {
             organizerService.modify(session, tempOrganizerId, username, password, email);
             tempOrganizerId = null;
         }
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
+        refreshPageContent(modelMap);
         return "admin_home";
     }
 
@@ -108,8 +103,7 @@ public class AdminController {
     public String deleteOrganizer(HttpServletRequest request,
                                   ModelMap modelMap) {
         organizerService.delete(Integer.parseInt(request.getParameter("id")));
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
+        refreshPageContent(modelMap);
         return "admin_home";
     }
 
@@ -121,6 +115,11 @@ public class AdminController {
             return "create_organizer";
         }
         return "admin_home";
+    }
+
+    private void refreshPageContent(ModelMap modelMap) {
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
     }
 
 }

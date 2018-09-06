@@ -34,7 +34,7 @@
             <td rowspan="4">${host.email}</td>
             <td rowspan="4">
                 <a href="/admin/modify_host?id=${host.id}">Modify</a>
-                <a href="/delete_host?id=${host.id}">Delete</a>
+                <a href="/admin/delete_host?id=${host.id}">Delete</a>
             </td>
         </tr>
     </c:if>
@@ -47,7 +47,7 @@
             <td rowspan="4">${organizer.email}</td>
             <td rowspan="4">
                 <a href="/admin/modify_organizer?id=${organizer.id}">Modify</a>
-                <a href="/delete_organizer?id=${organizer.id}">Delete</a>
+                <a href="/admin/delete_organizer?id=${organizer.id}">Delete</a>
             </td>
         </tr>
     </c:if>
