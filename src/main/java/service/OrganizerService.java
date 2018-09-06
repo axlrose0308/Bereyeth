@@ -55,6 +55,8 @@ public class OrganizerService {
     }
 
     public void delete(Integer id) {
-        organizerRepository.delete(id);
+        Organizer organizer = organizerRepository.findById(id);
+        organizer.setDeleted(true);
+        organizerRepository.saveAndFlush(organizer);
     }
 }
