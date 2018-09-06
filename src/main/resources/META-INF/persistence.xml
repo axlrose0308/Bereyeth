@@ -3,13 +3,18 @@
 
     <persistence-unit name="defaultPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>model.Admin</class>
+        <class>model.Attendee</class>
+        <class>model.Host</class>
+        <class>model.Organizer</class>
+        <class>model.Seminar</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <!-- 数据库连接的URL地址 -->
             <property name="hibernate.connection.url"
-                value="jdbc:mysql://localhost:3306/seminar_management_system?serverTimezone=GMT"/>
+                value="jdbc:mysql://localhost:3306/seminar_management_system"/>
             <!-- 数据库连接的驱动 -->
-            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <!-- 数据库连接的用户名 -->
             <property name="hibernate.connection.username" value="root"/>
             <!-- 数据库连接的密码 -->

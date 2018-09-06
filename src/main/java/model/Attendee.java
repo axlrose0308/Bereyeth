@@ -11,6 +11,17 @@ public class Attendee {
     private String code;
     private boolean deleted;
     private Seminar seminarBySeminarId;
+    private String nameTag;
+
+    @Basic
+    @Column(name = "deleted", nullable = false)
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -48,10 +59,6 @@ public class Attendee {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,5 +83,15 @@ public class Attendee {
 
     public void setSeminarBySeminarId(Seminar seminarBySeminarId) {
         this.seminarBySeminarId = seminarBySeminarId;
+    }
+
+    @Basic
+    @Column(name = "name_tag", nullable = true, length = 20)
+    public String getNameTag() {
+        return nameTag;
+    }
+
+    public void setNameTag(String nameTag) {
+        this.nameTag = nameTag;
     }
 }

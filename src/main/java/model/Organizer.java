@@ -15,6 +15,16 @@ public class Organizer {
     private Admin adminByAdminId;
     private Collection<Seminar> seminarsById;
 
+    @Basic
+    @Column(name = "deleted", nullable = false)
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
@@ -59,10 +69,6 @@ public class Organizer {
     @Column(name = "deleted", nullable = false)
     public boolean isDeleted() {
         return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
     @Override

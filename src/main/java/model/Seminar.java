@@ -19,6 +19,17 @@ public class Seminar {
     private Admin adminByAdminId;
     private Organizer organizerByOrganizerId;
     private Host hostByHostId;
+    private int capacity;
+
+    @Basic
+    @Column(name = "deleted", nullable = false)
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -86,10 +97,6 @@ public class Seminar {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,5 +153,15 @@ public class Seminar {
 
     public void setHostByHostId(Host hostByHostId) {
         this.hostByHostId = hostByHostId;
+    }
+
+    @Basic
+    @Column(name = "capacity", nullable = false)
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
