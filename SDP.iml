@@ -20,6 +20,7 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="defaultPersistenceUnit" value="b7a150b2-cf47-4fa1-8462-d5908ee0add6" />
+          <factory-entry name="noname-a.xml@0" value="b7a150b2-cf47-4fa1-8462-d5908ee0add6" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

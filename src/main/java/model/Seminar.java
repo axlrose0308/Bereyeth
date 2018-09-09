@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Collection;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +21,24 @@ public class Seminar {
     private Admin adminByAdminId;
     private Organizer organizerByOrganizerId;
     private Host hostByHostId;
+    private Date holdDate;
+
+    public Seminar(){}
+
+    public Seminar(String location, String time, String subject, String description, String duration, int capacity,
+                   Organizer organizer, Host host, String holdDate){
+        this.location = location;
+        this.time = java.sql.Time.valueOf(time+":00");
+        this.subject = subject;
+        this.description = description;
+        this.duration = Time.valueOf(duration+":00");
+        this.deleted = false;
+        this.capacity = capacity;
+        this.organizerByOrganizerId = organizer;
+        this.hostByHostId = host;
+        this.holdDate = Date.valueOf(holdDate);
+
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -131,7 +150,7 @@ public class Seminar {
     }
 
     @ManyToOne
-    @JoinColumn(name = "admin_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "admin_id", referencedColumnName = "id")
     public Admin getAdminByAdminId() {
         return adminByAdminId;
     }
@@ -158,5 +177,15 @@ public class Seminar {
 
     public void setHostByHostId(Host hostByHostId) {
         this.hostByHostId = hostByHostId;
+    }
+
+    @Basic
+    @Column(name = "hold_date")
+    public Date getHoldDate() {
+        return holdDate;
+    }
+
+    public void setHoldDate(Date holdDate) {
+        this.holdDate = holdDate;
     }
 }

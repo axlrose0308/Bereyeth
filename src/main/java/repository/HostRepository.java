@@ -11,4 +11,5 @@ public interface HostRepository extends JpaRepository<Host, Integer> {
     Host findById(Integer id);
     Host findByUsernameAndPassword(String username, String password);
     List<Host> findAllByOrderById();
+    List<Host> findAllByDeletedFalse();
 }

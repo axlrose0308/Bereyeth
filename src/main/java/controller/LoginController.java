@@ -59,6 +59,6 @@ public class LoginController {
                                ModelMap modelMap) {
         Organizer organizer = organizerService.login(username, password);
         modelMap.addAttribute("organizer", organizer);
-        return "organizer_home";
+        return "redirect:/organizer/";
     }
 }

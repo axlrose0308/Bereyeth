@@ -155,11 +155,12 @@ CREATE TABLE `seminar` (
   `subject` varchar(20) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
   `duration` time NOT NULL,
-  `admin_id` int(11) NOT NULL,
+  `admin_id` int(11) DEFAULT NULL,
   `organizer_id` int(11) NOT NULL,
   `host_id` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `capacity` int(11) NOT NULL,
+  `hold_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `seminar_id_uindex` (`id`),
   KEY `seminar_admin_id_fk` (`admin_id`),
@@ -168,7 +169,7 @@ CREATE TABLE `seminar` (
   CONSTRAINT `seminar_admin_id_fk` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
   CONSTRAINT `seminar_host_id_fk` FOREIGN KEY (`host_id`) REFERENCES `host` (`id`),
   CONSTRAINT `seminar_organizer_id_fk` FOREIGN KEY (`organizer_id`) REFERENCES `organizer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +178,7 @@ CREATE TABLE `seminar` (
 
 LOCK TABLES `seminar` WRITE;
 /*!40000 ALTER TABLE `seminar` DISABLE KEYS */;
-INSERT INTO `seminar` VALUES (1,'UTS','11:00:00','java','java','02:00:00',1,6,8,0,20);
+INSERT INTO `seminar` VALUES (1,'UTS','11:00:00','java','java','02:00:00',1,6,8,0,20,'2018-09-29'),(2,'UTS','18:03:00','ddd','ADFAFEFAWDFA','15:55:00',NULL,6,9,0,6,'2018-09-06');
 /*!40000 ALTER TABLE `seminar` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -190,4 +191,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-09 20:58:21
+-- Dump completed on 2018-09-10  0:03:02

@@ -2,12 +2,17 @@ package service;
 
 import model.Admin;
 import model.Host;
+import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.ls.LSInput;
 import repository.HostRepository;
+import repository.SeminarRepository;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -16,6 +21,9 @@ public class HostService {
 
     @Autowired
     HostRepository hostRepository;
+
+    @Autowired
+    SeminarRepository seminarRepository;
 
     public Host login(String username,
                       String password) {
@@ -64,4 +72,7 @@ public class HostService {
         host.setDeleted(true);
         hostRepository.saveAndFlush(host);
     }
+
+    public Host get(Integer id){ return hostRepository.findById(id); }
+
 }
