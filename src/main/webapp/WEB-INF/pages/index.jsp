@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="model.Admin" %>
 <%@ page import="model.Host" %>
 <%@ page import="model.Organizer" %><%--
@@ -15,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>SpringMVC Demo 首页</title>
+    <title>Seminar Management System</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -35,7 +36,7 @@
 <a href="/redirect/host">Host Login</a>
 <a href="/redirect/organizer">Organizer Login</a>
 <h2>current session test</h2>
-<%--<table>
+<table>
     <tr>
         <td>${sessionScope.admin.username}</td>
     </tr>
@@ -45,7 +46,29 @@
     <tr>
         <td>${sessionScope.organizer.username}</td>
     </tr>
-</table>--%>
+</table>
+
+<h3>Seminar we have right now</h3>
+<c:forEach var="seminar" items="${seminars}">
+    <c:if test="${!seminar.deleted}">
+        <tr>
+            <td>
+                    ${seminar.subject}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    ${seminar.description}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Details:
+                <a href="/seminar/details"/>
+            </td>
+        </tr>
+    </c:if>
+</c:forEach>
 
 <%
     Admin admin = null;

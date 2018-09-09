@@ -10,18 +10,8 @@ public class Attendee {
     private String email;
     private String code;
     private boolean deleted;
-    private Seminar seminarBySeminarId;
     private String nameTag;
-
-    @Basic
-    @Column(name = "deleted", nullable = false)
-    public boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
+    private Seminar seminarBySeminarId;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -59,30 +49,8 @@ public class Attendee {
         return deleted;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Attendee attendee = (Attendee) o;
-        return id == attendee.id &&
-                deleted == attendee.deleted &&
-                Objects.equals(email, attendee.email) &&
-                Objects.equals(code, attendee.code);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, code, deleted);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "seminar_id", referencedColumnName = "id", nullable = false)
-    public Seminar getSeminarBySeminarId() {
-        return seminarBySeminarId;
-    }
-
-    public void setSeminarBySeminarId(Seminar seminarBySeminarId) {
-        this.seminarBySeminarId = seminarBySeminarId;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Basic
@@ -93,5 +61,32 @@ public class Attendee {
 
     public void setNameTag(String nameTag) {
         this.nameTag = nameTag;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Attendee attendee = (Attendee) o;
+        return id == attendee.id &&
+                deleted == attendee.deleted &&
+                Objects.equals(email, attendee.email) &&
+                Objects.equals(code, attendee.code) &&
+                Objects.equals(nameTag, attendee.nameTag);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, code, deleted, nameTag);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "seminar_id", referencedColumnName = "id", nullable = false)
+    public Seminar getSeminarBySeminarId() {
+        return seminarBySeminarId;
+    }
+
+    public void setSeminarBySeminarId(Seminar seminarBySeminarId) {
+        this.seminarBySeminarId = seminarBySeminarId;
     }
 }

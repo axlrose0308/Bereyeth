@@ -15,21 +15,11 @@ public class Seminar {
     private String description;
     private Time duration;
     private boolean deleted;
+    private int capacity;
     private Collection<Attendee> attendeesById;
     private Admin adminByAdminId;
     private Organizer organizerByOrganizerId;
     private Host hostByHostId;
-    private int capacity;
-
-    @Basic
-    @Column(name = "deleted", nullable = false)
-    public boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -97,6 +87,20 @@ public class Seminar {
         return deleted;
     }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    @Basic
+    @Column(name = "capacity", nullable = false)
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,6 +108,7 @@ public class Seminar {
         Seminar seminar = (Seminar) o;
         return id == seminar.id &&
                 deleted == seminar.deleted &&
+                capacity == seminar.capacity &&
                 Objects.equals(location, seminar.location) &&
                 Objects.equals(time, seminar.time) &&
                 Objects.equals(subject, seminar.subject) &&
@@ -113,7 +118,7 @@ public class Seminar {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, location, time, subject, description, duration, deleted);
+        return Objects.hash(id, location, time, subject, description, duration, deleted, capacity);
     }
 
     @OneToMany(mappedBy = "seminarBySeminarId")
@@ -153,15 +158,5 @@ public class Seminar {
 
     public void setHostByHostId(Host hostByHostId) {
         this.hostByHostId = hostByHostId;
-    }
-
-    @Basic
-    @Column(name = "capacity", nullable = false)
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 }

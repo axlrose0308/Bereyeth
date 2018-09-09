@@ -27,13 +27,16 @@ public class HostService {
                         String password,
                         String phone,
                         String email) {
+
         Host host = new Host();
-        host.setEmail(email);
-        host.setPhone(phone);
-        host.setUsername(username);
-        host.setPassword(password);
-        host.setAdminByAdminId((Admin) session.getAttribute("admin"));
-        hostRepository.save(host);
+        if (hostRepository.findByUsername(username) == null) {
+            host.setEmail(email);
+            host.setPhone(phone);
+            host.setUsername(username);
+            host.setPassword(password);
+            host.setAdminByAdminId((Admin) session.getAttribute("admin"));
+            hostRepository.save(host);
+        } else modify(session,hostRepository.findByUsername(username).getId(),username,password,phone,email);
     }
 
     public List<Host> getAll() {

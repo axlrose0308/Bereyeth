@@ -56,6 +56,7 @@ CREATE TABLE `attendee` (
   `code` varchar(200) NOT NULL,
   `seminar_id` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL,
+  `name_tag` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `attendee_id_uindex` (`id`),
   UNIQUE KEY `attendee_email_uindex` (`email`),
@@ -94,7 +95,7 @@ CREATE TABLE `host` (
   UNIQUE KEY `host_username_uindex` (`username`),
   KEY `host_admin_id_fk` (`admin_id`),
   CONSTRAINT `host_admin_id_fk` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +104,7 @@ CREATE TABLE `host` (
 
 LOCK TABLES `host` WRITE;
 /*!40000 ALTER TABLE `host` DISABLE KEYS */;
-INSERT INTO `host` VALUES (3,'lei','7499','456456456','1232@123.com',1,1),(7,'wacao','1234','332214','asdf@asdf.com',1,0);
+INSERT INTO `host` VALUES (3,'lei','7499','456456456','1232@123.com',1,1),(7,'ericwwww','1234','123123123','eafeasdfaewf@asdf.com',1,1),(8,'yichen1','1234','8374837484','lkjasdf@asdf.como',1,0),(9,'yichen2','1234','12934879213847','aoisudfh@uhwen.com',1,0),(10,'yichen3','1234','8987938473','aefaef@loiojwoe.comm',1,1),(12,'yichen4','1234','912837','laskdjf@laskdjf.alskdfj',1,1);
 /*!40000 ALTER TABLE `host` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +128,7 @@ CREATE TABLE `organizer` (
   UNIQUE KEY `Organizer_email_uindex` (`email`),
   KEY `Organizer_admin_id_fk` (`admin_id`),
   CONSTRAINT `Organizer_admin_id_fk` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +137,7 @@ CREATE TABLE `organizer` (
 
 LOCK TABLES `organizer` WRITE;
 /*!40000 ALTER TABLE `organizer` DISABLE KEYS */;
-INSERT INTO `organizer` VALUES (3,'eric','1234','asdf@asdf.com',1,0),(5,'leitong','1234','qwer@qwer.com',1,0);
+INSERT INTO `organizer` VALUES (6,'tong1','1234','aewf@eev.com',1,0),(9,'tong2','1234','qwer31412@ss.com',1,0);
 /*!40000 ALTER TABLE `organizer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,6 +159,7 @@ CREATE TABLE `seminar` (
   `organizer_id` int(11) NOT NULL,
   `host_id` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `capacity` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `seminar_id_uindex` (`id`),
   KEY `seminar_admin_id_fk` (`admin_id`),
@@ -166,7 +168,7 @@ CREATE TABLE `seminar` (
   CONSTRAINT `seminar_admin_id_fk` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
   CONSTRAINT `seminar_host_id_fk` FOREIGN KEY (`host_id`) REFERENCES `host` (`id`),
   CONSTRAINT `seminar_organizer_id_fk` FOREIGN KEY (`organizer_id`) REFERENCES `organizer` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +177,7 @@ CREATE TABLE `seminar` (
 
 LOCK TABLES `seminar` WRITE;
 /*!40000 ALTER TABLE `seminar` DISABLE KEYS */;
+INSERT INTO `seminar` VALUES (1,'UTS','11:00:00','java','java','02:00:00',1,6,8,0,20);
 /*!40000 ALTER TABLE `seminar` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -187,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-05 22:00:19
+-- Dump completed on 2018-09-09 20:58:21

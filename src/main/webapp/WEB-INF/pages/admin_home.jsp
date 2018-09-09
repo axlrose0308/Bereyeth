@@ -30,8 +30,14 @@
     <c:if test="${!host.deleted}">
         <tr>
             <td rowspan="4">${host.username}</td>
+        </tr>
+        <tr>
             <td rowspan="4">${host.phone}</td>
+        </tr>
+        <tr>
             <td rowspan="4">${host.email}</td>
+        </tr>
+        <tr>
             <td rowspan="4">
                 <a href="/admin/modify_host?id=${host.id}">Modify</a>
                 <a href="/admin/delete_host?id=${host.id}">Delete</a>
