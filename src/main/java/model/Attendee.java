@@ -1,5 +1,7 @@
 package model;
 
+import org.jasypt.util.text.BasicTextEncryptor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -12,6 +14,16 @@ public class Attendee {
     private boolean deleted;
     private String nameTag;
     private Seminar seminarBySeminarId;
+
+
+    public Attendee(){}
+    public Attendee(String email, String nameTag, Seminar seminar){
+        this.email = email;
+        this.nameTag = nameTag;
+        deleted = false;
+        seminarBySeminarId = seminar;
+        generateCode();
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -88,5 +100,19 @@ public class Attendee {
 
     public void setSeminarBySeminarId(Seminar seminarBySeminarId) {
         this.seminarBySeminarId = seminarBySeminarId;
+    }
+
+    private void generateCode(){
+        String key = getEmail()+getSeminarBySeminarId().getHoldDate()+getSeminarBySeminarId().getId();
+        int hash, i;
+        for (hash = 0, i = 0; i < key.length(); ++i) {
+            hash += key.charAt(i);
+            hash += (hash << 10);
+            hash ^= (hash >> 6);
+        }
+        hash += (hash << 3);
+        hash ^= (hash >> 11);
+        hash += (hash << 15);
+        code = "SEMA"+ Math.abs(hash) + "";
     }
 }
