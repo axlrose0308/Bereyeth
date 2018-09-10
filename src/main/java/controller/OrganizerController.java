@@ -2,6 +2,7 @@ package controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import exception.HostUnavailableException;
 import model.Host;
 import model.Organizer;
 import model.Seminar;
@@ -19,6 +20,7 @@ import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/organizer")
@@ -28,16 +30,17 @@ public class OrganizerController {
     @Autowired
     HostService hostService;
 
-    @RequestMapping(value = {"/","/seminars"}, method = RequestMethod.GET )
+    @RequestMapping(value = {"/", "/seminars"}, method = RequestMethod.GET)
     public String getSeminars(HttpSession session, ModelMap modelMap) {
         Organizer organizer = (Organizer) session.getAttribute("organizer");
         modelMap.addAttribute("seminars", seminarService.getAllByOrganiserId(organizer));
         return "organizer_home";
     }
 
-    @RequestMapping(value = {"/seminars/add"}, method = RequestMethod.GET )
-    public String addSeminar(ModelMap modelMap) {
-        modelMap.addAttribute("availableHosts", seminarService.getAvailableHosts());
+    @RequestMapping(value = {"/seminars/add"}, method = RequestMethod.GET)
+    public String addSeminar(ModelMap modelMap, @RequestParam(required=false, name="error") String error) {
+        modelMap.addAttribute("availableHosts", hostService.getAll());
+        modelMap.addAttribute("error", error);
         return "create_seminar";
     }
 
@@ -49,13 +52,53 @@ public class OrganizerController {
                               @RequestParam("duration") String duration,
                               @RequestParam("capacity") int capacity,
                               @RequestParam("holdDate") String date,
-                              @RequestParam("hostId")Integer hostId,
-                              HttpSession session
-                              ){
+                              @RequestParam("hostId") Integer hostId,
+                              HttpSession session, ModelMap modelMap
+    ) {
         Organizer organizer = (Organizer) session.getAttribute("organizer");
         Host host = hostService.get(hostId);
         Seminar seminar = new Seminar(location, time, subject, description, duration, capacity, organizer, host, date);
-        seminarService.addSeminar(seminar);
+        try {
+            seminarService.addSeminar(seminar);
+        } catch (HostUnavailableException e) {
+            return "redirect:/organizer/seminars/add?error="+e.getMessage();
+        }
         return "redirect:/organizer/";
+    }
+
+    @RequestMapping(value = {"/seminars/delete"}, method = RequestMethod.GET)
+    public String deleteSeminar(@RequestParam("seminarId") Integer id) {
+        seminarService.deleteSeminar(id);
+        return "redirect:/organizer/";
+    }
+
+    @RequestMapping(value = {"/seminars/edit"}, method = RequestMethod.GET)
+    public String edit(@RequestParam("seminarId") Integer id, ModelMap modelMap,
+                       @RequestParam(required = false, name="error") String error) {
+        Seminar seminar = seminarService.get(id);
+        modelMap.addAttribute("seminar", seminar);
+        modelMap.addAttribute("availableHosts", hostService.getAll());
+        if(error != null && !error.equals("")) modelMap.addAttribute("error", error);
+        return "modify_seminar";
+    }
+
+
+
+    @RequestMapping(value = {"/seminars/edit"}, method = RequestMethod.POST)
+    public String edit(@RequestParam("seminarId") Integer seminarId,
+                       @RequestParam("location") String location,
+                       @RequestParam("time") String time,
+                       @RequestParam("subject") String subject,
+                       @RequestParam("description") String description,
+                       @RequestParam("duration") String duration,
+                       @RequestParam("capacity") int capacity,
+                       @RequestParam("holdDate") String holdDate,
+                       @RequestParam("hostId") Integer hostId ) {
+        try {
+            seminarService.updateSeminar(seminarId, location, time, subject, description, duration, capacity, holdDate, hostId);
+        } catch (HostUnavailableException e) {
+            return "redirect:/organizer/seminars/edit?seminarId="+seminarId+"&error="+e.getMessage();
+        }
+        return "redirect:/organizer/seminars";
     }
 }

@@ -19,7 +19,7 @@ public class OrganizerService {
 
     public Organizer login(String username,
                            String password) {
-        return organizerRepository.findByUsernameAndPassword(username, password);
+        return organizerRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
     }
 
     public List<Organizer> getAll(){

@@ -70,6 +70,10 @@ public class Seminar {
         this.time = time;
     }
 
+    public void setTimeString(String time) {
+        this.time = Time.valueOf(time);
+    }
+
     @Basic
     @Column(name = "subject", nullable = false, length = 20)
     public String getSubject() {
@@ -98,6 +102,10 @@ public class Seminar {
 
     public void setDuration(Time duration) {
         this.duration = duration;
+    }
+
+    public void setDurationString(String duration) {
+        this.duration = Time.valueOf(duration);
     }
 
     @Basic
@@ -188,4 +196,9 @@ public class Seminar {
     public void setHoldDate(Date holdDate) {
         this.holdDate = holdDate;
     }
+
+    public void setHoldDateString(String holdDate) {
+        this.holdDate = Date.valueOf(holdDate);
+    }
+
 }

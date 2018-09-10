@@ -27,7 +27,7 @@ public class HostService {
 
     public Host login(String username,
                       String password) {
-        return hostRepository.findByUsernameAndPassword(username, password);
+        return hostRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
     }
 
     public void addHost(HttpSession session,
@@ -48,7 +48,7 @@ public class HostService {
     }
 
     public List<Host> getAll() {
-        return hostRepository.findAllByOrderById();
+        return hostRepository.findAllByDeletedFalse();
     }
 
     public void modify(HttpSession session,
@@ -73,6 +73,4 @@ public class HostService {
         hostRepository.saveAndFlush(host);
     }
 
-    public Host get(Integer id){ return hostRepository.findById(id); }
-
-}
+    public Host get(Integer id){ return hostRepository.findById(id); }}

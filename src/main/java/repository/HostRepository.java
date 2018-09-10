@@ -9,7 +9,7 @@ public interface HostRepository extends JpaRepository<Host, Integer> {
 
     Host findByUsername(String username);
     Host findById(Integer id);
-    Host findByUsernameAndPassword(String username, String password);
+    Host findByUsernameAndPasswordAndDeletedFalse(String username, String password);
     List<Host> findAllByOrderById();
     List<Host> findAllByDeletedFalse();
 }

@@ -8,6 +8,6 @@ import java.util.List;
 public interface OrganizerRepository extends JpaRepository<Organizer, Integer> {
 
     Organizer findById(Integer id);
-    Organizer findByUsernameAndPassword(String username, String password);
+    Organizer findByUsernameAndPasswordAndDeletedFalse(String username, String password);
     List<Organizer> findAllByOrderById();
 }

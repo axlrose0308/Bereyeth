@@ -21,6 +21,7 @@
         <tr>
             <th>Id</th>
             <th>Location</th>
+            <th>Date</th>
             <th>Time</th>
             <th>Subject</th>
             <th>Description</th>
@@ -36,6 +37,7 @@
             <tr>
                 <td>${seminar.id}</td>
                 <td>${seminar.location}</td>
+                <td>${seminar.holdDate}</td>
                 <td>${seminar.time}</td>
                 <td>${seminar.subject}</td>
                 <td>${seminar.description}</td>
@@ -44,8 +46,8 @@
                 <td>${seminar.adminByAdminId.username}</td>
                 <td>${seminar.hostByHostId.username}</td>
                 <td><a>View attendees</a></td>
-                <td><a>Edit</a></td>
-                <td><a>Delete</a></td>
+                <td><a href="/organizer/seminars/edit?seminarId=${seminar.id}">Edit</a></td>
+                <td><a href="/organizer/seminars/delete?seminarId=${seminar.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

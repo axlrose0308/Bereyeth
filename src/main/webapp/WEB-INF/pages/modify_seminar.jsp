@@ -14,14 +14,22 @@
 </head>
 <body>
 <h1>${error}</h1>
-<form:form action="/organizer/seminars/add" method="POST">
+<form:form action="/organizer/seminars/edit" method="POST">
     <table>
         <tr>
             <td>
-                <label for="location">location</label>
+                <label for="seminarId">Seminar Id</label>
             </td>
             <td>
-                <input type="text" id="location" name="location"/>
+                <input type="number" name="seminarId" id="seminarId" readonly="readonly" value="${seminar.id}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="location">Location</label>
+            </td>
+            <td>
+                <input type="text" id="location" name="location" value="${seminar.location}"/>
             </td>
         </tr>
         <tr>
@@ -29,7 +37,7 @@
                 <label for="time">Time</label>
             </td>
             <td>
-                <input type="time" id="time" name="time"/>
+                <input type="time" id="time" name="time" value="${seminar.time}"/>
             </td>
         </tr>
         <tr>
@@ -37,15 +45,15 @@
                 <label for="subject">Subject</label>
             </td>
             <td>
-                <input type="text" id="subject" name="subject"/>
+                <input type="text" id="subject" name="subject" value="${seminar.subject}"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="description">Subject</label>
+                <label for="description">Description</label>
             </td>
             <td>
-                <textarea name="description" id="description" rows="6"></textarea>
+                <textarea name="description" id="description" rows="6">${seminar.description}</textarea>
             </td>
         </tr>
 
@@ -54,7 +62,7 @@
                 <label for="duration">Duration</label>
             </td>
             <td>
-                <input type="time" id="duration" name="duration"/>
+                <input type="time" id="duration" name="duration" value="${seminar.duration}"/>
             </td>
         </tr>
         <tr>
@@ -62,10 +70,9 @@
                 <label for="capacity">Capacity</label>
             </td>
             <td>
-                <input type="number" min="1" id="capacity" name="capacity"/>
+                <input type="number" min="1" id="capacity" name="capacity" value="${seminar.capacity}"/>
             </td>
         </tr>
-
 
         <tr>
             <td>
@@ -74,7 +81,12 @@
             <td>
                 <select id="hostId" name="hostId">
                     <c:forEach items="${availableHosts}" var="host">
-                        <option value="${host.id}">${host.username}</option>
+                        <c:if test="${host.id==seminar.hostByHostId.id}">
+                            <option value="${host.id}" selected="selected">${host.username}</option>
+                        </c:if>
+                        <c:if test="${host.id!=seminar.hostByHostId.id}">
+                            <option value="${host.id}">${host.username}</option>
+                        </c:if>
                     </c:forEach>
                 </select>
             </td>
@@ -84,12 +96,15 @@
                 <label for="holdDate">Hold date</label>
             </td>
             <td>
-                <input type="date" id="holdDate" name="holdDate"/>
+                <input type="date" id="holdDate" name="holdDate" value="${seminar.holdDate}"/>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="submit" value="Create"/>
+                <input type="submit" value="Save"/>
+            </td>
+            <td>
+                <a href="/organizer/">Return</a>
             </td>
         </tr>
     </table>
