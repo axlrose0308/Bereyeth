@@ -10,4 +10,5 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Integer> {
 
     List<Attendee> findAllBySeminarBySeminarIdAndDeletedFalse(Seminar seminar);
     Attendee findByEmailAndDeletedFalseAndSeminarBySeminarId(String email, Seminar seminar);
+    Attendee findByCode(String code);
 }

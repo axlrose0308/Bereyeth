@@ -10,6 +10,16 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <%@include file="logout_component.jsp" %>
@@ -23,6 +33,7 @@
             <th>Location</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Category</th>
             <th>Subject</th>
             <th>Description</th>
             <th>Duration</th>
@@ -39,6 +50,7 @@
                 <td>${seminar.location}</td>
                 <td>${seminar.holdDate}</td>
                 <td>${seminar.time}</td>
+                <td>${seminar.category}</td>
                 <td>${seminar.subject}</td>
                 <td>${seminar.description}</td>
                 <td>${seminar.duration}</td>

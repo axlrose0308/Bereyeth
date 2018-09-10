@@ -3,6 +3,7 @@ package service;
 
 import exception.RegisteredException;
 import model.Attendee;
+import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,19 @@ public class AttendeeService {
 
     public void delete(Integer attendeeId){
         Attendee attendee = get(attendeeId);
+        delete(attendee);
+    }
+
+    public void delete(Attendee attendee){
         attendee.setDeleted(true);
         attendeeRepository.saveAndFlush(attendee);
+    }
+
+    public Seminar delete(String code){
+        Attendee attendee = attendeeRepository.findByCode(code);
+        Seminar seminar = attendee.getSeminarBySeminarId();
+        delete(attendee);
+        return seminar;
     }
 
 

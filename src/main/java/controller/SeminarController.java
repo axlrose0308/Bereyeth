@@ -28,7 +28,7 @@ public class SeminarController {
     public String details(@RequestParam("id") Integer id, @RequestParam(required = false, name = "error") String error,
                           ModelMap modelMap) {
         modelMap.addAttribute("seminar", seminarService.get(id));
-        if(error != null) modelMap.addAttribute("error", error);
+        if (error != null) modelMap.addAttribute("error", error);
         return "seminar_detail";
     }
 
@@ -36,7 +36,7 @@ public class SeminarController {
     public String register(@RequestParam("email") String email,
                            @RequestParam("nameTag") String nameTag,
                            @RequestParam("seminarId") Integer seminarId,
-                           ModelMap modelMap){
+                           ModelMap modelMap) {
 
         Seminar seminar = seminarService.get(seminarId);
         Attendee attendee = new Attendee(email, nameTag, seminar);
@@ -47,24 +47,32 @@ public class SeminarController {
             modelMap.addAttribute("code", code);
             return "registered";
         } catch (RegisteredException e) {
-            return "redirect:/seminar/details?id="+seminarId+"&error="+e.getMessage();
+            return "redirect:/seminar/details?id=" + seminarId + "&error=" + e.getMessage();
         }
 
     }
 
-    @RequestMapping(value="/attendees", method = RequestMethod.GET)
-    public String viewAttendees(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap){
+    @RequestMapping(value = "/attendees", method = RequestMethod.GET)
+    public String viewAttendees(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap) {
         List<Attendee> attendees = seminarService.getAttendees(seminarId);
         modelMap.addAttribute("attendees", attendees);
         modelMap.addAttribute("seminar", seminarService.get(seminarId));
         return "attendees";
     }
 
-    @RequestMapping(value="/attendees/delete", method = RequestMethod.GET)
-    public String viewAttendees(@RequestParam("id") Integer attendeeId,
-                                @RequestParam("seminarId") Integer seminarId){
-        attendeeService.delete(attendeeId);
-        return "redirect:/seminar/attendees?seminarId="+seminarId;
+    @RequestMapping(value = "/attendees/delete", method = RequestMethod.GET)
+    public String viewAttendees(@RequestParam(required = false, name = "id") Integer attendeeId,
+                                @RequestParam(required = false, name = "seminarId") Integer seminarId,
+                                @RequestParam(required = false, name = "code") String code, ModelMap modelMap) {
+        if (attendeeId != null) {
+            attendeeService.delete(attendeeId);
+            return "redirect:/seminar/attendees?seminarId=" + seminarId;
+        }
+        else {
+            Seminar seminar = attendeeService.delete(code);
+            modelMap.addAttribute("seminar", seminar);
+            return "cancel_registration";
+        }
     }
 
 }

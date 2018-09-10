@@ -11,6 +11,16 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <h1>${error}</h1>
@@ -86,6 +96,23 @@
                         </c:if>
                         <c:if test="${host.id!=seminar.hostByHostId.id}">
                             <option value="${host.id}">${host.username}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="category">Category</label>
+            </td>
+            <td>
+                <select id="category" name="category">
+                    <c:forEach items="${categories}" var="category">
+                        <c:if test="${category.equals(seminar.category)}">
+                            <option selected="selected">${category}</option>
+                        </c:if>
+                        <c:if test="${not category.equals(seminar.category)}">
+                            <option >${category}</option>
                         </c:if>
                     </c:forEach>
                 </select>

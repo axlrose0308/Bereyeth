@@ -10,11 +10,21 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <c:if test="${not empty attendees}">
     <h3>Attendees for Seminar No.${seminar.id} ${seminar.subject}</h3>
-    <table border="1">
+    <table>
         <tr>
             <th>Id</th>
             <th>Email</th>

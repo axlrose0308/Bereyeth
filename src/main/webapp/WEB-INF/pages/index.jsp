@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="model.Admin" %>
 <%@ page import="model.Host" %>
 <%@ page import="model.Organizer" %><%--
@@ -13,6 +14,16 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <h1>Welcome to seminar management system</h1>
@@ -44,24 +55,51 @@
 <a href="/redirect/organizer">Organizer Login</a>
 <%}%>
 
+<form:form action="/" method="GET">
+<table>
+    <tr>
+        <td>
+            <select id="category" name="category">
+                <option>All</option>
+                <c:forEach items="${categories}" var="category">
+                    <c:if test="${category.equals(selected)}">
+                        <option selected="selected">${category}</option>
+                    </c:if>
+                    <c:if test="${not category.equals(selected)}">
+                        <option>${category}</option>
+                    </c:if>
+                </c:forEach>
+            </select>
+        </td>
+        <td>
+            <input type="submit" value="View By Category"/>
+        </td>
+    </tr>
+</table>
+</form:form>
+
 <c:if test="${empty seminars}">
     <h1>No available seminars</h1>
 </c:if>
 <c:if test="${not empty seminars}">
     <h3>Seminars currently available.</h3>
-    <table>
+    <table >
         <tr>
             <th>Subject</th>
             <th>Hold Date</th>
+            <th>Category</th>
             <th></th>
         </tr>
         <c:forEach var="seminar" items="${seminars}">
             <tr>
-                <td>
+                <td >
                         ${seminar.subject}
                 </td>
                 <td>
                         ${seminar.holdDate}
+                </td>
+                <td>
+                    ${seminar.category}
                 </td>
                 <td>
                     <a href="/seminar/details?id=${seminar.id}">View detail</a>
@@ -70,6 +108,12 @@
         </c:forEach>
     </table>
 </c:if>
+
+<form:form action="/seminar/attendees/delete" method="get">
+    <p>Enter your registration code to cancel registration</p>
+    <input type="text" name="code" width="100"/>
+    <input type="submit" value="Cancel"/>
+</form:form>
 
 </body>
 </html>

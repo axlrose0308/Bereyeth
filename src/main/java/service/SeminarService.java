@@ -56,7 +56,7 @@ public class SeminarService {
     }
 
     public void updateSeminar(Integer seminarId, String location, String time, String subject, String description,
-                              String duration, int capacity, String holdDate, Integer hostId) throws HostUnavailableException {
+                              String duration, int capacity, String holdDate, Integer hostId, String category) throws HostUnavailableException {
         Host host = hostRepository.findById(hostId);
         Seminar seminar = get(seminarId);
         seminar.setLocation(location);
@@ -65,6 +65,7 @@ public class SeminarService {
         seminar.setDescription(description);
         seminar.setDurationString(duration);
         seminar.setCapacity(capacity);
+        seminar.setCategory(category);
 
 
         Seminar anotherSeminar = seminarRepository.findByHoldDateAndHostId(holdDate, hostId);
@@ -79,5 +80,9 @@ public class SeminarService {
 
     public List<Attendee> getAttendees(Integer id){
         return attendeeRepository.findAllBySeminarBySeminarIdAndDeletedFalse(get(id));
+    }
+
+    public List<Seminar> getAvailablesByCategory(String category){
+        return seminarRepository.findAllByCategoryAndDeletedFalseAndHoldDateAfter(category, new Date(new java.util.Date().getTime()));
     }
 }

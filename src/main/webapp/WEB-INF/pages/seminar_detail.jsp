@@ -11,6 +11,17 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 1px;
+        }
+
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,6 +41,14 @@
         </td>
         <td>
             <h3>${seminar.location}</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Category</label>
+        </td>
+        <td>
+            <h3>${seminar.category}</h3>
         </td>
     </tr>
     <tr>
@@ -70,7 +89,7 @@
             <label>Capacity</label>
         </td>
         <td>
-            <h3>${seminar.capacity}"</h3>
+            <h3>${seminar.capacity}</h3>
         </td>
     </tr>
 
@@ -120,7 +139,8 @@
     </tr>
     </form:form>
 </table>
-<a href="/">Back</a><h2>${error}</h2>
+<a href="/">Back</a>
+<h2>${error}</h2>
 
 </body>
 </html>

@@ -9,6 +9,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "seminar")
 public class Seminar {
+    public static final String FORUM = "Forum";
+    public static final String LECTURE = "Lecture";
+    public static final String ACADEMIC_CONFERENCE = "Academic Conference";
+    public static final String SUMMIT_MEETING = "Summit Meeting";
+    public static final String[] CATEGORIES = {FORUM, LECTURE, ACADEMIC_CONFERENCE, SUMMIT_MEETING};
+
     private int id;
     private String location;
     private Time time;
@@ -22,13 +28,14 @@ public class Seminar {
     private Organizer organizerByOrganizerId;
     private Host hostByHostId;
     private Date holdDate;
+    private String category;
 
     public Seminar(){}
 
     public Seminar(String location, String time, String subject, String description, String duration, int capacity,
-                   Organizer organizer, Host host, String holdDate){
+                   Organizer organizer, Host host, String holdDate, String category){
         this.location = location;
-        this.time = java.sql.Time.valueOf(time+":00");
+        this.time = Time.valueOf(time+":00");
         this.subject = subject;
         this.description = description;
         this.duration = Time.valueOf(duration+":00");
@@ -37,6 +44,7 @@ public class Seminar {
         this.organizerByOrganizerId = organizer;
         this.hostByHostId = host;
         this.holdDate = Date.valueOf(holdDate);
+        this.category = category;
 
     }
 
@@ -205,4 +213,13 @@ public class Seminar {
         return getHoldDate().before(new Date(new java.util.Date().getTime()));
     }
 
+    @Basic
+    @Column(name = "category")
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }

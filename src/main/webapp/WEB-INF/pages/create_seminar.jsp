@@ -11,6 +11,16 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <h1>${error}</h1>
@@ -81,6 +91,18 @@
         </tr>
         <tr>
             <td>
+                <label for="category">Category</label>
+            </td>
+            <td>
+                <select id="category" name="category">
+                    <c:forEach items="${categories}" var="category">
+                        <option>${category}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="holdDate">Hold date</label>
             </td>
             <td>
@@ -94,6 +116,7 @@
         </tr>
     </table>
 </form:form>
+<<a href="/organizer/">Return</a>
 
 </body>
 </html>

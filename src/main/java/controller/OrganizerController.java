@@ -22,6 +22,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
+import static model.Seminar.CATEGORIES;
+
 @Controller
 @RequestMapping(value = "/organizer")
 public class OrganizerController {
@@ -41,6 +43,7 @@ public class OrganizerController {
     public String addSeminar(ModelMap modelMap, @RequestParam(required=false, name="error") String error) {
         modelMap.addAttribute("availableHosts", hostService.getAll());
         modelMap.addAttribute("error", error);
+        modelMap.addAttribute("categories", CATEGORIES);
         return "create_seminar";
     }
 
@@ -53,11 +56,12 @@ public class OrganizerController {
                               @RequestParam("capacity") int capacity,
                               @RequestParam("holdDate") String date,
                               @RequestParam("hostId") Integer hostId,
+                              @RequestParam("category") String category,
                               HttpSession session, ModelMap modelMap
     ) {
         Organizer organizer = (Organizer) session.getAttribute("organizer");
         Host host = hostService.get(hostId);
-        Seminar seminar = new Seminar(location, time, subject, description, duration, capacity, organizer, host, date);
+        Seminar seminar = new Seminar(location, time, subject, description, duration, capacity, organizer, host, date, category);
         try {
             seminarService.addSeminar(seminar);
         } catch (HostUnavailableException e) {
@@ -78,6 +82,7 @@ public class OrganizerController {
         Seminar seminar = seminarService.get(id);
         modelMap.addAttribute("seminar", seminar);
         modelMap.addAttribute("availableHosts", hostService.getAll());
+        modelMap.addAttribute("categories", CATEGORIES);
         if(error != null && !error.equals("")) modelMap.addAttribute("error", error);
         return "modify_seminar";
     }
@@ -93,9 +98,10 @@ public class OrganizerController {
                        @RequestParam("duration") String duration,
                        @RequestParam("capacity") int capacity,
                        @RequestParam("holdDate") String holdDate,
-                       @RequestParam("hostId") Integer hostId ) {
+                       @RequestParam("hostId") Integer hostId,
+                       @RequestParam("category") String category) {
         try {
-            seminarService.updateSeminar(seminarId, location, time, subject, description, duration, capacity, holdDate, hostId);
+            seminarService.updateSeminar(seminarId, location, time, subject, description, duration, capacity, holdDate, hostId, category);
         } catch (HostUnavailableException e) {
             return "redirect:/organizer/seminars/edit?seminarId="+seminarId+"&error="+e.getMessage();
         }

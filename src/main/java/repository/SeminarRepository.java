@@ -34,4 +34,6 @@ public interface SeminarRepository extends JpaRepository<Seminar, Integer> {
     Integer updateDeletedById (@Param(value = "id") Integer id);
 
     List<Seminar> findAllByDeletedFalseAndHoldDateAfter(Date holdDate);
+
+    List<Seminar> findAllByCategoryAndDeletedFalseAndHoldDateAfter(String category, Date holdDate);
 }
