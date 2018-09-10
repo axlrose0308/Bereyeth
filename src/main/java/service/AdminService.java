@@ -1,5 +1,6 @@
 package service;
 
+import exception.LoginFailException;
 import model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,9 @@ public class AdminService {
     AdminRepository adminRepository;
 
     public Admin login(String username,
-                       String password) {
-        return adminRepository.findByUsernameAndPassword(username, password);
+                       String password) throws LoginFailException {
+        Admin admin = adminRepository.findByUsernameAndPassword(username, password);
+        if(admin == null) throw new LoginFailException();
+        return admin;
     }
 }

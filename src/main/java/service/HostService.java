@@ -1,5 +1,6 @@
 package service;
 
+import exception.LoginFailException;
 import model.Admin;
 import model.Host;
 import model.Seminar;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.ls.LSInput;
 import repository.HostRepository;
 import repository.SeminarRepository;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -26,8 +28,10 @@ public class HostService {
     SeminarRepository seminarRepository;
 
     public Host login(String username,
-                      String password) {
-        return hostRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
+                      String password) throws LoginFailException {
+        Host host = hostRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
+        if(host == null) throw  new LoginFailException();
+        return host;
     }
 
     public void addHost(HttpSession session,

@@ -1,5 +1,6 @@
 package controller;
 
+import exception.LoginFailException;
 import model.Admin;
 import model.Host;
 import model.Organizer;
@@ -37,28 +38,52 @@ public class LoginController {
     public String getAdmin(@RequestParam("username") String username,
                            @RequestParam("password") String password,
                            ModelMap modelMap) {
-        Admin admin = adminService.login(username, password);
-        modelMap.addAttribute("admin", admin);
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers",organizerService.getAll());
-        return "admin_home";
+        Admin admin = null;
+        try {
+            admin = adminService.login(username, password);
+            modelMap.addAttribute("admin", admin);
+            modelMap.addAttribute("hosts", hostService.getAll());
+            modelMap.addAttribute("organizers",organizerService.getAll());
+            return "admin_home";
+        } catch (LoginFailException e) {
+            return loginError("admin_login", modelMap, e.getMessage());
+        }
+
     }
 
     @RequestMapping(value = "/host", method = RequestMethod.POST)
     public String getHost(@RequestParam("username") String username,
                           @RequestParam("password") String password,
                           ModelMap modelMap) {
-        Host host = hostService.login(username, password);
-        modelMap.addAttribute("host", host);
-        return "host_home";
+        Host host = null;
+        try {
+            host = hostService.login(username, password);
+            modelMap.addAttribute("host", host);
+            return "host_home";
+        } catch (LoginFailException e) {
+            return loginError("host_login", modelMap, e.getMessage());
+        }
+
     }
 
     @RequestMapping(value = "/organizer", method = RequestMethod.POST)
     public String getOrganizer(@RequestParam("username") String username,
                                @RequestParam("password") String password,
                                ModelMap modelMap) {
-        Organizer organizer = organizerService.login(username, password);
-        modelMap.addAttribute("organizer", organizer);
-        return "redirect:/organizer/";
+        Organizer organizer = null;
+        try {
+            organizer = organizerService.login(username, password);
+            modelMap.addAttribute("organizer", organizer);
+            return "redirect:/organizer/";
+        } catch (LoginFailException e) {
+
+           return loginError("organizer_login", modelMap, e.getMessage());
+        }
+
+    }
+
+    private String loginError(String path, ModelMap modelMap, String error){
+        modelMap.addAttribute("error", error);
+        return path;
     }
 }

@@ -1,5 +1,6 @@
 package service;
 
+import exception.LoginFailException;
 import model.Admin;
 import model.Organizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ public class OrganizerService {
     OrganizerRepository organizerRepository;
 
     public Organizer login(String username,
-                           String password) {
-        return organizerRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
+                           String password) throws LoginFailException {
+        Organizer organizer = organizerRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
+        if(organizer == null) throw new LoginFailException();
+        return organizer;
     }
 
     public List<Organizer> getAll(){
