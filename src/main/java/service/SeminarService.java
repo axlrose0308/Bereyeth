@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import repository.HostRepository;
 import repository.SeminarRepository;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -31,6 +31,9 @@ public class SeminarService {
     }
     public List<Seminar> getAllByOrganiserId(Organizer organizer){ return seminarRepository.findAllByOrganizerByOrganizerIdAndDeletedFalse(organizer);}
 
+    public List<Seminar> getAvailables(){
+        return seminarRepository.findAllByDeletedFalseAndHoldDateAfter(new Date(new java.util.Date().getTime()));
+    }
 
     public Seminar get(Integer id){ return seminarRepository.findById(id); }
 

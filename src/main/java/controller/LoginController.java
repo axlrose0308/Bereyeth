@@ -59,12 +59,14 @@ public class LoginController {
         try {
             host = hostService.login(username, password);
             modelMap.addAttribute("host", host);
+            modelMap.addAttribute("seminars", hostService.getRelateSeminars(host));
             return "host_home";
         } catch (LoginFailException e) {
             return loginError("host_login", modelMap, e.getMessage());
         }
 
     }
+
 
     @RequestMapping(value = "/organizer", method = RequestMethod.POST)
     public String getOrganizer(@RequestParam("username") String username,

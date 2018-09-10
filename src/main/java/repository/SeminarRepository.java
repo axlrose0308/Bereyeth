@@ -23,7 +23,7 @@ public interface SeminarRepository extends JpaRepository<Seminar, Integer> {
     Seminar findByDuration(Time time);
     Seminar findByCapacity(Integer capacity);
     List<Seminar> findAllByOrganizerByOrganizerIdAndDeletedFalse(Organizer organizer);
-    List<Seminar> findAllByHostByHostId(Integer id);
+    List<Seminar> findAllByHostByHostIdAndDeletedFalse(Host host);
     List<Seminar> findAllByAdminByAdminId(Integer id);
 
     @Query(value="select * from seminar s where s.host_id = :hostId AND s.hold_date LIKE :holdDate%", nativeQuery = true)
@@ -32,4 +32,6 @@ public interface SeminarRepository extends JpaRepository<Seminar, Integer> {
     @Modifying
     @Query("update Seminar s set s.deleted = true where s.id = :id")
     Integer updateDeletedById (@Param(value = "id") Integer id);
+
+    List<Seminar> findAllByDeletedFalseAndHoldDateAfter(Date holdDate);
 }

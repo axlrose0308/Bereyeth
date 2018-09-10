@@ -201,4 +201,8 @@ public class Seminar {
         this.holdDate = Date.valueOf(holdDate);
     }
 
+    public boolean passed(){
+        return getHoldDate().before(new Date(new java.util.Date().getTime()));
+    }
+
 }

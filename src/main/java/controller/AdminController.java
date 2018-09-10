@@ -25,6 +25,13 @@ public class AdminController {
     @Autowired
     OrganizerService organizerService;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET )
+    public String home(ModelMap modelMap){
+        modelMap.addAttribute("hosts", hostService.getAll());
+        modelMap.addAttribute("organizers",organizerService.getAll());
+        return "admin_home";
+    }
+
     @RequestMapping(value = "/add_host", method = RequestMethod.POST)
     public String creatHost(HttpSession session,
                             ModelMap modelMap,

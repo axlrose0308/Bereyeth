@@ -13,80 +13,63 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Seminar Management System</title>
-
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
-<h1>If you see this page, you have successfully configured this project.</h1>
-
-<h3>However, these two lines will be deleted after a short development iteration.</h3>
-<a href="/redirect/admin">Admin Login</a>
-<a href="/redirect/host">Host Login</a>
-<a href="/redirect/organizer">Organizer Login</a>
-<h2>current session test</h2>
-<table>
-    <tr>
-        <td>${sessionScope.admin.username}</td>
-    </tr>
-    <tr>
-        <td>${sessionScope.host.username}</td>
-    </tr>
-    <tr>
-        <td>${sessionScope.organizer.username}</td>
-    </tr>
-</table>
-
-<h3>Seminar we have right now</h3>
-<c:forEach var="seminar" items="${seminars}">
-    <c:if test="${!seminar.deleted}">
-        <tr>
-            <td>
-                    ${seminar.subject}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                    ${seminar.description}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Details:
-                <a href="/seminar/details"/>
-            </td>
-        </tr>
-    </c:if>
-</c:forEach>
+<h1>Welcome to seminar management system</h1>
 
 <%
     Admin admin = null;
     Host host = null;
     Organizer organizer = null;
+    String home = null;
     if (session.getAttribute("admin") != null) {
         admin = (Admin) session.getAttribute("admin");
+        home = "/admin/";
     } else if (session.getAttribute("host") != null) {
         host = (Host) session.getAttribute("admin");
+        home = "/host/";
     } else if (session.getAttribute("organizer") != null) {
         organizer = (Organizer) session.getAttribute("organizer");
+        home = "/organizer/";
     }
+    if (home != null) {
 %>
+<h2>You are now logged in
+    as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}</h2>
+<a href="<%=home%>">Home</a>
+<a href="/logout">Log out</a>
+<%} else {%>
+<a href="/redirect/admin">Admin Login</a>
+<a href="/redirect/host">Host Login</a>
+<a href="/redirect/organizer">Organizer Login</a>
+<%}%>
 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<c:if test="${empty seminars}">
+    <h1>No available seminars</h1>
+</c:if>
+<c:if test="${not empty seminars}">
+    <h3>Seminars currently available.</h3>
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Hold Date</th>
+            <th></th>
+        </tr>
+        <c:forEach var="seminar" items="${seminars}">
+            <tr>
+                <td>
+                        ${seminar.subject}
+                </td>
+                <td>
+                        ${seminar.holdDate}
+                </td>
+                <td>
+                    <a href="/seminar/details?id=${seminar.id}">View detail</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
 
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>

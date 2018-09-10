@@ -77,4 +77,9 @@ public class HostService {
         hostRepository.saveAndFlush(host);
     }
 
-    public Host get(Integer id){ return hostRepository.findById(id); }}
+    public Host get(Integer id){ return hostRepository.findById(id); }
+
+    public List<Seminar> getRelateSeminars(Host host){
+        return seminarRepository.findAllByHostByHostIdAndDeletedFalse(host);
+    }
+}
