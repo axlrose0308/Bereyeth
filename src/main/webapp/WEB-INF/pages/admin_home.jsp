@@ -11,53 +11,62 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        td,th {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: 0.6px solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <%@include file="logout_component.jsp"%>
-<h2>admin info</h2>
+<h2>Welcome ${sessionScope.admin.username}</h2>
 <table>
+    <thead>All hosts</thead>
     <tr>
-        <td>admin username:</td>
-        <td>${sessionScope.admin.username}</td>
+        <th>Username</th>
+        <th>Phone</th>
+        <th>Email</th>
     </tr>
-    <tr>
-        <td>admin password:</td>
-        <td>${sessionScope.admin.password}</td>
-    </tr>
-</table>
-<h3>All hosts:</h3>
 <c:forEach var="host" items="${hosts}">
-    <c:if test="${!host.deleted}">
         <tr>
-            <td rowspan="4">${host.username}</td>
-        </tr>
-        <tr>
-            <td rowspan="4">${host.phone}</td>
-        </tr>
-        <tr>
-            <td rowspan="4">${host.email}</td>
-        </tr>
-        <tr>
-            <td rowspan="4">
-                <a href="/admin/modify_host?id=${host.id}">Modify</a>
-                <a href="/admin/delete_host?id=${host.id}">Delete</a>
+            <td >${host.username}</td>
+
+            <td >${host.phone}</td>
+            <td >${host.email}</td>
+            <td >
+                <a href="/host/edit?id=${host.id}">Modify</a>
             </td>
+            <td><a href="/admin/delete_host?id=${host.id}">Delete</a></td>
         </tr>
-    </c:if>
 </c:forEach>
-<h3>All organizers:</h3>
+</table>
+
+<table>
+    <thead>All Organizers</thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
 <c:forEach var="organizer" items="${organizers}">
-    <c:if test="${!organizer.deleted}">
-        <tr>
-            <td rowspan="4">${organizer.username}</td>
-            <td rowspan="4">${organizer.email}</td>
-            <td rowspan="4">
+    <tr>
+            <td >${organizer.username}</td>
+            <td >${organizer.email}</td>
+            <td >
                 <a href="/admin/modify_organizer?id=${organizer.id}">Modify</a>
+            </td><td>
                 <a href="/admin/delete_organizer?id=${organizer.id}">Delete</a>
             </td>
         </tr>
-    </c:if>
 </c:forEach>
+</table>
+
 <h3>Create account</h3>
 <form:form action="/admin/get_type" method="POST">
     <label for="createType">Which do you want to create </label>

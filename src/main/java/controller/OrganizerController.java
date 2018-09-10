@@ -17,6 +17,7 @@ import service.HostService;
 import service.SeminarService;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Time;
@@ -36,6 +37,7 @@ public class OrganizerController {
     public String getSeminars(HttpSession session, ModelMap modelMap) {
         Organizer organizer = (Organizer) session.getAttribute("organizer");
         modelMap.addAttribute("seminars", seminarService.getAllByOrganiserId(organizer));
+        modelMap.addAttribute("hosts", hostService.getAll());
         return "organizer_home";
     }
 

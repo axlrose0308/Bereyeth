@@ -10,48 +10,66 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
-<form:form action="/admin/save_changed_organizer" method="POST">
+<form:form action="/admin/modify_organizer" method="POST">
     <table>
         <tr>
             <td>
-                <label for="username">username</label>
+                <label for="id">ID</label>
             </td>
             <td>
-                <input type="text" id="username" name="username"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="password">password</label>
-            </td>
-            <td>
-                <input type="text" id="password" name="password"/>
+                <input type="text" id="id" name="id" value="${organizer.id}" readonly="readonly"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="repeatpassword">repeat password</label>
+                <label for="username">Username</label>
             </td>
             <td>
-                <input type="text" id="repeatpassword" name="repeatpassword"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="phone">phone</label>
-            </td>
-            <td>
-                <input type="text" id="phone" name="phone"/>
+                <input type="text" id="username" name="username" value="${organizer.username}" readonly="readonly"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="email">email</label>
+                <label for="password">Password</label>
             </td>
             <td>
-                <input type="text" id="email" name="email"/>
+                <input type="password" id="password" name="password" value="${organizer.password}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="repeatpassword">Repeat password</label>
+            </td>
+            <td>
+                <input type="text" id="repeatpassword" name="repeatpassword" value="${organizer.password}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="phone">Phone</label>
+            </td>
+            <td>
+                <input type="text" id="phone" name="phone" value="${organizer.phone}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Email</label>
+            </td>
+            <td>
+                <input type="text" id="email" name="email" value="${organizer.email}"/>
             </td>
         </tr>
         <tr>
@@ -61,5 +79,7 @@
         </tr>
     </table>
 </form:form>
+<h1>${error}</h1>
+<<a href="/admin/"></a>
 </body>
 </html>

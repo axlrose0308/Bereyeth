@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import service.AttendeeService;
 import service.SeminarService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -58,6 +59,24 @@ public class SeminarController {
         modelMap.addAttribute("attendees", attendees);
         modelMap.addAttribute("seminar", seminarService.get(seminarId));
         return "attendees";
+    }
+
+    @RequestMapping(value = "/attendees/edit", method = RequestMethod.GET)
+    public String viewAttendees(@RequestParam("id") Integer id,
+                                @RequestParam(required = false, name="seminarId") Integer seminarId,ModelMap modelMap
+                                ) {
+        if(seminarId != null) modelMap.addAttribute("seminarId", seminarId);
+        modelMap.addAttribute("attendee", attendeeService.get(id));
+
+        return "modify_attendee";
+    }
+
+    @RequestMapping(value = "/attendees/edit", method = RequestMethod.POST)
+    public String viewAttendees(@RequestParam("id") Integer id, @RequestParam("name")String nameTag,
+    @RequestParam(required = false, name = "seminarId")Integer seminarId) {
+        attendeeService.modify(id, nameTag);
+        if(seminarId != null) return "redirect:/seminar/attendees?seminarId="+seminarId;
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "/attendees/delete", method = RequestMethod.GET)

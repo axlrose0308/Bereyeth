@@ -1,5 +1,7 @@
 package controller;
 
+import exception.ModifyException;
+import model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import service.HostService;
 import service.OrganizerService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,8 +19,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-    Integer tempHostId;
-    Integer tempOrganizerId;
 
     @Autowired
     HostService hostService;
@@ -25,10 +26,10 @@ public class AdminController {
     @Autowired
     OrganizerService organizerService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET )
-    public String home(ModelMap modelMap){
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home(ModelMap modelMap) {
         modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers",organizerService.getAll());
+        modelMap.addAttribute("organizers", organizerService.getAll());
         return "admin_home";
     }
 
@@ -39,39 +40,20 @@ public class AdminController {
                             @RequestParam("password") String password,
                             @RequestParam("phone") String phone,
                             @RequestParam("email") String email) {
-        hostService.addHost(session, username, password, phone, email);
-        refreshPageContent(modelMap);
-        return "admin_home";
-    }
-
-    @RequestMapping(value = "/modify_host", method = RequestMethod.GET)
-    public String modifyHost(HttpServletRequest request) {
-        tempHostId = Integer.parseInt(request.getParameter("id"));
-        return "modify_host";
-    }
-
-    @RequestMapping(value = "/save_changed_host", method = RequestMethod.POST)
-    public String saveChangedHost(HttpSession session,
-                                  @RequestParam("username") String username,
-                                  @RequestParam("password") String password,
-                                  @RequestParam("repeatpassword") String repeatPassword,
-                                  @RequestParam("phone") String phone,
-                                  @RequestParam("email") String email,
-                                  ModelMap modelMap) {
-        if (password.equals(repeatPassword)) {
-            hostService.modify(session, tempHostId, username, password, phone, email);
-            tempHostId = null;
+        try {
+            hostService.addHost(session, username, password, phone, email);
+            return "redirect:/admin/";
+        } catch (ModifyException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "create_host";
         }
-        refreshPageContent(modelMap);
-        return "admin_home";
+
     }
 
     @RequestMapping(value = "/delete_host", method = RequestMethod.GET)
-    public String deleteHost(HttpServletRequest request,
-                             ModelMap modelMap) {
-        hostService.delete(Integer.parseInt(request.getParameter("id")));
-        refreshPageContent(modelMap);
-        return "admin_home";
+    public String deleteHost(@RequestParam("id") Integer id) {
+        hostService.delete(id);
+        return "redirect:/admin/";
     }
 
     @RequestMapping(value = "/add_organizer", method = RequestMethod.POST)
@@ -80,38 +62,42 @@ public class AdminController {
                                   @RequestParam("username") String username,
                                   @RequestParam("password") String password,
                                   @RequestParam("email") String email) {
-        organizerService.add(session, username, password, email);
-        refreshPageContent(modelMap);
-        return "admin_home";
+        try {
+            organizerService.add(session, username, password, email);
+            return "redirect:/admin/";
+        } catch (ModifyException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "create_organizer";
+        }
+
     }
 
     @RequestMapping(value = "/modify_organizer", method = RequestMethod.GET)
-    public String modifyOrganizer(HttpServletRequest request) {
-        tempOrganizerId = Integer.parseInt(request.getParameter("id"));
+    public String modifyOrganizer(@RequestParam("id") Integer id, ModelMap modelMap, @RequestParam(required = false, name = "error") String error) {
+        modelMap.addAttribute("organizer", organizerService.get(id));
+        if(error != null) modelMap.addAttribute("error", error);
         return "modify_organizer";
     }
 
-    @RequestMapping(value = "/save_changed_organizer", method = RequestMethod.POST)
-    public String saveChangedOrganizer(HttpSession session,
-                                       @RequestParam("username") String username,
+    @RequestMapping(value = "/modify_organizer", method = RequestMethod.POST)
+    public String saveChangedOrganizer(@RequestParam("id") Integer id,
                                        @RequestParam("password") String password,
-                                       @RequestParam("repeatpassword") String repeatPassword,
-                                       @RequestParam("email") String email,
-                                       ModelMap modelMap) {
-        if (password.equals(repeatPassword)) {
-            organizerService.modify(session, tempOrganizerId, username, password, email);
-            tempOrganizerId = null;
+
+                                       @RequestParam("repeatpassword") String repeatpassword,
+                                       @RequestParam("phone") String phone,
+                                       @RequestParam("email") String email, HttpSession session) {
+        if (password.equals(repeatpassword)) {
+            Admin admin = (Admin) session.getAttribute("admin");
+            organizerService.modify(id, password, email, admin, phone);
+            return "redirect:/admin/";
         }
-        refreshPageContent(modelMap);
-        return "admin_home";
+        return "redirect:/admin/modify_organizer?id=" + id + "&error=" + "Two password entries are inconsistent.";
     }
 
     @RequestMapping(value = "/delete_organizer", method = RequestMethod.GET)
-    public String deleteOrganizer(HttpServletRequest request,
-                                  ModelMap modelMap) {
-        organizerService.delete(Integer.parseInt(request.getParameter("id")));
-        refreshPageContent(modelMap);
-        return "admin_home";
+    public String deleteOrganizer(@RequestParam("id") Integer id) {
+        organizerService.delete(id);
+        return "redirect:/admin/";
     }
 
     @RequestMapping(value = "/get_type", method = RequestMethod.POST)
@@ -122,11 +108,6 @@ public class AdminController {
             return "create_organizer";
         }
         return "admin_home";
-    }
-
-    private void refreshPageContent(ModelMap modelMap) {
-        modelMap.addAttribute("hosts", hostService.getAll());
-        modelMap.addAttribute("organizers", organizerService.getAll());
     }
 
 }

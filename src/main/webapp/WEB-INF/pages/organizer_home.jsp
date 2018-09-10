@@ -43,6 +43,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         <c:forEach items="${seminars}" var="seminar">
             <tr>
@@ -58,6 +59,7 @@
                 <td>${seminar.adminByAdminId.username}</td>
                 <td>${seminar.hostByHostId.username}</td>
                 <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
+                <td><a href="/host/edit?id=${seminar.hostByHostId.id}">Edit host</td>
                 <td><a href="/organizer/seminars/edit?seminarId=${seminar.id}">Edit</a></td>
                 <td><a href="/organizer/seminars/delete?seminarId=${seminar.id}">Delete</a></td>
             </tr>

@@ -115,4 +115,7 @@ public class Attendee {
         hash += (hash << 15);
         code = "SEMA"+ Math.abs(hash) + "";
     }
+
+    public String emailString(){return getEmail();}
+    public String codeString(){return getCode();}
 }

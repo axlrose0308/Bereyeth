@@ -44,5 +44,11 @@ public class AttendeeService {
         return seminar;
     }
 
+    public void modify(Integer id, String nameTag){
+        Attendee attendee = get(id);
+        attendee.setNameTag(nameTag);
+        attendeeRepository.saveAndFlush(attendee);
+    }
+
 
 }

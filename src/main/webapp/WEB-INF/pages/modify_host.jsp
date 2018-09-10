@@ -12,22 +12,30 @@
     <title>Title</title>
 </head>
 <body>
-<form:form action="/admin/save_changed_host" method="POST">
-    <table>
+<form:form action="/host/edit" method="POST">
+    <table border="1">
         <tr>
             <td>
-                <label for="username">username</label>
+                <label for="id">ID</label>
             </td>
             <td>
-                <input type="text" id="username" name="username"/>
+                <input type="text" id="id" name="id" readonly="readonly" value="${host.id}"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="password">password</label>
+                <label for="username">Username</label>
             </td>
             <td>
-                <input type="text" id="password" name="password"/>
+                <input type="text" id="username" name="username" readonly="readonly" value="${host.username}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Password</label>
+            </td>
+            <td>
+                <input type="password" id="password" name="password" value="${host.password}"/>
             </td>
         </tr>
         <tr>
@@ -35,23 +43,23 @@
                 <label for="repeatpassword">repeat password</label>
             </td>
             <td>
-                <input type="text" id="repeatpassword" name="repeatpassword"/>
+                <input type="password" id="repeatpassword" name="repeatpassword" value="${host.password}"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="phone">phone</label>
+                <label for="phone">Phone</label>
             </td>
             <td>
-                <input type="text" id="phone" name="phone"/>
+                <input type="text" id="phone" name="phone" value="${host.phone}"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="email">email</label>
+                <label for="email">Email</label>
             </td>
             <td>
-                <input type="text" id="email" name="email"/>
+                <input type="text" id="email" name="email" value="${host.email}"/>
             </td>
         </tr>
         <tr>
@@ -61,5 +69,6 @@
         </tr>
     </table>
 </form:form>
+<h1>${error}</h1>
 </body>
 </html>

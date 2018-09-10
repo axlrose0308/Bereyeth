@@ -1,6 +1,7 @@
 package service;
 
 import exception.LoginFailException;
+import exception.ModifyException;
 import model.Admin;
 import model.Host;
 import model.Seminar;
@@ -30,7 +31,7 @@ public class HostService {
     public Host login(String username,
                       String password) throws LoginFailException {
         Host host = hostRepository.findByUsernameAndPasswordAndDeletedFalse(username, password);
-        if(host == null) throw  new LoginFailException();
+        if (host == null) throw new LoginFailException();
         return host;
     }
 
@@ -38,36 +39,32 @@ public class HostService {
                         String username,
                         String password,
                         String phone,
-                        String email) {
+                        String email) throws ModifyException {
 
         Host host = new Host();
-        if (hostRepository.findByUsername(username) == null) {
+        if (hostRepository.findByUsernameAndDeletedFalse(username) == null) {
             host.setEmail(email);
             host.setPhone(phone);
             host.setUsername(username);
             host.setPassword(password);
             host.setAdminByAdminId((Admin) session.getAttribute("admin"));
             hostRepository.save(host);
-        } else modify(session,hostRepository.findByUsername(username).getId(),username,password,phone,email);
+        }
+        else throw new ModifyException("Host of username "+username+" already exists.");
     }
 
     public List<Host> getAll() {
         return hostRepository.findAllByDeletedFalse();
     }
 
-    public void modify(HttpSession session,
-                       Integer id,
-                       String username,
+    public void modify(Integer id,
                        String password,
                        String phone,
                        String email) {
-        Host host = new Host();
-        host.setId(id);
-        host.setUsername(username);
+        Host host = get(id);
         host.setPassword(password);
         host.setPhone(phone);
         host.setEmail(email);
-        host.setAdminByAdminId((Admin) session.getAttribute("admin"));
         hostRepository.saveAndFlush(host);
     }
 
@@ -77,9 +74,11 @@ public class HostService {
         hostRepository.saveAndFlush(host);
     }
 
-    public Host get(Integer id){ return hostRepository.findById(id); }
+    public Host get(Integer id) {
+        return hostRepository.findById(id);
+    }
 
-    public List<Seminar> getRelateSeminars(Host host){
+    public List<Seminar> getRelateSeminars(Host host) {
         return seminarRepository.findAllByHostByHostIdAndDeletedFalse(host);
     }
 }

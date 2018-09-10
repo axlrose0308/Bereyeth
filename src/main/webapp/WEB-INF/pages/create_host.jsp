@@ -54,5 +54,7 @@
         </tr>
     </table>
 </form:form>
+<h1>${error}</h1>
+<a href="/admin/">Back</a>
 </body>
 </html>

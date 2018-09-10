@@ -39,6 +39,7 @@
                 <td>${attendee.code}</td>
                 <td>${attendee.nameTag}</td>
                 <td><a href="/seminar/attendees/delete?id=${attendee.id}&seminarId=${seminar.id}">Delete</a></td>
+                <td><a href="/seminar/attendees/edit?id=${attendee.id}&seminarId=${seminar.id}">Edit</a></td>
             </tr>
         </c:forEach>
     </table>

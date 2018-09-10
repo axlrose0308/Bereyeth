@@ -11,6 +11,16 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        th, td {
+            padding: 2px;
+        }
+        table {
+            border-spacing: 15px;
+            padding: 5px;
+            border: solid chartreuse;
+        }
+    </style>
 </head>
 <body>
 <%!

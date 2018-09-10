@@ -14,6 +14,7 @@ public class Organizer {
     private boolean deleted;
     private Admin adminByAdminId;
     private Collection<Seminar> seminarsById;
+    private String phone;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -99,5 +100,15 @@ public class Organizer {
 
     public void setSeminarsById(Collection<Seminar> seminarsById) {
         this.seminarsById = seminarsById;
+    }
+
+    @Basic
+    @Column(name = "phone")
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
