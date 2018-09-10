@@ -1,12 +1,14 @@
 package service;
 
 import exception.HostUnavailableException;
+import model.Attendee;
 import model.Host;
 import model.Organizer;
 import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import repository.AttendeeRepository;
 import repository.HostRepository;
 import repository.SeminarRepository;
 
@@ -25,6 +27,9 @@ public class SeminarService {
 
     @Autowired
     HostRepository hostRepository;
+
+    @Autowired
+    AttendeeRepository attendeeRepository;
 
     public List<Seminar> getAll() {
         return seminarRepository.findAll();
@@ -70,5 +75,9 @@ public class SeminarService {
         seminar.setHoldDateString(holdDate);
         seminar.setHostByHostId(hostRepository.findById(hostId));
         seminarRepository.saveAndFlush(seminar);
+    }
+
+    public List<Attendee> getAttendees(Integer id){
+        return attendeeRepository.findAllBySeminarBySeminarIdAndDeletedFalse(get(id));
     }
 }

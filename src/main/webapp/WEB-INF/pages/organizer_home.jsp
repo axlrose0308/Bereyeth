@@ -45,7 +45,7 @@
                 <td>${seminar.capacity}</td>
                 <td>${seminar.adminByAdminId.username}</td>
                 <td>${seminar.hostByHostId.username}</td>
-                <td><a>View attendees</a></td>
+                <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
                 <td><a href="/organizer/seminars/edit?seminarId=${seminar.id}">Edit</a></td>
                 <td><a href="/organizer/seminars/delete?seminarId=${seminar.id}">Delete</a></td>
             </tr>

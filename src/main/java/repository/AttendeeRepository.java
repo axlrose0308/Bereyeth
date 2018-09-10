@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface AttendeeRepository extends JpaRepository<Attendee, Integer> {
 
-    List<Attendee> findAllBySeminarBySeminarId(Integer id);
+    List<Attendee> findAllBySeminarBySeminarIdAndDeletedFalse(Seminar seminar);
     Attendee findByEmailAndDeletedFalseAndSeminarBySeminarId(String email, Seminar seminar);
 }

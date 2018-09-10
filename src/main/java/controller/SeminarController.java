@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import service.AttendeeService;
 import service.SeminarService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/seminar")
 public class SeminarController {
@@ -49,4 +51,20 @@ public class SeminarController {
         }
 
     }
+
+    @RequestMapping(value="/attendees", method = RequestMethod.GET)
+    public String viewAttendees(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap){
+        List<Attendee> attendees = seminarService.getAttendees(seminarId);
+        modelMap.addAttribute("attendees", attendees);
+        modelMap.addAttribute("seminar", seminarService.get(seminarId));
+        return "attendees";
+    }
+
+    @RequestMapping(value="/attendees/delete", method = RequestMethod.GET)
+    public String viewAttendees(@RequestParam("id") Integer attendeeId,
+                                @RequestParam("seminarId") Integer seminarId){
+        attendeeService.delete(attendeeId);
+        return "redirect:/seminar/attendees?seminarId="+seminarId;
+    }
+
 }

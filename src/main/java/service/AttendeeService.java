@@ -22,5 +22,15 @@ public class AttendeeService {
         return attendee.getCode();
     }
 
+    public Attendee get(Integer id){
+        return attendeeRepository.getOne(id);
+    }
+
+    public void delete(Integer attendeeId){
+        Attendee attendee = get(attendeeId);
+        attendee.setDeleted(true);
+        attendeeRepository.saveAndFlush(attendee);
+    }
+
 
 }
