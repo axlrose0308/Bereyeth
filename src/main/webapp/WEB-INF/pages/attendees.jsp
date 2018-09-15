@@ -1,11 +1,23 @@
+<%@ page import="model.Admin" %>
+<%@ page import="model.Host" %>
+<%@ page import="model.Organizer" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: tong
-  Date: 10/09/18
-  Time: 8:07 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%
+    Admin admin = null;
+    Host host = null;
+    Organizer organizer = null;
+    String home = null;
+    if (session.getAttribute("admin") != null) {
+        admin = (Admin) session.getAttribute("admin");
+        home = "/admin/";
+    } else if (session.getAttribute("host") != null) {
+        host = (Host) session.getAttribute("admin");
+        home = "/host/";
+    } else if (session.getAttribute("organizer") != null) {
+        organizer = (Organizer) session.getAttribute("organizer");
+        home = "/organizer/";
+    }
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,6 +26,7 @@
         th, td {
             padding: 2px;
         }
+
         table {
             border-spacing: 15px;
             padding: 5px;
@@ -48,7 +61,7 @@
 <c:if test="${empty attendees}">
     <h1>No one attends seminar No.${seminar.id} ${seminar.subject}</h1>
 </c:if>
-<a href="/organizer/">Back</a>
+<a href="<%=home%>">Back</a>
 
 </body>
 </html>

@@ -67,12 +67,50 @@
 </c:forEach>
 </table>
 
+<table>
+    <thead>All Seminars</thead>
+    <tr>
+        <th>Id</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Category</th>
+        <th>Subject</th>
+        <th>Description</th>
+        <th>Duration</th>
+        <th>Capacity</th>
+        <th>Host</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <c:forEach items="${seminars}" var="seminar">
+        <tr>
+            <td>${seminar.id}</td>
+            <td>${seminar.location}</td>
+            <td>${seminar.holdDate}</td>
+            <td>${seminar.time}</td>
+            <td>${seminar.category}</td>
+            <td>${seminar.subject}</td>
+            <td>${seminar.description}</td>
+            <td>${seminar.duration}</td>
+            <td>${seminar.capacity}</td>
+            <td>${seminar.adminByAdminId.username}</td>
+            <td>${seminar.hostByHostId.username}</td>
+            <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
+            <td><a href="/seminar/edit?seminarId=${seminar.id}">Edit</a></td>
+            <td><a href="/seminar/delete?seminarId=${seminar.id}">Delete</a></td>
+        </tr>
+    </c:forEach>
+</table>
+
 <h3>Create account</h3>
 <form:form action="/admin/get_type" method="POST">
     <label for="createType">Which do you want to create </label>
     <select id="createType" name="createType">
         <option>Host</option>
         <option>Organizer</option>
+        <option>Seminar</option>
     </select>
     <input type="submit" value="Confirm"/>
 </form:form>

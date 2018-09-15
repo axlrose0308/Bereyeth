@@ -1,7 +1,9 @@
 package controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import exception.ModifyException;
 import model.Admin;
+import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import service.HostService;
 import service.OrganizerService;
+import service.SeminarService;
 
+import javax.jws.WebParam;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,10 +30,14 @@ public class AdminController {
     @Autowired
     OrganizerService organizerService;
 
+    @Autowired
+    SeminarService seminarService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(ModelMap modelMap) {
         modelMap.addAttribute("hosts", hostService.getAll());
         modelMap.addAttribute("organizers", organizerService.getAll());
+        modelMap.addAttribute("seminars", seminarService.getAll());
         return "admin_home";
     }
 
@@ -82,7 +90,6 @@ public class AdminController {
     @RequestMapping(value = "/modify_organizer", method = RequestMethod.POST)
     public String saveChangedOrganizer(@RequestParam("id") Integer id,
                                        @RequestParam("password") String password,
-
                                        @RequestParam("repeatpassword") String repeatpassword,
                                        @RequestParam("phone") String phone,
                                        @RequestParam("email") String email, HttpSession session) {
@@ -107,7 +114,9 @@ public class AdminController {
         } else if (type.equals("Organizer")) {
             return "create_organizer";
         }
+        else if(type.equals("Seminar")) return "redirect:/seminar/add";
         return "admin_home";
     }
+
 
 }

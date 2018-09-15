@@ -1,12 +1,24 @@
+<%@ page import="model.Admin" %>
+<%@ page import="model.Host" %>
+<%@ page import="model.Organizer" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: tong
-  Date: 9/09/18
-  Time: 10:11 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%
+    Admin admin = null;
+    Host host = null;
+    Organizer organizer = null;
+    String home = null;
+    if (session.getAttribute("admin") != null) {
+        admin = (Admin) session.getAttribute("admin");
+        home = "/admin/";
+    } else if (session.getAttribute("host") != null) {
+        host = (Host) session.getAttribute("admin");
+        home = "/host/";
+    } else if (session.getAttribute("organizer") != null) {
+        organizer = (Organizer) session.getAttribute("organizer");
+        home = "/organizer/";
+    }
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,7 +36,7 @@
 </head>
 <body>
 <h1>${error}</h1>
-<form:form action="/organizer/seminars/edit" method="POST">
+<form:form action="/seminar/edit" method="POST">
     <table>
         <tr>
             <td>
@@ -84,6 +96,26 @@
             </td>
         </tr>
 
+        <c:if test="${not empty organizers}">
+        <tr>
+            <td>
+                <label for="organizerId">Host</label>
+            </td>
+            <td>
+                <select id="organizerId" name="organizerId">
+                    <c:forEach items="${organizers}" var="organizer">
+                        <c:if test="${organizer.id==seminar.organizerByOrganizerId.id}">
+                            <option value="${organizer.id}" selected="selected">${organizer.username}</option>
+                        </c:if>
+                        <c:if test="${organizer.id!=seminar.organizerByOrganizerId.id}">
+                            <option value="${organizer.id}">${organizer.username}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        </c:if>
+
         <tr>
             <td>
                 <label for="hostId">Host</label>
@@ -131,7 +163,7 @@
                 <input type="submit" value="Save"/>
             </td>
             <td>
-                <a href="/organizer/">Return</a>
+                <a href="<%=home%>">Return</a>
             </td>
         </tr>
     </table>

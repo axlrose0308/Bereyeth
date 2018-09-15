@@ -22,6 +22,7 @@ public interface SeminarRepository extends JpaRepository<Seminar, Integer> {
     Seminar findByDescription(String description);
     Seminar findByDuration(Time time);
     Seminar findByCapacity(Integer capacity);
+    List<Seminar> findAllByDeletedFalse();
     List<Seminar> findAllByOrganizerByOrganizerIdAndDeletedFalse(Organizer organizer);
     List<Seminar> findAllByHostByHostIdAndDeletedFalse(Host host);
     List<Seminar> findAllByAdminByAdminId(Integer id);

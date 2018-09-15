@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import repository.AttendeeRepository;
 import repository.HostRepository;
+import repository.OrganizerRepository;
 import repository.SeminarRepository;
 
 import java.sql.Date;
@@ -28,10 +29,13 @@ public class SeminarService {
     AttendeeRepository attendeeRepository;
 
     @Autowired
+    OrganizerRepository organizerRepository;
+
+    @Autowired
     EmailService emailService;
 
     public List<Seminar> getAll() {
-        return seminarRepository.findAll();
+        return seminarRepository.findAllByDeletedFalse();
     }
     public List<Seminar> getAllByOrganiserId(Organizer organizer){ return seminarRepository.findAllByOrganizerByOrganizerIdAndDeletedFalse(organizer);}
 
@@ -77,9 +81,14 @@ public class SeminarService {
     }
 
     public void updateSeminar(Integer seminarId, String location, String time, String subject, String description,
-                              String duration, int capacity, String holdDate, Integer hostId, String category) throws HostUnavailableException {
+                              String duration, int capacity, String holdDate, Integer hostId, String category,
+                              int organizerId) throws HostUnavailableException {
         Host host = hostRepository.findById(hostId);
         Seminar seminar = get(seminarId);
+        if(organizerId != -1){
+            Organizer organizer = organizerRepository.findById(organizerId);
+            seminar.setOrganizerByOrganizerId(organizer);
+        }
         seminar.setLocation(location);
         seminar.setTimeString(time);
         seminar.setSubject(subject);

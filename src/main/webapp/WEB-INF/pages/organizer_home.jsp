@@ -60,8 +60,8 @@
                 <td>${seminar.hostByHostId.username}</td>
                 <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
                 <td><a href="/host/edit?id=${seminar.hostByHostId.id}">Edit host</td>
-                <td><a href="/organizer/seminars/edit?seminarId=${seminar.id}">Edit</a></td>
-                <td><a href="/organizer/seminars/delete?seminarId=${seminar.id}">Delete</a></td>
+                <td><a href="/seminar/edit?seminarId=${seminar.id}">Edit</a></td>
+                <td><a href="/seminar/delete?seminarId=${seminar.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
@@ -69,6 +69,6 @@
 <c:if test="${empty seminars}">
     <h1>No seminar that is hold by you.</h1>
 </c:if>
-<a href="/organizer/seminars/add">Add seminar</a>
+<a href="/seminar/add">Add seminar</a>
 </body>
 </html>

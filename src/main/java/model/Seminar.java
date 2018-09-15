@@ -79,6 +79,8 @@ public class Seminar {
     }
 
     public void setTimeString(String time) {
+        String format = "00:00";
+        if(time.length() == format.length()) time += ":00";
         this.time = Time.valueOf(time);
     }
 

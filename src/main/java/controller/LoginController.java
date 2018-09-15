@@ -44,7 +44,7 @@ public class LoginController {
             modelMap.addAttribute("admin", admin);
             modelMap.addAttribute("hosts", hostService.getAll());
             modelMap.addAttribute("organizers",organizerService.getAll());
-            return "admin_home";
+            return "redirect:/admin/";
         } catch (LoginFailException e) {
             return loginError("admin_login", modelMap, e.getMessage());
         }
