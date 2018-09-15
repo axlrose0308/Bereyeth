@@ -89,6 +89,10 @@ public class SeminarController {
         }
         else {
             Seminar seminar = attendeeService.delete(code);
+            if(seminar == null) {
+                modelMap.addAttribute("error", "No registration of code " + code);
+                return "redirect:/";
+            }
             modelMap.addAttribute("seminar", seminar);
             return "cancel_registration";
         }

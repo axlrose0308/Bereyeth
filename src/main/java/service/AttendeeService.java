@@ -39,6 +39,7 @@ public class AttendeeService {
 
     public Seminar delete(String code){
         Attendee attendee = attendeeRepository.findByCode(code);
+        if(attendee == null) return null;
         Seminar seminar = attendee.getSeminarBySeminarId();
         delete(attendee);
         return seminar;

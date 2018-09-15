@@ -17,13 +17,15 @@ public class IndexController {
     SeminarService seminarService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap modelMap, @RequestParam(required = false, name = "category") String category) {
+    public String index(ModelMap modelMap, @RequestParam(required = false, name = "category") String category,
+                        @RequestParam(required = false, name = "error") String error) {
         modelMap.addAttribute("categories", CATEGORIES);
         if(category == null || category.equals("All")) modelMap.addAttribute("seminars", seminarService.getAvailables());
         else {
             modelMap.addAttribute("seminars", seminarService.getAvailablesByCategory(category));
             modelMap.addAttribute("selected", category);
         }
+        if(error != null) modelMap.addAttribute("error", error);
         return "index";
     }
 

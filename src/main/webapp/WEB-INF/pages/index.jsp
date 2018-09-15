@@ -114,6 +114,7 @@
     <input type="text" name="code" width="100"/>
     <input type="submit" value="Cancel"/>
 </form:form>
+<h3>${error}</h3>
 
 </body>
 </html>
