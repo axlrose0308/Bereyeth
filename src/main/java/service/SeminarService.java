@@ -56,11 +56,12 @@ public class SeminarService {
                 public void run() {
                     try {
                         emailService.sendEmail(getAttendeeEmails(id), SEMINAR_CANCELLED, get(id));
+                        attendeeRepository.updateDeletedBySeminar(get(id));
                     } catch (Exception ex) {
                     }
                 }
             }).start();
-            attendeeRepository.updateDeletedBySeminar(get(id));
+
         }
 
         seminarRepository.updateDeletedById(id);

@@ -24,7 +24,7 @@ public class AttendeeService {
     }
 
     public Attendee get(Integer id){
-        return attendeeRepository.getOne(id);
+        return attendeeRepository.findOne(id);
     }
 
     public void delete(Integer attendeeId){

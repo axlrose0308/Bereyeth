@@ -19,7 +19,7 @@
                 <label for="id">ID</label>
             </td>
             <td>
-                <input type="text" id="id" name="id" readonly="readonly" value="${attendee.id}"/>
+                <input type="text" id="id" name="id" readonly="readonly" value="${attendee_editted.id}"/>
             </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
                 <label>Email</label>
             </td>
             <td>
-                <input type="text" readonly="readonly" value="${attendee.email}"/>
+                <input type="text" readonly="readonly" value="${attendee_editted.email}"/>
             </td>
         </tr>
         <tr>
@@ -35,7 +35,7 @@
                 <label >Code</label>
             </td>
             <td>
-                <input type="text" readonly="readonly" value="${attendee.code}"/>
+                <input type="text" readonly="readonly" value="${attendee_editted.code}"/>
             </td>
         </tr>
         <tr>
@@ -43,7 +43,7 @@
                 <label for="name">Name Tag</label>
             </td>
             <td>
-                <input type="text" id="name" name="name" value="${attendee.nameTag}"/>
+                <input type="text" id="name" name="name" value="${attendee_editted.nameTag}"/>
             </td>
         </tr>
         <tr>

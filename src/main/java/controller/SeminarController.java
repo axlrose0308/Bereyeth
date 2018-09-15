@@ -66,7 +66,7 @@ public class SeminarController {
                                 @RequestParam(required = false, name="seminarId") Integer seminarId,ModelMap modelMap
                                 ) {
         if(seminarId != null) modelMap.addAttribute("seminarId", seminarId);
-        modelMap.addAttribute("attendee", attendeeService.get(id));
+        modelMap.addAttribute("attendee_editted", attendeeService.get(id));
 
         return "modify_attendee";
     }
