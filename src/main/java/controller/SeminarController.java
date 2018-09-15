@@ -4,6 +4,10 @@ import exception.RegisteredException;
 import model.Attendee;
 import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import service.AttendeeService;
 import service.SeminarService;
+import util.PdfUtil;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -96,6 +101,19 @@ public class SeminarController {
             modelMap.addAttribute("seminar", seminar);
             return "cancel_registration";
         }
+    }
+
+    @RequestMapping("/attendees/download")
+    public ResponseEntity<byte[]> download(@RequestParam("id") Integer id){
+        Seminar seminar = seminarService.get(id);
+        HttpHeaders headers = new HttpHeaders();
+        String fileName = "attendees_seminar_no." + seminar.getId() + "_" + seminar.getSubject()+".pdf";
+
+        headers.setContentDispositionFormData("attachment", fileName);
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return new ResponseEntity<byte[]>(
+                PdfUtil.attendeeNamesPdf(seminarService.getAttendeeNames(seminar.getId()), seminar),
+                headers, HttpStatus.OK);
     }
 
 }

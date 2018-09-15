@@ -67,6 +67,15 @@ public class SeminarService {
         seminarRepository.updateDeletedById(id);
     }
 
+    public String[] getAttendeeNames(Integer id){
+        List<Attendee> attendees = getAttendees(id);
+        String [] names = new String[attendees.size()];
+        for(int i = 0; i < names.length; i++){
+            names[i] = attendees.get(i).getNameTag();
+        }
+        return names;
+    }
+
     public void updateSeminar(Integer seminarId, String location, String time, String subject, String description,
                               String duration, int capacity, String holdDate, Integer hostId, String category) throws HostUnavailableException {
         Host host = hostRepository.findById(hostId);

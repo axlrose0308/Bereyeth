@@ -43,6 +43,7 @@
             </tr>
         </c:forEach>
     </table>
+    <a href="/seminar/attendees/download?id=${seminar.id}">Download attendees</a>
 </c:if>
 <c:if test="${empty attendees}">
     <h1>No one attends seminar No.${seminar.id} ${seminar.subject}</h1>
