@@ -1,14 +1,12 @@
 package controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import exception.HostUnavailableException;
 import model.Host;
 import model.Organizer;
 import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import service.HostService;
 import service.SeminarService;
 
-import javax.jws.WebParam;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
-import java.sql.Time;
-import java.util.List;
 
 import static model.Seminar.CATEGORIES;
 

@@ -1,10 +1,7 @@
 package service;
 
 import exception.HostUnavailableException;
-import model.Attendee;
-import model.Host;
-import model.Organizer;
-import model.Seminar;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +10,9 @@ import repository.HostRepository;
 import repository.SeminarRepository;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
+
+import static model.Email.*;
 
 @Transactional
 @Service
@@ -30,6 +26,9 @@ public class SeminarService {
 
     @Autowired
     AttendeeRepository attendeeRepository;
+
+    @Autowired
+    EmailService emailService;
 
     public List<Seminar> getAll() {
         return seminarRepository.findAll();
@@ -52,6 +51,18 @@ public class SeminarService {
     }
 
     public void deleteSeminar(Integer id){
+        if(getAttendeeEmails(id) != null){
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        emailService.sendEmail(getAttendeeEmails(id), SEMINAR_CANCELLED, get(id));
+                    } catch (Exception ex) {
+                    }
+                }
+            }).start();
+            attendeeRepository.updateDeletedBySeminar(get(id));
+        }
+
         seminarRepository.updateDeletedById(id);
     }
 
@@ -76,10 +87,33 @@ public class SeminarService {
         seminar.setHoldDateString(holdDate);
         seminar.setHostByHostId(hostRepository.findById(hostId));
         seminarRepository.saveAndFlush(seminar);
+
+        if(getAttendeeEmails(seminarId) != null){
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        emailService.sendEmail(getAttendeeEmails(seminarId), SEMINAR_CHANGED, seminar);
+                    } catch (Exception ex) {
+                    }
+                }
+            }).start();
+        }
+
+
     }
 
     public List<Attendee> getAttendees(Integer id){
         return attendeeRepository.findAllBySeminarBySeminarIdAndDeletedFalse(get(id));
+    }
+
+    public String[] getAttendeeEmails(Integer id){
+        List<Attendee> attendees = getAttendees(id);
+        if(attendees == null || attendees.size() == 0) return null;
+        String[] emails = new String[attendees.size()];
+        for(int i = 0; i < attendees.size(); i++){
+            emails[i] = attendees.get(i).getEmail();
+        }
+        return emails;
     }
 
     public List<Seminar> getAvailablesByCategory(String category){
