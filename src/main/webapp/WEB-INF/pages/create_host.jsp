@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" value="Login"/>
+                <input type="submit" value="Create"/>
             </td>
         </tr>
     </table>

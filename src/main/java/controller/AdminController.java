@@ -14,9 +14,6 @@ import service.HostService;
 import service.OrganizerService;
 import service.SeminarService;
 
-import javax.jws.WebParam;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -117,6 +114,4 @@ public class AdminController {
         else if(type.equals("Seminar")) return "redirect:/seminar/add";
         return "admin_home";
     }
-
-
 }

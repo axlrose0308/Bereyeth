@@ -106,7 +106,7 @@
 
 <h3>Create account</h3>
 <form:form action="/admin/get_type" method="POST">
-    <label for="createType">Which do you want to create </label>
+    <label for="createType">What do you want to create </label>
     <select id="createType" name="createType">
         <option>Host</option>
         <option>Organizer</option>
