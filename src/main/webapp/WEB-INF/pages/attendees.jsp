@@ -52,7 +52,8 @@
                 <td>${attendee.code}</td>
                 <td>${attendee.nameTag}</td>
                 <td><a href="/seminar/attendees/delete?id=${attendee.id}&seminarId=${seminar.id}">Delete</a></td>
-                <td><a href="/seminar/attendees/edit?id=${attendee.id}&seminarId=${seminar.id}">Edit</a></td>
+                <c:if test="${seminar.passed()}"><td></td></c:if>
+                <c:if test="${not seminar.passed()}"><td><a href="/seminar/attendees/edit?id=${attendee.id}&seminarId=${seminar.id}">Edit</a></td></c:if>
             </tr>
         </c:forEach>
     </table>

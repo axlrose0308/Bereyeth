@@ -226,4 +226,5 @@ public class Seminar {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }

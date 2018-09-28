@@ -1,15 +1,19 @@
 package service;
 
+import exception.InUseException;
 import exception.LoginFailException;
 import exception.ModifyException;
 import model.Admin;
 import model.Organizer;
+import model.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import repository.OrganizerRepository;
+import repository.SeminarRepository;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.List;
 
 @Transactional
@@ -18,6 +22,9 @@ public class OrganizerService {
 
     @Autowired
     OrganizerRepository organizerRepository;
+
+    @Autowired
+    SeminarRepository seminarRepository;
 
     public Organizer login(String username,
                            String password) throws LoginFailException {
@@ -56,10 +63,20 @@ public class OrganizerService {
         organizerRepository.saveAndFlush(organizer);
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer id) throws InUseException {
         Organizer organizer = organizerRepository.findById(id);
+        if (hasUnfinishedSeminar(organizer)) throw new InUseException(organizer.getUsername());
         organizer.setDeleted(true);
         organizerRepository.saveAndFlush(organizer);
+    }
+
+    private boolean hasUnfinishedSeminar(Organizer organizer){
+        List<Seminar> seminars = seminarRepository.findAllByOrganizerByOrganizerIdAndDeletedFalse(organizer);
+        Date today = new Date(new java.util.Date().getTime());
+        for(Seminar seminar: seminars){
+            if(today.before( seminar.getHoldDate())) return true;
+        }
+        return false;
     }
 
     public Organizer get(Integer id) {

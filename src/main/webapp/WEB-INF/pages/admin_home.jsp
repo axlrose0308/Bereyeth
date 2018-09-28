@@ -25,6 +25,7 @@
 <body>
 <%@include file="logout_component.jsp"%>
 <h2>Welcome ${sessionScope.admin.username}</h2>
+<h2 style="color: red">${error}</h2>
 <table>
     <thead>All hosts</thead>
     <tr>
@@ -96,9 +97,11 @@
             <td>${seminar.duration}</td>
             <td>${seminar.capacity}</td>
             <td>${seminar.adminByAdminId.username}</td>
-            <td>${seminar.hostByHostId.username}</td>
+            <c:if test="${seminar.hostByHostId.deleted}"><td>Deleted</td></c:if>
+            <c:if test="${not seminar.hostByHostId.deleted}"><td>${seminar.hostByHostId.username}</td></c:if>
             <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
-            <td><a href="/seminar/edit?seminarId=${seminar.id}">Edit</a></td>
+            <c:if test="${not seminar.passed()}"><td><a href="/seminar/edit?seminarId=${seminar.id}">Edit</a></td></c:if>
+            <c:if test="${seminar.passed()}"><td> </td></c:if>
             <td><a href="/seminar/delete?seminarId=${seminar.id}">Delete</a></td>
         </tr>
     </c:forEach>

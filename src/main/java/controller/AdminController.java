@@ -1,6 +1,7 @@
 package controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import exception.InUseException;
 import exception.ModifyException;
 import model.Admin;
 import model.Seminar;
@@ -31,10 +32,11 @@ public class AdminController {
     SeminarService seminarService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(ModelMap modelMap) {
+    public String home(ModelMap modelMap, @RequestParam(name = "error", required = false) String error) {
         modelMap.addAttribute("hosts", hostService.getAll());
         modelMap.addAttribute("organizers", organizerService.getAll());
         modelMap.addAttribute("seminars", seminarService.getAll());
+        if (error != null)modelMap.addAttribute("error", error);
         return "admin_home";
     }
 
@@ -56,8 +58,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/delete_host", method = RequestMethod.GET)
-    public String deleteHost(@RequestParam("id") Integer id) {
-        hostService.delete(id);
+    public String deleteHost(@RequestParam("id") Integer id, ModelMap modelMap) {
+        try {
+            hostService.delete(id);
+        } catch (InUseException e) {
+            modelMap.addAttribute("error", e.getMessage());
+        }
         return "redirect:/admin/";
     }
 
@@ -99,8 +105,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/delete_organizer", method = RequestMethod.GET)
-    public String deleteOrganizer(@RequestParam("id") Integer id) {
-        organizerService.delete(id);
+    public String deleteOrganizer(@RequestParam("id") Integer id, ModelMap modelMap) {
+        try {
+            organizerService.delete(id);
+        } catch (InUseException e) {
+            modelMap.addAttribute("error", e.getMessage());
+        }
         return "redirect:/admin/";
     }
 

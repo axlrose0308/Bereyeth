@@ -1,5 +1,6 @@
 package service;
 
+import exception.InUseException;
 import exception.LoginFailException;
 import exception.ModifyException;
 import model.Admin;
@@ -14,8 +15,8 @@ import repository.SeminarRepository;
 import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -68,8 +69,9 @@ public class HostService {
         hostRepository.saveAndFlush(host);
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer id) throws InUseException {
         Host host = hostRepository.findById(id);
+        if (hasUnpassedSeminar(host)) throw new InUseException(host.getUsername());
         host.setDeleted(true);
         hostRepository.saveAndFlush(host);
     }
@@ -80,5 +82,14 @@ public class HostService {
 
     public List<Seminar> getRelateSeminars(Host host) {
         return seminarRepository.findAllByHostByHostIdAndDeletedFalse(host);
+    }
+
+    public boolean hasUnpassedSeminar(Host host){
+        List<Seminar> seminars = getRelateSeminars(host);
+        Date today = new Date(new java.util.Date().getTime());
+        for(Seminar seminar: seminars){
+            if(today.before( seminar.getHoldDate())) return true;
+        }
+        return false;
     }
 }
