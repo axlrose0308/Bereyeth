@@ -2,10 +2,7 @@ package controller;
 
 import exception.HostUnavailableException;
 import exception.RegisteredException;
-import model.Attendee;
-import model.Host;
-import model.Organizer;
-import model.Seminar;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -159,8 +156,10 @@ public class SeminarController {
                               HttpSession session, ModelMap modelMap) {
         String path;
         Organizer organizer;
+        Admin admin = null;
         if(session.getAttribute("admin") != null) {
             path = "/admin/";
+            admin = (Admin) session.getAttribute("admin");
             organizer = organizerService.get(organizerId);
         }
         else {
@@ -170,6 +169,7 @@ public class SeminarController {
 
         Host host = hostService.get(hostId);
         Seminar seminar = new Seminar(location, time, subject, description, duration, capacity, organizer, host, date, category);
+        if ( admin != null) seminar.setAdminByAdminId(admin);
         try {
             seminarService.addSeminar(seminar);
         } catch (HostUnavailableException e) {

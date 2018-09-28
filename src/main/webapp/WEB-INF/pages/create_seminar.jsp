@@ -76,7 +76,7 @@
                 <label for="duration">Duration</label>
             </td>
             <td>
-                <input type="time" id="duration" name="duration"/>
+                <input type="time" id="duration" name="duration" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" step="60"/>
             </td>
         </tr>
         <tr>
@@ -90,7 +90,7 @@
         <c:if test="${not empty organizers}">
             <tr>
                 <td>
-                    <label for="organizerId">Host</label>
+                    <label for="organizerId">Organizer</label>
                 </td>
                 <td>
                     <select id="organizerId" name="organizerId">

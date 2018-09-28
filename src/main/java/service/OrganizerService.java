@@ -37,7 +37,7 @@ public class OrganizerService {
         Admin admin = (Admin) session.getAttribute("admin");
         Organizer organizer = new Organizer();
         organizer.setUsername(username);
-        if (organizerRepository.findByUsernameAndDeletedFalse(username) == null) throw new ModifyException("" +
+        if (organizerRepository.findByUsernameAndDeletedFalse(username) != null) throw new ModifyException("" +
                 "Organizer with user name " + username + " already exists.");
         organizer.setPassword(password);
         organizer.setEmail(email);

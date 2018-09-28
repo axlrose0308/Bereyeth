@@ -115,6 +115,8 @@ public class Seminar {
     }
 
     public void setDurationString(String duration) {
+        String format = "00:00";
+        if(duration.length() == format.length()) duration += ":00";
         this.duration = Time.valueOf(duration);
     }
 

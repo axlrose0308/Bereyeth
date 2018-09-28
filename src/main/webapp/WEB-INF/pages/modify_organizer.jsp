@@ -53,7 +53,7 @@
                 <label for="repeatpassword">Repeat password</label>
             </td>
             <td>
-                <input type="text" id="repeatpassword" name="repeatpassword" value="${organizer.password}"/>
+                <input type="password" id="repeatpassword" name="repeatpassword" value="${organizer.password}"/>
             </td>
         </tr>
         <tr>
