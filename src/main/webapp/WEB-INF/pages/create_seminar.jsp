@@ -84,7 +84,12 @@
                 <label for="capacity">Capacity</label>
             </td>
             <td>
-                <input type="number" min="1" id="capacity" name="capacity"/>
+                <select id="capacity" name="capacity">
+                    <option>50</option>
+                    <option>100</option>
+                    <option>150</option>
+                    <option>200</option>
+                </select>
             </td>
         </tr>
         <c:if test="${not empty organizers}">

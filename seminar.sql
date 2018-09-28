@@ -160,14 +160,15 @@ CREATE TABLE `seminar` (
   `organizer_id` int(11) NOT NULL,
   `host_id` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
-  `capacity` int(11) NOT NULL,
   `hold_date` date DEFAULT NULL,
   `category` varchar(20) DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `seminar_id_uindex` (`id`),
   KEY `seminar_admin_id_fk` (`admin_id`),
   KEY `seminar_organizer_id_fk` (`organizer_id`),
   KEY `seminar_host_id_fk` (`host_id`),
+  KEY `seminar___fk` (`capacity`),
   CONSTRAINT `seminar_admin_id_fk` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
   CONSTRAINT `seminar_host_id_fk` FOREIGN KEY (`host_id`) REFERENCES `host` (`id`),
   CONSTRAINT `seminar_organizer_id_fk` FOREIGN KEY (`organizer_id`) REFERENCES `organizer` (`id`)
@@ -180,7 +181,7 @@ CREATE TABLE `seminar` (
 
 LOCK TABLES `seminar` WRITE;
 /*!40000 ALTER TABLE `seminar` DISABLE KEYS */;
-INSERT INTO `seminar` VALUES (1,'UTS','11:00:00','java','javaafa','02:00:00',1,6,8,0,20,'2018-09-28','Forum'),(2,'UTS','18:03:00','ddd','ADFAFEFAWDF','15:55:00',NULL,6,9,0,6,'2018-09-06','Forum'),(5,'uts','08:00:00','WSD','qpoiefjqpewofijqoewifj','02:00:00',1,9,8,0,100,'2018-09-10','Summit Meeting'),(8,'dafa','16:55:00','WSD','12321EAFAE','10:52:00',NULL,6,9,0,6,'2018-09-27','Lecture'),(9,'dd','11:58:00','dd','adsfadfa','15:59:00',NULL,6,8,0,1231,'2018-09-25','Summit Meeting'),(10,'UTS library','12:00:00','Graduation','Please come for your graduation.','16:00:00',NULL,6,14,0,100,'2018-09-22','Summit Meeting'),(11,'UTS','12:59:00','adfa','sdfadfewf','15:00:00',NULL,6,8,1,500,'2018-12-28','Summit Meeting'),(12,'Powerhouse','06:00:00','Graduation','Testing','15:00:00',NULL,6,13,0,50,'2018-10-10','Forum'),(13,'city','13:59:00','try','sadfafs','15:59:00',NULL,6,8,1,2,'2018-09-06','Forum'),(14,'adsfasdfa','14:59:00','dsafadf','2342dsfaewf','14:59:00',NULL,6,14,1,50,'2018-09-29','Forum');
+INSERT INTO `seminar` VALUES (1,'UTS','11:00:00','java','javaafa','02:00:00',1,6,8,0,'2018-09-28','Forum',50),(2,'UTS','18:03:00','ddd','ADFAFEFAWDF','15:55:00',NULL,6,9,0,'2018-09-06','Forum',50),(5,'uts','08:00:00','WSD','qpoiefjqpewofijqoewifj','02:00:00',1,9,8,0,'2018-09-10','Summit Meeting',100),(8,'dafa','16:55:00','WSD','12321EAFAE','10:52:00',NULL,6,9,0,'2018-09-27','Lecture',200),(9,'dd','11:58:00','dd','adsfadfa','15:59:00',NULL,6,8,0,'2018-09-25','Summit Meeting',100),(10,'UTS library','12:00:00','Graduation','Please come for your graduation.','16:00:00',NULL,6,14,0,'2018-09-22','Summit Meeting',200),(11,'UTS','12:59:00','adfa','sdfadfewf','15:00:00',NULL,6,8,1,'2018-12-28','Summit Meeting',150),(12,'Powerhouse','06:00:00','Graduation','Testing','15:00:00',NULL,6,13,0,'2018-10-10','Forum',50),(13,'city','13:59:00','try','sadfafs','15:59:00',NULL,6,8,1,'2018-09-06','Forum',150),(14,'adsfasdfa','14:59:00','dsafadf','2342dsfaewf','14:59:00',NULL,6,14,1,'2018-09-29','Forum',150);
 /*!40000 ALTER TABLE `seminar` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -193,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-16  0:16:36
+-- Dump completed on 2018-09-28 20:58:03

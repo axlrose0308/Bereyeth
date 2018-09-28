@@ -92,7 +92,32 @@
                 <label for="capacity">Capacity</label>
             </td>
             <td>
-                <input type="number" min="1" id="capacity" name="capacity" value="${seminar.capacity}"/>
+                <select id="capacity" name="capacity">
+                    <c:if test="${seminar.capacity == 50}">
+                        <option selected="selected">50</option>
+                        <option>100</option>
+                        <option>150</option>
+                        <option>200</option>
+                    </c:if>
+                    <c:if test="${seminar.capacity == 100}">
+                        <option>50</option>
+                        <option selected="selected">100</option>
+                        <option>150</option>
+                        <option>200</option>
+                    </c:if>
+                    <c:if test="${seminar.capacity == 150}">
+                        <option>50</option>
+                        <option>100</option>
+                        <option selected="selected">150</option>
+                        <option>200</option>
+                    </c:if>
+                    <c:if test="${seminar.capacity == 200}">
+                        <option>50</option>
+                        <option>100</option>
+                        <option>150</option>
+                        <option selected="selected">200</option>
+                    </c:if>
+                </select>
             </td>
         </tr>
 
