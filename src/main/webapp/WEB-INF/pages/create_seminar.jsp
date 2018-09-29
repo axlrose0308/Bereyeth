@@ -43,7 +43,16 @@
                 <label for="location">location</label>
             </td>
             <td>
-                <input type="text" id="location" name="location"/>
+                <select id="location" name="location">
+                    <option>UTS Building 11</option>
+                    <option>UTS Building 10</option>
+                    <option>UTS Building 7</option>
+                    <option>UTS Building 6</option>
+                    <option>UTS Building 5</option>
+                    <option>UTS Buidling 4</option>
+                    <option>UTS Buidling 3</option>
+                    <option>UTS Buidling 1</option>
+                </select>
             </td>
         </tr>
         <tr>
@@ -56,7 +65,7 @@
         </tr>
         <tr>
             <td>
-                <label for="subject">Subject</label>
+                <label for="subject">Title</label>
             </td>
             <td>
                 <input type="text" id="subject" name="subject"/>
@@ -64,7 +73,7 @@
         </tr>
         <tr>
             <td>
-                <label for="description">Subject</label>
+                <label for="description">Description</label>
             </td>
             <td>
                 <textarea name="description" id="description" rows="6"></textarea>
@@ -76,19 +85,19 @@
                 <label for="duration">Duration</label>
             </td>
             <td>
-                <input type="time" id="duration" name="duration" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" step="60"/>
+                <input type="time" id="duration" name="duration"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="capacity">Capacity</label>
+                <label for="capacity">Room Capacity</label>
             </td>
             <td>
                 <select id="capacity" name="capacity">
-                    <option>50</option>
-                    <option>100</option>
-                    <option>150</option>
                     <option>200</option>
+                    <option>100</option>
+                    <option>60</option>
+                    <option>20e</option>
                 </select>
             </td>
         </tr>

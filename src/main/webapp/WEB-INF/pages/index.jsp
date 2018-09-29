@@ -4,7 +4,7 @@
 <%@ page import="model.Host" %>
 <%@ page import="model.Organizer" %><%--
   Created by IntelliJ IDEA.
-  User: eaton
+  User: eric
   Date: 31/08/18
   Time: 11:47 PM
   To change this template use File | Settings | File Templates.
