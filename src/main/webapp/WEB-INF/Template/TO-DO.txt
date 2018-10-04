@@ -1,0 +1,10 @@
+[] Make all forms work
+[] Make all links/button clicks work
+[] Make login work
+[] Make certain features apear/dissapear depending on user role
+[] Make tables able to edit/delete
+[] Display actual seminars
+[] Search/Filtering automatic
+[] Change html titles 
+[] Create favicon
+[] Popups (seminar added, )

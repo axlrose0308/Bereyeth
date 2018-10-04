@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="40fb3872-7b51-463a-8c95-194bca7e11b8" name="ec2-user@ec2-13-211-60-175.ap-southeast-2.compute.amazonaws.com:22" url="http://ec2-13-211-60-175.ap-southeast-2.compute.amazonaws.com">
+        <fileTransfer host="ec2-13-211-60-175.ap-southeast-2.compute.amazonaws.com" port="22" privateKey="$USER_HOME$/OneDrive - University of Technology Sydney/AWS/EricStradlin.pem" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
