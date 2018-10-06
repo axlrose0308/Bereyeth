@@ -11,9 +11,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <title>SMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="WEB-INF/pages/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="WEB-INF/pages/css/font-awesome.min.css" media="all"/>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="WEB-INF/pages/css/swiper.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="WEB-INF/pages/style.css">
+    <script src="js/custom.js"></script>
+    <!--
     <style>
         th, td {
             padding: 2px;
@@ -24,9 +40,10 @@
             border: solid chartreuse;
         }
     </style>
+    -->
 </head>
+
 <body>
-<h1>Welcome to seminar management system</h1>
 
 <%
     Admin admin = null;
@@ -45,15 +62,47 @@
     }
     if (home != null) {
 %>
-<h2>You are now logged in
-    as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}</h2>
-<a href="<%=home%>">Home</a>
-<a href="/logout">Log out</a>
-<%} else {%>
-<a href="/redirect/admin">Admin Login</a>
-<a href="/redirect/host">Host Login</a>
-<a href="/redirect/organizer">Organizer Login</a>
-<%}%>
+
+<header class='site-header'>
+    <div class='header-bg'>
+        <img src='WEB-INF/pages/img/home-bg.png' class='header-bg'>
+        <div class='header-container'>
+            <div class='header-top'>
+                <div class='header-top-logo'><a href='index.jsp'><img src='WEB-INF/pages/img/logo.png' class='header-logo'></a></div>
+                    <h2>You are now logged in
+                        as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}
+                    </h2>
+                    <ul>
+                        <a href="<%=home%>">Home</a>
+                        <a href="/logout">Log Out</a>
+                        <%} else {%>
+                        <div class='header-top-login'>
+                            <button class="login-dropbtn">Login</button>
+                            <div class="login-dropdown-content">
+                                <a href="/redirect/admin">Administrator Login</a>
+                                <a href="/redirect/organizer">Organizer Login</a>
+                                <a href="/redirect/host">Host Login</a>
+                            </div>
+                        </div>
+                        <%}%>
+                        <!--
+                        <div class='header-links'>
+                            <ul class='nav-menu'>
+                                <li><a href="/seminar/register">Seminars</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        -->
+                    </ul>
+            </div>
+
+            <div class='title-container'>
+                <h1>Find and register for UTS seminars here!</h1>
+            </div>
+        </div>
+    </div>
+</header>
 
 <form:form action="/" method="GET">
 <table>
@@ -78,9 +127,35 @@
 </table>
 </form:form>
 
+<div class='about-section'>
+    <div class='about-section-icon'>
+        <img src='img/logo.png'>
+    </div>
+    <div class='about-section-desc'>
+        <h1>What is UTS SMS?</h1>
+        <p>UTS SMS is the dedicated Seminar Management System for the University of Technology Sydney. Here you will see all the upcoming seminar's for UTS, and are able to register to attend them! To get started, visit the Seminars page to find a seminar that interests you.</p>
+    </div>
+</div>
+
+<div class='seminars-section'>
+    <img src='/img/seminars-banner.jpg'>
+    <div class='seminars-section-desc'>
+        <h1>Seminars</h1>
+        <a href='/seminars.html'><button><span>Click to search for seminars</span></button></a>
+    </div>
+</div>
+
 <c:if test="${empty seminars}">
     <h1>No available seminars</h1>
 </c:if>
+
+<form:form action="/seminar/attendees/delete" method="get">
+    <p>Enter your registration code to cancel registration</p>
+    <input type="text" name="code" width="100"/>
+    <input type="submit" value="Cancel"/>
+</form:form>
+<h3>${error}</h3>
+
 <c:if test="${not empty seminars}">
     <h3>Seminars currently available.</h3>
     <table >
@@ -99,7 +174,7 @@
                         ${seminar.holdDate}
                 </td>
                 <td>
-                    ${seminar.category}
+                        ${seminar.category}
                 </td>
                 <td>
                     <a href="/seminar/details?id=${seminar.id}">View detail</a>
@@ -109,12 +184,29 @@
     </table>
 </c:if>
 
-<form:form action="/seminar/attendees/delete" method="get">
-    <p>Enter your registration code to cancel registration</p>
-    <input type="text" name="code" width="100"/>
-    <input type="submit" value="Cancel"/>
-</form:form>
-<h3>${error}</h3>
+<footer class='site-footer'>
+    <div class='footer-container'>
+        <div class='footer-top'>
+            <div class='footer-top-container'>
+                <h1>Contact</h1>
+                <p>For any questions or comments, please contact us through the email address below.</p>
+                <h3>uts_sms@uts.edu.au</h3>
+            </div>
+        </div>
+
+        <!--
+        <div class='footer-container-bottom'>
+            <img src='img/logo.png'>
+            <ul class='nav-menu'>
+                <a href="index.jsp"><li>Home</li></a>
+                <a href='/index'><li>About Us</li></a>
+                <a href='/seminars'><li>Seminars</li></a>
+                <a href='/contact'><li>Contact</li></a>
+            </ul>
+        </div>
+        -->
+    </div>
+</footer>
 
 </body>
 </html>
