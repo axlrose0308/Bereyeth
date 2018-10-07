@@ -4,11 +4,11 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPCell;
+import javafx.scene.control.Cell;
 import model.Seminar;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
+import java.io.*;
 
 public class PdfUtil {
 
@@ -17,6 +17,13 @@ public class PdfUtil {
         byte[] result = null;
 
         Document doc = new Document();
+        /*
+        PdfPTable table = new PdfPTable(new float[] { 10, 5, 10 });
+        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell("Name Tags");
+        table.setHeaderRows(1);
+        PdfPCell[] cells = table.getRow(0).getCells();
+        */
 
         try {
             PdfWriter pw = PdfWriter.getInstance(doc, bos);
@@ -28,6 +35,8 @@ public class PdfUtil {
             List nameList = new List();
             for (int i = 0; i < nameTags.length; i++) {
                 nameList.add(new ListItem(nameTags[i]));
+                //cells[i].setBackgroundColor(BaseColor.GRAY);
+                //table.addCell("Name" + i);
             }
 
             doc.add(nameList);
@@ -51,5 +60,4 @@ public class PdfUtil {
         }
         return result;
     }
-
 }
