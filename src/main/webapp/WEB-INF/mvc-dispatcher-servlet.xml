@@ -24,6 +24,16 @@
 
     <mvc:annotation-driven/>
 
+    <mvc:resources mapping="/img/**" location="/WEB-INF/pages/img/" />
+
+    <mvc:resources mapping="/css/**" location="/WEB-INF/pages/css/" />
+
+    <mvc:resources mapping="/fonts/**" location="/WEB-INF/pages/fonts/" />
+
+    <mvc:resources mapping="/js/**" location="/WEB-INF/pages/js/" />
+
+    <!-- <mvc:resources mapping="/pages/**" location="WEB-INF/pages/" /> -->
+
     <!--ViewResolver 视图解析器-->
     <!--用于支持Servlet、JSP视图解析-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

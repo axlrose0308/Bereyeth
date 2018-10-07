@@ -22,6 +22,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <!--
     <title>Title</title>
     <style>
         th, td {
@@ -33,16 +34,56 @@
             border: solid chartreuse;
         }
     </style>
+    -->
+    <meta charset="utf-8">
+    <title>Create Seminar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="/css/swiper.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/custom.js"></script>
 </head>
 <body>
+<header class='site-header'>
+    <div class='header-bg'>
+        <img src='/img/seminars-bg.jpg' class='header-bg'>
+        <div class='header-container'>
+            <div class='header-top'>
+                <div class='header-top-logo'><a href="<%=home%>"><img src='/img/logo.png' class='header-logo'></a></div>
+
+                <div class='header-top-login'>
+                    <button class="login-dropbtn">Login</button>
+                    <div class="login-dropdown-content">
+                        <a href="/redirect/admin">Admin</a>
+                        <a href="/redirect/host">Host</a>
+                        <a href="/redirect/organizer">Organiser</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class='title-container'>
+                <h1>Create Seminar</h1>
+
+            </div>
+        </div>
+    </div>
+</header>
 <h1>${error}</h1>
 <form:form action="/seminar/add" method="POST">
     <table>
         <tr>
             <td>
                 <label for="location">location</label>
-            </td>
-            <td>
+
                 <select id="location" name="location">
                     <option>UTS Building 11</option>
                     <option>UTS Building 10</option>
@@ -60,12 +101,12 @@
                 <label for="time">Time</label>
             </td>
             <td>
-                <input type="time" id="time" name="time"/>
+                <input type="time" id="time" name="time" placeholder="Time"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="subject">Title</label>
+                <label for="subject">Seminar Title</label>
             </td>
             <td>
                 <input type="text" id="subject" name="subject"/>
@@ -73,7 +114,7 @@
         </tr>
         <tr>
             <td>
-                <label for="description">Description</label>
+                <label for="description">Seminar Description</label>
             </td>
             <td>
                 <textarea name="description" id="description" rows="6"></textarea>
@@ -97,7 +138,7 @@
                     <option>200</option>
                     <option>100</option>
                     <option>60</option>
-                    <option>20e</option>
+                    <option>20</option>
                 </select>
             </td>
         </tr>
@@ -155,6 +196,18 @@
     </table>
 </form:form>
 <a href="<%=home%>">Return</a>
+
+<footer class='site-footer'>
+    <div class='footer-container'>
+        <div class='footer-top'>
+            <div class='footer-top-container'>
+                <h1>Contact</h1>
+                <p>For any questions or comments, please contact us through the email address below.</p>
+                <h3>uts_sms@uts.edu.au</h3>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

@@ -22,6 +22,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <!--
     <title>Title</title>
     <style>
         th, td {
@@ -33,6 +34,24 @@
             border: solid chartreuse;
         }
     </style>
+    -->
+
+    <meta charset="utf-8">
+    <title>Modify Seminar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="/css/swiper.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/custom.js"></script>
 </head>
 <body>
 <h1>${error}</h1>

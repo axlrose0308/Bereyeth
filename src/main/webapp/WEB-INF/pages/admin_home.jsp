@@ -81,7 +81,7 @@
         <th>Duration</th>
         <th>Capacity</th>
         <th>Host</th>
-        <th></th>
+        <th>Organizer</th>
         <th></th>
         <th></th>
     </tr>

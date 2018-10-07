@@ -18,17 +18,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="WEB-INF/pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="WEB-INF/pages/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="WEB-INF/pages/css/swiper.min.css">
+    <link rel="stylesheet" href="/css/swiper.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="WEB-INF/pages/style.css">
-    <script src="js/custom.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/custom.js"></script>
     <!--
     <style>
         th, td {
@@ -63,12 +63,12 @@
     if (home != null) {
 %>
 
-<header class='site-header'>
-    <div class='header-bg'>
-        <img src='WEB-INF/pages/img/home-bg.png' class='header-bg'>
-        <div class='header-container'>
-            <div class='header-top'>
-                <div class='header-top-logo'><a href='index.jsp'><img src='WEB-INF/pages/img/logo.png' class='header-logo'></a></div>
+<header class="site-header">
+    <div class="header-bg">
+        <img src="/img/home-bg.png" class="header-bg">
+        <div class="header-container">
+            <div class="header-top">
+                <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
                     <h2>You are now logged in
                         as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}
                     </h2>
@@ -76,12 +76,12 @@
                         <a href="<%=home%>">Home</a>
                         <a href="/logout">Log Out</a>
                         <%} else {%>
-                        <div class='header-top-login'>
+                        <div class="header-top-login">
                             <button class="login-dropbtn">Login</button>
                             <div class="login-dropdown-content">
-                                <a href="/redirect/admin">Administrator Login</a>
-                                <a href="/redirect/organizer">Organizer Login</a>
-                                <a href="/redirect/host">Host Login</a>
+                                <a href="/redirect/admin">Administrator</a>
+                                <a href="/redirect/organizer">Organizer</a>
+                                <a href="/redirect/host">Host</a>
                             </div>
                         </div>
                         <%}%>
@@ -97,7 +97,7 @@
                     </ul>
             </div>
 
-            <div class='title-container'>
+            <div class="title-container">
                 <h1>Find and register for UTS seminars here!</h1>
             </div>
         </div>
@@ -127,21 +127,21 @@
 </table>
 </form:form>
 
-<div class='about-section'>
-    <div class='about-section-icon'>
-        <img src='img/logo.png'>
+<div class="about-section">
+    <div class="about-section-icon">
+        <img src="/img/logo.png">
     </div>
-    <div class='about-section-desc'>
+    <div class="about-section-desc">
         <h1>What is UTS SMS?</h1>
         <p>UTS SMS is the dedicated Seminar Management System for the University of Technology Sydney. Here you will see all the upcoming seminar's for UTS, and are able to register to attend them! To get started, visit the Seminars page to find a seminar that interests you.</p>
     </div>
 </div>
 
-<div class='seminars-section'>
-    <img src='/img/seminars-banner.jpg'>
-    <div class='seminars-section-desc'>
+<div class="seminars-section">
+    <img src="/img/seminars-banner.jpg">
+    <div class="seminars-section-desc">
         <h1>Seminars</h1>
-        <a href='/seminars.html'><button><span>Click to search for seminars</span></button></a>
+        <a href="#"><button><span>Click to search for seminars</span></button></a>
     </div>
 </div>
 
@@ -184,10 +184,10 @@
     </table>
 </c:if>
 
-<footer class='site-footer'>
-    <div class='footer-container'>
-        <div class='footer-top'>
-            <div class='footer-top-container'>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-top-container">
                 <h1>Contact</h1>
                 <p>For any questions or comments, please contact us through the email address below.</p>
                 <h3>uts_sms@uts.edu.au</h3>

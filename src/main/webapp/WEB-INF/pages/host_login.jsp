@@ -9,35 +9,44 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>Host Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="/css/swiper.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/custom.js"></script>
 </head>
 <body>
-<h1>Host Login</h1>
-<form:form action="/login/host" method="POST">
-    <table>
-        <tr>
-            <td>
-                <label for="username">username</label>
-            </td>
-            <td>
-                <input type="text" id="username" name="username"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="password">password</label>
-            </td>
-            <td>
-                <input type="password" id="password" name="password"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Login"/>
-            </td>
-        </tr>
-    </table>
-</form:form>
-<h2>${error}</h2>
+<div class='login-bg'>
+    <img src="/img/home-bg.png" class='login-bg-img'>
+    <div class='login-form-container'>
+        <img src="/img/logo.png" class='login-logo'>
+        <h1>Host Login</h1>
+            <form:form action="/login/host" method="POST">
+                <div class=login-form>
+                    <form>
+                        <input type="text" id="username" name="username" placeholder="Username"/>
+                        <label for="password">password</label>
+
+                        <input type="password" id="password" name="password" placeholder="Password"/>
+                    <div class="login-buttons">
+                        <input type="submit" value="Login"/>
+                    </div>
+                    </form>
+            </form:form>
+                </div>
+    <h2>${error}</h2>
+    </div>
+</div>
 </body>
 </html>
