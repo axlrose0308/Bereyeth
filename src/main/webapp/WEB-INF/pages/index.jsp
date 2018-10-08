@@ -9,26 +9,31 @@
   Time: 11:47 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
     <title>SMS</title>
+
+    <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/bootstrap.min.css" />" >
 
     <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/font-awesome.min.css"/> ">
 
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/swiper.min.css"/> ">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-    <script src="/js/custom.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css"/> ">
+
+    <script type="text/javascript" src="<c:url value="/js/custom.js"/> "></script>
     <!--
     <style>
         th, td {
@@ -44,6 +49,13 @@
 </head>
 
 <body>
+
+<header class="site-header">
+    <div class="header-bg">
+        <img src="<c:url value="/img/home-bg.png"/> " class="header-bg"/>
+        <div class="header-container">
+            <div class="header-top">
+                <div class="header-top-logo"><img src="<c:url value="/img/logo.png"/>" class="header-logo"/></div>
 
 <%
     Admin admin = null;
@@ -63,15 +75,9 @@
     if (home != null) {
 %>
 
-<header class="site-header">
-    <div class="header-bg">
-        <img src="/img/home-bg.png" class="header-bg">
-        <div class="header-container">
-            <div class="header-top">
-                <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
-                    <h2>You are now logged in
-                        as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}
-                    </h2>
+<h2>You are now logged in
+    as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}
+</h2>
                     <ul>
                         <a href="<%=home%>">Home</a>
                         <a href="/logout">Log Out</a>
@@ -82,28 +88,20 @@
                                 <a href="/redirect/admin">Administrator</a>
                                 <a href="/redirect/organizer">Organizer</a>
                                 <a href="/redirect/host">Host</a>
+                                <%}%>
                             </div>
                         </div>
-                        <%}%>
-                        <!--
-                        <div class='header-links'>
-                            <ul class='nav-menu'>
-                                <li><a href="/seminar/register">Seminars</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                        -->
                     </ul>
-            </div>
-
-            <div class="title-container">
-                <h1>Find and register for UTS seminars here!</h1>
             </div>
         </div>
     </div>
 </header>
 
+<div class="seminars-section">
+    <div class="seminars-section-desc">
+        <h1>Seminars</h1>
+    </div>
+</div>
 <form:form action="/" method="GET">
 <table>
     <tr>
@@ -127,24 +125,6 @@
 </table>
 </form:form>
 
-<div class="about-section">
-    <div class="about-section-icon">
-        <img src="/img/logo.png">
-    </div>
-    <div class="about-section-desc">
-        <h1>What is UTS SMS?</h1>
-        <p>UTS SMS is the dedicated Seminar Management System for the University of Technology Sydney. Here you will see all the upcoming seminar's for UTS, and are able to register to attend them! To get started, visit the Seminars page to find a seminar that interests you.</p>
-    </div>
-</div>
-
-<div class="seminars-section">
-    <img src="/img/seminars-banner.jpg">
-    <div class="seminars-section-desc">
-        <h1>Seminars</h1>
-        <a href="#"><button><span>Click to search for seminars</span></button></a>
-    </div>
-</div>
-
 <c:if test="${empty seminars}">
     <h1>No available seminars</h1>
 </c:if>
@@ -155,7 +135,7 @@
     <input type="submit" value="Cancel"/>
 </form:form>
 <h3>${error}</h3>
-
+<h1>Find and register for UTS seminars here!</h1>
 <c:if test="${not empty seminars}">
     <h3>Seminars currently available.</h3>
     <table >
@@ -184,6 +164,17 @@
     </table>
 </c:if>
 
+<div class="about-section">
+    <div class="about-section-icon">
+        <img src="/img/logo.png">
+    </div>
+    <div class="about-section-desc">
+        <h1>What is UTS SMS?</h1>
+        <img src="/img/seminars-banner.jpg">
+        <p>UTS SMS is the dedicated Seminar Management System for the University of Technology Sydney. Here you will see all the upcoming seminar's for UTS, and are able to register to attend them! To get started, visit the Seminars page to find a seminar that interests you.</p>
+    </div>
+</div>
+
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-top">
@@ -193,18 +184,6 @@
                 <h3>uts_sms@uts.edu.au</h3>
             </div>
         </div>
-
-        <!--
-        <div class='footer-container-bottom'>
-            <img src='img/logo.png'>
-            <ul class='nav-menu'>
-                <a href="index.jsp"><li>Home</li></a>
-                <a href='/index'><li>About Us</li></a>
-                <a href='/seminars'><li>Seminars</li></a>
-                <a href='/contact'><li>Contact</li></a>
-            </ul>
-        </div>
-        -->
     </div>
 </footer>
 

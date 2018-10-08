@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="/css/swiper.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="/js/custom.js"></script>
 </head>
 <body>
@@ -59,15 +59,6 @@
         <div class='header-container'>
             <div class='header-top'>
                 <div class='header-top-logo'><a href="<%=home%>"><img src='/img/logo.png' class='header-logo'></a></div>
-
-                <div class='header-top-login'>
-                    <button class="login-dropbtn">Login</button>
-                    <div class="login-dropdown-content">
-                        <a href="/redirect/admin">Admin</a>
-                        <a href="/redirect/host">Host</a>
-                        <a href="/redirect/organizer">Organiser</a>
-                    </div>
-                </div>
             </div>
 
             <div class='title-container'>
