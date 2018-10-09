@@ -140,7 +140,7 @@
             <input type="text" name="code" width="100"/>
             <input type="submit" value="Cancel" class="cancel-btn"/>
         </form:form>
-        <h3>${error}</h3>
+        <h4>${error}</h4>
         </div>
 
     </div>
@@ -178,7 +178,7 @@
             <img src='img/location-icon.png' class='location-icon'>
             <h4>${seminar.location}</h4>
         </div>
-        <p>${seminar.holdDate} ${seminar.time} </p>
+        <p>${seminar.holdDate} ${seminar.time}${seminar.duration} </p>
         <a href="/seminar/details?id=${seminar.id}"><button>Read more</button></a>
         <div class='individual-seminar-item-tags'>
             <p>${seminar.category}</p>

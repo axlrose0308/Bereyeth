@@ -36,7 +36,6 @@
                 <div class=login-form>
                     <form>
                         <input type="text" id="username" name="username" placeholder="Username"/>
-                        <label for="password">password</label>
 
                         <input type="password" id="password" name="password" placeholder="Password"/>
                     <div class="login-buttons">

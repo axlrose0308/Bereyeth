@@ -51,6 +51,7 @@ body {
     font-size: 14px;
     border: none;
     z-index: 99;
+    position: relative;
 }
 
 
@@ -651,6 +652,14 @@ body {
     padding: 3px 20px;
 }
 
+.register-section{
+    padding: 20px;
+}
+
+.register-section input{
+    margin: 3px;
+    padding: 5px;
+}
 
 /*----------------------------------------------------------
 # Create/Modify Seminar Pages
