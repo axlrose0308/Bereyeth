@@ -29,18 +29,6 @@
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/custom.js"></script>
-    <!--
-    <style>
-        th, td {
-            padding: 2px;
-        }
-        table {
-            border-spacing: 15px;
-            padding: 5px;
-            border: solid chartreuse;
-        }
-    </style>
-    -->
 </head>
 
 <body>
@@ -70,7 +58,7 @@
 %>
 
                         <div class="header-top-login">
-                            <button class="login-dropbtn"><p>${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username} | <a href="/logout">Log Out</a></p></button>
+                            <button class="login-dropbtn"><p>${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username} | <a href="/logout" class="logout-btn">Log Out</a></p></button>
                         </div>
 
                         <%} else {%>
@@ -172,10 +160,10 @@
         </tr>-->
         <c:forEach var="seminar" items="${seminars}">
     <div class='individual-seminar-item'>
-        <img src='img/tech-banner.jpg' class='individual-seminar-item-banner'>
+        <img src='/img/tech-banner.jpg' class='individual-seminar-item-banner'>
         <h2>${seminar.subject}</h2>
         <div class='individual-seminar-item-location'>
-            <img src='img/location-icon.png' class='location-icon'>
+            <img src='/img/location-icon.png' class='location-icon'>
             <h4>${seminar.location}</h4>
         </div>
         <p>${seminar.holdDate} ${seminar.time}${seminar.duration} </p>

@@ -35,11 +35,8 @@
             <form:form action="/login/admin" method="POST">
                 <div class=login-form>
                     <form>
-                            <!-- <label for="username">username</label> -->
-                            <!-- <input type="text" id="username" name="username"/> -->
                             <input type="text" id="username" name="username" placeholder="Username" />
 
-                            <!-- <label for="password">password</label> -->
                             <input type="password" id="password" name="password" placeholder="Password"/>
                     <div class="login-buttons">
                             <input type="submit" value="Login"/>

@@ -44,7 +44,7 @@
                 %>
 
                 <div class="header-top-login">
-                    <button class="login-dropbtn"><p>${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username} | <a href="/logout">Log Out</a></p></button>
+                    <button class="login-dropbtn"><p>${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username} | <a href="/logout" class="logout-btn">Log Out</a></p></button>
                 </div>
 
                 <%} else {%>

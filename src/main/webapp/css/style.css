@@ -47,13 +47,16 @@ body {
 .login-dropbtn{
     background-color: #004BAE;
     color: white;
-    padding: 16px;
+    padding: 12px;
     font-size: 14px;
     border: none;
     z-index: 99;
     position: relative;
 }
 
+.login-dropbtn p{
+    margin: 0;
+}
 
 .login-dropdown-content {
     display: none;
@@ -187,6 +190,17 @@ body {
     margin: 10px 0px;
 }
 
+.logout-btn{
+    cursor: pointer;
+    color: white;
+}
+
+.logout-btn hover{
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+}
+
 .login-buttons input{
     width: 100px;
     background-color: #004BAE;
@@ -217,6 +231,20 @@ body {
     position: relative;
     margin: 5% 15%;
     height: 250px;
+}
+
+.about-section-v2{
+    position: relative;
+    margin: 5% 5%;
+}
+
+.about-section-v2 h2{
+    text-align: center;
+}
+
+.about-section-v2 table{
+    padding: 2px;
+    width: 100%;
 }
 
 .about-section-icon{
@@ -267,6 +295,7 @@ body {
 /* Seminars Section */
 .seminars-section{
     position: relative;
+    text-align: center;
 }
 
 .seminars-section img{
@@ -331,7 +360,7 @@ body {
 .upcoming-seminars-section{
     width: 80%;
     margin: 0 auto;
-    height: 600px;
+    text-align:center;
 }
 
 .all-seminars-section{
@@ -664,6 +693,18 @@ body {
 /*----------------------------------------------------------
 # Create/Modify Seminar Pages
 ----------------------------------------------------------*/
+.your-seminar-section{
+    background-color: #F3F8F9;
+    height: auto;
+    width: 80%;
+    margin: 40px auto;
+    border: 1px solid #E5E5E5;
+}
+
+.your-seminar-section table{
+    text-align: left;
+}
+
 .create-seminar-section{
     background-color: #F3F8F9;
     height: auto;
@@ -731,6 +772,7 @@ body {
     position: relative;
     height: 380px;
     width: 100%;
+    text-align: center;
 }
 
 .footer-top{

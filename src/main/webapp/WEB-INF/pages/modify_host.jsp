@@ -9,10 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Modify User</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<form:form action="/host/edit" method="POST">
+<!--<form:form action="/host/edit" method="POST">
     <table border="1">
         <tr>
             <td>
@@ -70,5 +71,6 @@
     </table>
 </form:form>
 <h1>${error}</h1>
+-->
 </body>
 </html>
