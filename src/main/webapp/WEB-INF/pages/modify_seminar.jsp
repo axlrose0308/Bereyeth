@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="/css/swiper.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="/js/custom.js"></script>
 </head>
 <body>
