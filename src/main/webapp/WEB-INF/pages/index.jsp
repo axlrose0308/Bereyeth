@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/css/swiper.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="/js/custom.js"></script>
     <!--
     <style>
@@ -44,6 +44,12 @@
 </head>
 
 <body>
+<header class="site-header">
+    <div class="header-bg">
+        <img src="/img/home-bg.png" class="header-bg">
+        <div class="header-container">
+            <div class="header-top">
+                <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
 
 <%
     Admin admin = null;
@@ -63,18 +69,10 @@
     if (home != null) {
 %>
 
-<header class="site-header">
-    <div class="header-bg">
-        <img src="/img/home-bg.png" class="header-bg">
-        <div class="header-container">
-            <div class="header-top">
-                <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
-                    <h2>You are now logged in
-                        as ${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username}
-                    </h2>
-                    <ul>
-                        <a href="<%=home%>">Home</a>
-                        <a href="/logout">Log Out</a>
+                        <div class="header-top-login">
+                            <button class="login-dropbtn"><p>${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username} | <a href="/logout">Log Out</a></p></button>
+                        </div>
+
                         <%} else {%>
                         <div class="header-top-login">
                             <button class="login-dropbtn">Login</button>
@@ -85,17 +83,17 @@
                             </div>
                         </div>
                         <%}%>
-                        <!--
+
                         <div class='header-links'>
                             <ul class='nav-menu'>
+                                <li><a href='/'><li>Home</li></a></li>
                                 <li><a href="/seminar/register">Seminars</a></li>
                                 <li><a href="#">About us</a></li>
                                 <li><a href="#">Contact</a></li>
                             </ul>
                         </div>
-                        -->
-                    </ul>
             </div>
+
 
             <div class="title-container">
                 <h1>Find and register for UTS seminars here!</h1>
@@ -104,8 +102,9 @@
     </div>
 </header>
 
+
 <form:form action="/" method="GET">
-<table>
+    <!--<table>
     <tr>
         <td>
             <select id="category" name="category">
@@ -124,7 +123,7 @@
             <input type="submit" value="View By Category"/>
         </td>
     </tr>
-</table>
+</table>-->
 </form:form>
 
 <div class="about-section">
@@ -134,7 +133,18 @@
     <div class="about-section-desc">
         <h1>What is UTS SMS?</h1>
         <p>UTS SMS is the dedicated Seminar Management System for the University of Technology Sydney. Here you will see all the upcoming seminar's for UTS, and are able to register to attend them! To get started, visit the Seminars page to find a seminar that interests you.</p>
+
+        <div class="cancel-section">
+        <form:form action="/seminar/attendees/delete" method="get">
+            <p><b>To cancel your registration, enter your registration code below.</b></p>
+            <input type="text" name="code" width="100"/>
+            <input type="submit" value="Cancel" class="cancel-btn"/>
+        </form:form>
+        <h3>${error}</h3>
+        </div>
+
     </div>
+
 </div>
 
 <div class="seminars-section">
@@ -145,28 +155,38 @@
     </div>
 </div>
 
+<div class='upcoming-seminars-section'>
+    <h1>Upcoming Seminars</h1>
+
 <c:if test="${empty seminars}">
-    <h1>No available seminars</h1>
+    <p>There are no available seminars.</p>
 </c:if>
 
-<form:form action="/seminar/attendees/delete" method="get">
-    <p>Enter your registration code to cancel registration</p>
-    <input type="text" name="code" width="100"/>
-    <input type="submit" value="Cancel"/>
-</form:form>
-<h3>${error}</h3>
-
 <c:if test="${not empty seminars}">
-    <h3>Seminars currently available.</h3>
-    <table >
+    <!--<table >
         <tr>
             <th>Subject</th>
             <th>Hold Date</th>
             <th>Category</th>
             <th></th>
-        </tr>
+        </tr>-->
         <c:forEach var="seminar" items="${seminars}">
-            <tr>
+    <div class='individual-seminar-item'>
+        <img src='img/tech-banner.jpg' class='individual-seminar-item-banner'>
+        <h2>${seminar.subject}</h2>
+        <div class='individual-seminar-item-location'>
+            <img src='img/location-icon.png' class='location-icon'>
+            <h4>${seminar.location}</h4>
+        </div>
+        <p>${seminar.holdDate} ${seminar.time} </p>
+        <a href="/seminar/details?id=${seminar.id}"><button>Read more</button></a>
+        <div class='individual-seminar-item-tags'>
+            <p>${seminar.category}</p>
+        </div>
+    </div>
+
+
+           <!-- <tr>
                 <td >
                         ${seminar.subject}
                 </td>
@@ -179,9 +199,11 @@
                 <td>
                     <a href="/seminar/details?id=${seminar.id}">View detail</a>
                 </td>
-            </tr>
+            </tr>-->
         </c:forEach>
-    </table>
+    </div>
+
+    <!--</table>-->
 </c:if>
 
 <footer class="site-footer">
@@ -190,11 +212,10 @@
             <div class="footer-top-container">
                 <h1>Contact</h1>
                 <p>For any questions or comments, please contact us through the email address below.</p>
-                <h3>uts_sms@uts.edu.au</h3>
+                <h3><b>uts_sms@uts.edu.au</b></h3>
             </div>
         </div>
 
-        <!--
         <div class='footer-container-bottom'>
             <img src='img/logo.png'>
             <ul class='nav-menu'>
@@ -204,7 +225,6 @@
                 <a href='/contact'><li>Contact</li></a>
             </ul>
         </div>
-        -->
     </div>
 </footer>
 
