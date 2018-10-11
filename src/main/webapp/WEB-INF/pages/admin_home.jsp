@@ -173,7 +173,7 @@
 
 <div class="about-section-v2">
     <div class="your-seminar-section">
-<h3>Create account</h3>
+<h3>Create</h3>
 <form:form action="/admin/get_type" method="POST">
     <label for="createType">What do you want to create </label>
     <select id="createType" name="createType">

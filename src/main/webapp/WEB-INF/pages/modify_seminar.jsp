@@ -188,7 +188,7 @@
         <c:if test="${not empty organizers}">
         <tr>
             <td>
-                <label for="organizerId">Host</label>
+                <label for="organizerId">Organizer</label>
             </td>
             <td>
                 <select id="organizerId" name="organizerId" class='seminar-form-input'>

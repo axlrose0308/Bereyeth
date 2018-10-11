@@ -136,7 +136,7 @@
         <tr>
         <tr>
             <td>
-                <label for="time">Time</label>
+                <label for="time">Start Time</label>
             </td>
             <td>
                 <input type="time" id="time" name="time" placeholder="Time" class='seminar-form-input'/>
