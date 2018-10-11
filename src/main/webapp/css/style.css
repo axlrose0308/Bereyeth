@@ -791,6 +791,7 @@ body {
     top: 25%;
     left: 25%;
     position: absolute;
+    width: 50%;
 }
 
 .footer-top-container h1{

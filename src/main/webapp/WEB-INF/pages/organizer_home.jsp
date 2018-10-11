@@ -130,10 +130,11 @@
 <c:if test="${empty seminars}">
     <h1>You are not organising any seminars.</h1>
 </c:if>
+
+        <a href="/seminar/add"><button class="create-seminar-button">Create Seminar</button></a>
     </div>
 </div>
 
-<a href="/seminar/add">Add seminar</a>
 
 <div class="seminars-section">
     <img src="/img/seminars-banner.jpg">
