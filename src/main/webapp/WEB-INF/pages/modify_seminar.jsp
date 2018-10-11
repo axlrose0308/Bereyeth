@@ -3,22 +3,6 @@
 <%@ page import="model.Organizer" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    Admin admin = null;
-    Host host = null;
-    Organizer organizer = null;
-    String home = null;
-    if (session.getAttribute("admin") != null) {
-        admin = (Admin) session.getAttribute("admin");
-        home = "/admin/";
-    } else if (session.getAttribute("host") != null) {
-        host = (Host) session.getAttribute("admin");
-        home = "/host/";
-    } else if (session.getAttribute("organizer") != null) {
-        organizer = (Organizer) session.getAttribute("organizer");
-        home = "/organizer/";
-    }
-%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -54,15 +38,76 @@
     <script src="/js/custom.js"></script>
 </head>
 <body>
-<h1>${error}</h1>
-<form:form action="/seminar/edit" method="POST">
+
+<header class="site-header">
+    <div class="header-bg">
+        <img src="/img/seminars-bg.jpg" class="header-bg">
+        <div class="header-container">
+            <div class="header-top">
+                <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
+
+                <%
+                    Admin admin = null;
+                    Host host = null;
+                    Organizer organizer = null;
+                    String home = null;
+                    if (session.getAttribute("admin") != null) {
+                        admin = (Admin) session.getAttribute("admin");
+                        home = "/admin/";
+                    } else if (session.getAttribute("host") != null) {
+                        host = (Host) session.getAttribute("admin");
+                        home = "/host/";
+                    } else if (session.getAttribute("organizer") != null) {
+                        organizer = (Organizer) session.getAttribute("organizer");
+                        home = "/organizer/";
+                    }
+                    if (home != null) {
+                %>
+
+                <div class="header-top-login">
+                    <button class="login-dropbtn"><p>${sessionScope.admin.username}${sessionScope.host.username}${sessionScope.organizer.username} | <a href="/logout" class="logout-btn">Log Out</a></p></button>
+                </div>
+
+                <%} else {%>
+                <div class="header-top-login">
+                    <button class="login-dropbtn">Login</button>
+                    <div class="login-dropdown-content">
+                        <a href="/redirect/admin">Administrator</a>
+                        <a href="/redirect/organizer">Organizer</a>
+                        <a href="/redirect/host">Host</a>
+                    </div>
+                </div>
+                <%}%>
+
+                <div class='header-links'>
+                    <ul class='nav-menu'>
+                        <li><a href='/'><li>Home</li></a></li>
+                        <li><a href="/seminar/register">Seminars</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="title-container">
+                <h1>Modify Seminar</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class='create-seminar-section'>
+    <h1>Modify Seminar</h1>
+<h2>${error}</h2>
+
+<form:form action="/seminar/edit" method="POST" class="create-seminar-form">
     <table>
         <tr>
             <td>
-                <label for="seminarId">Seminar Id</label>
+                <label for="subject">Seminar Title</label>
             </td>
             <td>
-                <input type="number" name="seminarId" id="seminarId" readonly="readonly" value="${seminar.id}">
+                <input type="text" id="subject" name="subject" value="${seminar.subject}" class='seminar-form-input'/>
             </td>
         </tr>
         <tr>
@@ -70,7 +115,15 @@
                 <label for="location">Location</label>
             </td>
             <td>
-                <input type="text" id="location" name="location" value="${seminar.location}"/>
+                <input type="text" id="location" name="location" value="${seminar.location}"class='seminar-form-input'/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="holdDate">Hold date</label>
+            </td>
+            <td>
+                <input type="date" id="holdDate" name="holdDate" value="${seminar.holdDate}" class='seminar-form-input'/>
             </td>
         </tr>
         <tr>
@@ -78,15 +131,7 @@
                 <label for="time">Time</label>
             </td>
             <td>
-                <input type="time" id="time" name="time" value="${seminar.time}" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" step="60"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="subject">Subject</label>
-            </td>
-            <td>
-                <input type="text" id="subject" name="subject" value="${seminar.subject}"/>
+                <input type="time" id="time" name="time" value="${seminar.time}" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" step="60" class='seminar-form-input'/>
             </td>
         </tr>
         <tr>
@@ -94,7 +139,7 @@
                 <label for="description">Description</label>
             </td>
             <td>
-                <textarea name="description" id="description" rows="6">${seminar.description}</textarea>
+                <textarea name="description" id="description" rows="6" class='seminar-form-input-long'>${seminar.description}</textarea>
             </td>
         </tr>
 
@@ -103,7 +148,7 @@
                 <label for="duration">Duration</label>
             </td>
             <td>
-                <input type="time" id="duration" name="duration" value="${seminar.duration}"/>
+                <input type="time" id="duration" name="duration" value="${seminar.duration}" class='seminar-form-input'/>
             </td>
         </tr>
         <tr>
@@ -111,7 +156,7 @@
                 <label for="capacity">Capacity</label>
             </td>
             <td>
-                <select id="capacity" name="capacity">
+                <select id="capacity" name="capacity" class='seminar-form-input'>
                     <c:if test="${seminar.capacity == 50}">
                         <option selected="selected">50</option>
                         <option>100</option>
@@ -146,7 +191,7 @@
                 <label for="organizerId">Host</label>
             </td>
             <td>
-                <select id="organizerId" name="organizerId">
+                <select id="organizerId" name="organizerId" class='seminar-form-input'>
                     <c:forEach items="${organizers}" var="organizer">
                         <c:if test="${organizer.id==seminar.organizerByOrganizerId.id}">
                             <option value="${organizer.id}" selected="selected">${organizer.username}</option>
@@ -165,7 +210,7 @@
                 <label for="hostId">Host</label>
             </td>
             <td>
-                <select id="hostId" name="hostId">
+                <select id="hostId" name="hostId" class='seminar-form-input'>
                     <c:forEach items="${availableHosts}" var="host">
                         <c:if test="${host.id==seminar.hostByHostId.id}">
                             <option value="${host.id}" selected="selected">${host.username}</option>
@@ -182,7 +227,7 @@
                 <label for="category">Category</label>
             </td>
             <td>
-                <select id="category" name="category">
+                <select id="category" name="category" class='seminar-form-input'>
                     <c:forEach items="${categories}" var="category">
                         <c:if test="${category.equals(seminar.category)}">
                             <option selected="selected">${category}</option>
@@ -194,24 +239,37 @@
                 </select>
             </td>
         </tr>
-        <tr>
-            <td>
-                <label for="holdDate">Hold date</label>
-            </td>
-            <td>
-                <input type="date" id="holdDate" name="holdDate" value="${seminar.holdDate}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Save"/>
-            </td>
-            <td>
-                <a href="<%=home%>">Return</a>
-            </td>
-        </tr>
     </table>
+
+    <div class='create-seminar-buttons'>
+        <a href="<%=home%>"><button class='back-seminar-button'>Back</button></a>
+        <input type="submit" value="Modify Seminar" class='create-seminar-button'/>
+    </div>
 </form:form>
+</div>
+
+<footer class='site-footer'>
+    <div class='footer-container'>
+        <div class='footer-top'>
+            <div class='footer-top-container'>
+                <h1>Contact</h1>
+                <p>For any questions or comments, please contact us through the email address below.</p>
+                <h3>utsseminar@uts.edu.au</h3>
+            </div>
+        </div>
+
+        <div class='footer-container-bottom'>
+            <img src='/img/logo.png'>
+            <ul class='nav-menu'>
+                <a href='index.html'><li>Home</li></a>
+                <a href='index.html'><li>About Us</li></a>
+                <a href='seminars.html'><li>Seminars</li></a>
+                <a href='index.html'><li>Contact</li></a>
+            </ul>
+
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

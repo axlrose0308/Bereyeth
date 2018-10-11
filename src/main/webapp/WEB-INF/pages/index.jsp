@@ -189,10 +189,10 @@
                 </td>
             </tr>-->
         </c:forEach>
-    </div>
 
     <!--</table>-->
 </c:if>
+</div>
 
 <footer class="site-footer">
     <div class="footer-container">

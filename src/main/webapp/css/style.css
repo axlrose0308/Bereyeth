@@ -714,6 +714,10 @@ body {
     padding: 30px 100px;
 }
 
+.create-seminar-section table{
+    width: 100%;
+}
+
 .create-seminar-section h1{
     text-align: left;
     margin: 5px 0px;
