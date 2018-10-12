@@ -126,9 +126,9 @@
         <form:form action="/seminar/attendees/delete" method="get">
             <p><b>To cancel your registration, enter your registration code below.</b></p>
             <input type="text" name="code" width="100"/>
-            <input type="submit" value="Cancel" class="cancel-btn"/>
+            <input type="submit" value="Submit" class="cancel-btn"/>
         </form:form>
-        <h4>${error}</h4>
+        <p class="login-error">${error}</p>
         </div>
 
     </div>

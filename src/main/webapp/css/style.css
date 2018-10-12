@@ -832,3 +832,8 @@ body {
     height: 100px;
     padding: 15px;
 }
+
+.center{
+    text-align: center;
+    margin: 0 auto;
+}
