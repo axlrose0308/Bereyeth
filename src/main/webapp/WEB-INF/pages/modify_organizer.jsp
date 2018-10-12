@@ -58,14 +58,6 @@
         </tr>
         <tr>
             <td>
-                <label for="phone">Phone</label>
-            </td>
-            <td>
-                <input type="text" id="phone" name="phone" value="${organizer.phone}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <label for="email">Email</label>
             </td>
             <td>

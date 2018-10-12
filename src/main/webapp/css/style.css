@@ -757,20 +757,18 @@ body {
     padding: 30px 150px;
 }
 
-.user-management-section h1{
-    margin: 0;
-}
-
 .user-management-bg{
     background-color: #F3F8F9;
     border: 1px solid #E5E5E5;
     padding: 20px 80px;
 }
 
+.create-user-form table{
+    width: 100%;
+}
+
 .user-management-bg h2{
     text-align: left;
-    padding: 0;
-    margin:0;
 }
 
 
