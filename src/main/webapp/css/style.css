@@ -768,6 +768,14 @@ body {
     padding: 20px 80px;
 }
 
+.user-management-bg table{
+    width: 100%;
+}
+
+.user-management-bg th{
+    text-align: left;
+}
+
 .create-user-form table{
     width: 100%;
 }
