@@ -28,7 +28,7 @@
 <body>
 <header class="site-header">
     <div class="header-bg">
-        <img src="/img/home-bg.png" class="header-bg">
+        <img src="/img/home-bg-small.png" class="header-bg">
         <div class="header-container">
             <div class="header-top">
                 <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
@@ -76,14 +76,13 @@
                 </div>
             </div>
 
-            <div class="title-container">
-                <h1>Find and register for UTS seminars here!</h1>
-            </div>
         </div>
     </div>
 </header>
 
-<div class="about-section-v2">
+
+<div class='about-section-v2'>
+    <h1>User Management</h1>
 <div class="your-seminar-section">
 <table>
     <h2>All hosts</h2>

@@ -12,21 +12,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <!--
-    <title>Title</title>
-    <style>
-        th, td {
-            padding: 2px;
-        }
-        table {
-            border-spacing: 15px;
-            padding: 5px;
-            border: solid chartreuse;
-        }
-    </style>
-    -->
     <meta charset="utf-8">
-    <title>Create Seminar</title>
+    <title>Create Organizer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
