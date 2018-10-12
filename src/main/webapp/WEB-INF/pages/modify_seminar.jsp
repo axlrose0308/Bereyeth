@@ -242,10 +242,10 @@
     </table>
 
     <div class='create-seminar-buttons'>
-        <a href="<%=home%>"><button class='back-seminar-button'>Back</button></a>
         <input type="submit" value="Modify Seminar" class='create-seminar-button'/>
     </div>
 </form:form>
+    <a href="<%=home%>"><button class='back-seminar-button'>Back</button></a>
 </div>
 
 <footer class='site-footer'>
