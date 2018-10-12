@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -31,21 +32,23 @@
     <img src="/img/home-bg.png" class='login-bg-img'>
     <div class='login-form-container'>
         <img src="/img/logo.png" class='login-logo'>
-        <h1>Organizer Login</h1>
+        <h2>Organizer Login</h2>
             <form:form action="/login/organizer" method="POST">
                 <div class=login-form>
                 <form>
                         <input type="text" id="username" name="username" placeholder="Username"/>
 
                         <input type="password" id="password" name="password" placeholder="Password"/>
+                    <p class="login-error">${error}</p>
+
                     <div class="login-buttons">
+                        <a href="/"><button>Go Back</button></a>
                         <input type="submit" value="Login"/>
                     </div>
                 </form>
                 </div>
             </form:form>
     </div>
-<h2>${error}</h2>
 </div>
 </body>
 </html>

@@ -216,6 +216,7 @@
         <input type="submit" value="Create Seminar" class='create-seminar-button'/>
     </div>
 
+
 </form:form>
 </div>
 
