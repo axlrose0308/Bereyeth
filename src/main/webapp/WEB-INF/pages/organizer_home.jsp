@@ -67,7 +67,7 @@
 
                 <div class='header-links'>
                     <ul class='nav-menu'>
-                        <li><a href='/'><li>Home</li></a></li>
+                        <li><a href='/organizer/'><li>Home</li></a></li>
                         <li><a href="/seminar/register">Seminars</a></li>
                         <li><a href="#">About us</a></li>
                         <li><a href="#">Contact</a></li>
@@ -95,7 +95,6 @@
             <th>Location</th>
             <th>Date</th>
             <th>Time</th>
-            <th>Description</th>
             <th>Category</th>
             <th>Duration</th>
             <th>Capacity</th>
@@ -111,18 +110,22 @@
                 <td>${seminar.location}</td>
                 <td>${seminar.holdDate}</td>
                 <td>${seminar.time}</td>
-                <td>${seminar.description}</td>
                 <td>${seminar.category}</td>
                 <td>${seminar.duration}</td>
                 <td>${seminar.capacity}</td>
                 <c:if test="${seminar.hostByHostId.deleted}"><td>Deleted</td></c:if>
                 <c:if test="${not seminar.hostByHostId.deleted}"><td>${seminar.hostByHostId.username}</td></c:if>
-                <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
+                <c:if test="${not seminar.passed()}"><td><a href="/seminar/edit?seminarId=${seminar.id}"><img src="/img/edit.png" class="table-icon"></a></td></c:if>
+                <c:if test="${seminar.passed()}"><td> </td></c:if>
+                <td><a href="/seminar/attendees?seminarId=${seminar.id}"><img src="/img/attendance.png" class="table-icon"></a></td>
+                <td><a href="/seminar/delete?seminarId=${seminar.id}"><img src="/img/delete.png" class="table-icon"></a></td>
+                <!--
+                <td><a href="/seminar/attendees?seminarId=${seminar.id}">Attendance</a></td>
                 <c:if test="${seminar.hostByHostId.deleted}"><td></td></c:if>
                 <c:if test="${not seminar.hostByHostId.deleted}"><td><a href="/host/edit?id=${seminar.hostByHostId.id}">Edit host</a></td></c:if>
                 <c:if test="${seminar.passed()}"><td/></c:if>
                 <c:if test="${not seminar.passed()}"><td><a href="/seminar/edit?seminarId=${seminar.id}">Edit</a></td></c:if>
-                <td><a href="/seminar/delete?seminarId=${seminar.id}">Delete</a></td>
+                <td><a href="/seminar/delete?seminarId=${seminar.id}">Delete</a></td>-->
             </tr>
         </c:forEach>
     </table>
@@ -208,7 +211,7 @@
         <div class='footer-container-bottom'>
             <img src='/img/logo.png'>
             <ul class='nav-menu'>
-                <a href="index.jsp"><li>Home</li></a>
+                <a href="/organizer/"><li>Home</li></a>
                 <a href='/index'><li>About Us</li></a>
                 <a href='/seminars'><li>Seminars</li></a>
                 <a href='/contact'><li>Contact</li></a>

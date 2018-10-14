@@ -115,7 +115,16 @@
                 <input type="email" id="email" name="email" class='seminar-form-input'/>
             </td>
         </tr>
+        <tr>
+            <td>
+                <label for="phone">Phone Number</label>
+            </td>
+            <td>
+                <input type="text" id="phone" name="phone" class='seminar-form-input'/>
+            </td>
+        </tr>
     </table>
+
         <p class="login-error">${error}</p>
 
         <div class='create-seminar-buttons'>

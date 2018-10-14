@@ -88,19 +88,18 @@
     <h2>All hosts</h2>
     <tr>
         <th>Username</th>
-        <th>Phone</th>
         <th>Email</th>
+        <th>Phone Number</th>
     </tr>
 <c:forEach var="host" items="${hosts}">
         <tr>
             <td >${host.username}</td>
-
-            <td >${host.phone}</td>
             <td >${host.email}</td>
+            <td >${host.phone}</td>
             <td >
-                <a href="/host/edit?id=${host.id}">Modify</a>
+                <a href="/host/edit?id=${host.id}"><img src="/img/edit.png" class="table-icon"></a>
             </td>
-            <td><a href="/admin/delete_host?id=${host.id}">Delete</a></td>
+            <td><a href="/admin/delete_host?id=${host.id}"><img src="/img/delete.png" class="table-icon"></a></td>
         </tr>
 </c:forEach>
 </table>
@@ -114,6 +113,7 @@
     <tr>
         <th>Username</th>
         <th>Email</th>
+        <th>Phone Number</th>
         <th></th>
         <th></th>
     </tr>
@@ -121,10 +121,11 @@
     <tr>
             <td >${organizer.username}</td>
             <td >${organizer.email}</td>
+            <td >${organizer.phone}</td>
             <td >
-                <a href="/admin/modify_organizer?id=${organizer.id}">Modify</a>
+                <a href="/admin/modify_organizer?id=${organizer.id}"><img src="/img/edit.png" class="table-icon"></a>
             </td><td>
-                <a href="/admin/delete_organizer?id=${organizer.id}">Delete</a>
+                <a href="/admin/delete_organizer?id=${organizer.id}"><img src="/img/delete.png" class="table-icon"></a>
             </td>
         </tr>
 </c:forEach>
@@ -140,13 +141,11 @@
         <th>Location</th>
         <th>Date</th>
         <th>Time</th>
-        <th>Description</th>
         <th>Category</th>
         <th>Duration</th>
         <th>Host</th>
         <th>Organizer</th>
-        <th></th>
-        <th></th>
+        <th colspan="3"></th>
     </tr>
     <c:forEach items="${seminars}" var="seminar">
         <tr>
@@ -154,16 +153,15 @@
             <td>${seminar.location}</td>
             <td>${seminar.holdDate}</td>
             <td>${seminar.time}</td>
-            <td>${seminar.description}</td>
             <td>${seminar.category}</td>
             <td>${seminar.duration}</td>
             <td>${seminar.adminByAdminId.username}</td>
             <c:if test="${seminar.hostByHostId.deleted}"><td>Deleted</td></c:if>
             <c:if test="${not seminar.hostByHostId.deleted}"><td>${seminar.hostByHostId.username}</td></c:if>
-            <td><a href="/seminar/attendees?seminarId=${seminar.id}">View attendees</a></td>
-            <c:if test="${not seminar.passed()}"><td><a href="/seminar/edit?seminarId=${seminar.id}">Edit</a></td></c:if>
+            <c:if test="${not seminar.passed()}"><td><a href="/seminar/edit?seminarId=${seminar.id}"><img src="/img/edit.png" class="table-icon"></a></td></c:if>
             <c:if test="${seminar.passed()}"><td> </td></c:if>
-            <td><a href="/seminar/delete?seminarId=${seminar.id}">Delete</a></td>
+            <td><a href="/seminar/attendees?seminarId=${seminar.id}"><img src="/img/attendance.png" class="table-icon"></a></td>
+            <td><a href="/seminar/delete?seminarId=${seminar.id}"><img src="/img/delete.png" class="table-icon"></a></td>
         </tr>
     </c:forEach>
 </table>

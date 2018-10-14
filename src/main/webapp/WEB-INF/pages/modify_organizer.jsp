@@ -113,6 +113,13 @@
             </td>
         </tr>
         <tr>
+            <td>
+                <label for="phone">Phone Number</label>
+            </td>
+            <td>
+                <input type="text" id="phone" name="phone" value="${host.phone}" class='seminar-form-input'/>
+            </td>
+        </tr>
     </table>
         <p class="login-error">${error}</p>
 

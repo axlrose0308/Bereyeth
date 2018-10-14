@@ -99,7 +99,6 @@
             <th>Location</th>
             <th>Date</th>
             <th>Time</th>
-            <th>Description</th>
             <th>Duration</th>
             <th>Capacity</th>
             <th>Organizer</th>
@@ -111,7 +110,6 @@
                 <td>${seminar.location}</td>
                 <td>${seminar.holdDate}</td>
                 <td>${seminar.time}</td>
-                <td>${seminar.description}</td>
                 <td>${seminar.duration}</td>
                 <td>${seminar.capacity}</td>
                 <td>${seminar.organizerByOrganizerId.username}</td>

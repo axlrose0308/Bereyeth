@@ -706,7 +706,7 @@ body {
 .your-seminar-section{
     background-color: #F3F8F9;
     height: auto;
-    width: 80%;
+    width: 90%;
     margin: 40px auto;
     border: 1px solid #E5E5E5;
 }
@@ -844,4 +844,9 @@ body {
 .center{
     text-align: center;
     margin: 0 auto;
+}
+
+.table-icon{
+    height: 35px;
+    margin: 2px;
 }
