@@ -134,7 +134,11 @@
     <h1>You are not organising any seminars.</h1>
 </c:if>
 
+        <div class='create-seminar-buttons'>
         <a href="/seminar/add"><button class="create-seminar-button">Create Seminar</button></a>
+        </div>
+    </div>
+</div>
     </div>
 </div>
 

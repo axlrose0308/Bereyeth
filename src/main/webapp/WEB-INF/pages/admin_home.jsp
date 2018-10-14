@@ -103,6 +103,9 @@
         </tr>
 </c:forEach>
 </table>
+    <div class='create-seminar-buttons'>
+        <a href="/admin/add_host"><button class="create-seminar-button">Create Host</button></a>
+    </div>
 </div>
 </div>
 
@@ -130,6 +133,10 @@
         </tr>
 </c:forEach>
 </table>
+        <div class='create-seminar-buttons'>
+            <a href="/admin/add_organizer"><button class="create-seminar-button">Create Organizer</button></a>
+        </div>
+
     </div></div>
 
 <div class="about-section-v2">
@@ -165,6 +172,9 @@
         </tr>
     </c:forEach>
 </table>
+        <div class='create-seminar-buttons'>
+            <a href="/seminar/add"><button class="create-seminar-button">Create Seminar</button></a>
+        </div>
     </div>
 </div>
 
