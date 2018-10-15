@@ -115,7 +115,14 @@
                 <label for="location">Location</label>
             </td>
             <td>
-                <input type="text" id="location" name="location" value="${seminar.location}"class='seminar-form-input'/>
+                <select id="location" name="location" class='seminar-form-input'>
+                    <option>B11.04.401</option>
+                    <option>B10.07.706</option>
+                    <option>B07.04.403</option>
+                    <option>B06.02.201</option>
+                    <option>B05.03.303</option>
+                    <option>B01.02.Presenting Room</option>
+                </select>
             </td>
         </tr>
         <tr>

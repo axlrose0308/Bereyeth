@@ -18,9 +18,10 @@ import service.HostService;
 import service.OrganizerService;
 import service.SeminarService;
 import util.PdfUtil;
+import java.sql.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.*;
 
 import static model.Seminar.CATEGORIES;
 
@@ -68,14 +69,6 @@ public class SeminarController {
 
     }
 
-    @RequestMapping(value = "/attendees", method = RequestMethod.GET)
-    public String viewAttendees(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap) {
-        List<Attendee> attendees = seminarService.getAttendees(seminarId);
-        modelMap.addAttribute("attendees", attendees);
-        modelMap.addAttribute("seminar", seminarService.get(seminarId));
-        return "attendees";
-    }
-
     @RequestMapping(value = "/attendees/edit", method = RequestMethod.GET)
     public String editAttendee(@RequestParam("id") Integer id,
                                @RequestParam(required = false, name="seminarId") Integer seminarId, ModelMap modelMap
@@ -98,6 +91,14 @@ public class SeminarController {
         return "redirect:" + path;
     }
 
+    @RequestMapping(value = "/attendees", method = RequestMethod.GET)
+    public String viewAttendees(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap) {
+        List<Attendee> attendees = seminarService.getAttendees(seminarId);
+        modelMap.addAttribute("attendees", attendees);
+        modelMap.addAttribute("seminar", seminarService.get(seminarId));
+        return "attendees";
+    }
+
     @RequestMapping(value = "/attendees/delete", method = RequestMethod.GET)
     public String viewAttendees(@RequestParam(required = false, name = "id") Integer attendeeId,
                                 @RequestParam(required = false, name = "seminarId") Integer seminarId,
@@ -116,6 +117,23 @@ public class SeminarController {
             return "cancel_registration";
         }
     }
+
+//    @RequestMapping(value = {"/seminar"}, method = RequestMethod.GET)
+//    public String allSeminars(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap) {
+//        Seminar seminar = seminarService.get(seminarId);
+//        modelMap.addAttribute("allSeminars", seminarService.get(seminarId));
+//        return "redirect:/seminar/";
+//    }
+//
+//    @RequestMapping(value = {"/allSeminars"}, method = RequestMethod.GET)
+//    public String allSeminars(@RequestParam(name = "id", required = false)Integer seminarId,
+//                              @RequestParam(name = "location", required = false)String location,
+//                              @RequestParam(name = "time", required = false)Time time,
+//                              @RequestParam(name = "duration", required = false)Time duration,
+//                              @RequestParam(name = "catagory", required = false)String catagory) {
+//
+//    }
+
 
     @RequestMapping("/attendees/download")
     public ResponseEntity<byte[]> download(@RequestParam("id") Integer id){
@@ -199,8 +217,6 @@ public class SeminarController {
         if(error != null && !error.equals("")) modelMap.addAttribute("error", error);
         return "modify_seminar";
     }
-
-
 
     @RequestMapping(value = {"/edit"}, method = RequestMethod.POST)
     public String edit(@RequestParam("seminarId") Integer seminarId,

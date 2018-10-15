@@ -2,7 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="model.Admin" %>
 <%@ page import="model.Host" %>
-<%@ page import="model.Organizer" %><%--
+<%@ page import="model.Organizer" %>
+<%--
   Created by IntelliJ IDEA.
   User: eric
   Date: 31/08/18
@@ -39,6 +40,8 @@
             <div class="header-top">
                 <div class="header-top-logo"><a href="index.jsp"><img src="/img/logo.png" class="header-logo"></a></div>
 
+
+<!-- Detect what type of user has logged in to the system and redirect to the welcome page of the specific role -->
 <%
     Admin admin = null;
     Host host = null;
@@ -139,7 +142,7 @@
     <img src="/img/seminars-banner.jpg">
     <div class="seminars-section-desc">
         <h1>Seminars</h1>
-        <a href="#"><button><span>Click to search for seminars</span></button></a>
+        <a href="/redirect/allSeminars"><button><span>Click to search for seminars</span></button></a>
     </div>
 </div>
 
@@ -151,13 +154,6 @@
 </c:if>
 
 <c:if test="${not empty seminars}">
-    <!--<table >
-        <tr>
-            <th>Subject</th>
-            <th>Hold Date</th>
-            <th>Category</th>
-            <th></th>
-        </tr>-->
         <c:forEach var="seminar" items="${seminars}">
     <div class='individual-seminar-item'>
         <img src='/img/tech-banner.jpg' class='individual-seminar-item-banner'>
@@ -172,25 +168,7 @@
             <p>${seminar.category}</p>
         </div>
     </div>
-
-
-           <!-- <tr>
-                <td >
-                        ${seminar.subject}
-                </td>
-                <td>
-                        ${seminar.holdDate}
-                </td>
-                <td>
-                        ${seminar.category}
-                </td>
-                <td>
-                    <a href="/seminar/details?id=${seminar.id}">View detail</a>
-                </td>
-            </tr>-->
         </c:forEach>
-
-    <!--</table>-->
 </c:if>
 </div>
 
@@ -207,9 +185,9 @@
         <div class='footer-container-bottom'>
             <img src='img/logo.png'>
             <ul class='nav-menu'>
-                <a href="index.jsp"><li>Home</li></a>
+                <a href=<%=home%>><li>Home</li></a>
                 <a href='/index'><li>About Us</li></a>
-                <a href='/seminars'><li>Seminars</li></a>
+                <a href="#"><li>Seminars</li></a>
                 <a href='/contact'><li>Contact</li></a>
             </ul>
         </div>

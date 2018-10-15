@@ -79,7 +79,7 @@
 
                 <div class='header-links'>
                     <ul class='nav-menu'>
-                        <li><a href='/'><li>Home</li></a></li>
+                        <li><a href=<%=home%>><li>Home</li></a></li>
                         <li><a href="/seminar/register">Seminars</a></li>
                         <li><a href="#">About us</a></li>
                         <li><a href="#">Contact</a></li>
@@ -114,14 +114,12 @@
             </td>
             <td>
                 <select id="location" name="location" class='seminar-form-input'>
-                    <option>UTS Building 11</option>
-                    <option>UTS Building 10</option>
-                    <option>UTS Building 7</option>
-                    <option>UTS Building 6</option>
-                    <option>UTS Building 5</option>
-                    <option>UTS Buidling 4</option>
-                    <option>UTS Buidling 3</option>
-                    <option>UTS Buidling 1</option>
+                    <option>B11.04.401</option>
+                    <option>B10.07.706</option>
+                    <option>B07.04.403</option>
+                    <option>B06.02.201</option>
+                    <option>B05.03.303</option>
+                    <option>B01.02.Presenting Room</option>
                 </select>
             </td>
         </tr>
