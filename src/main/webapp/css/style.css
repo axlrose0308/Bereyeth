@@ -379,12 +379,17 @@ body {
     height: auto;
 }
 
-.search-seminars-section input{
+.search-seminars-section select{
     background-color: #F3F8F9;
-    padding: 10px 70px 10px 20px;
-    margin: 30px;
-    height: 20px;
     border: 1px solid #E5E5E5;
+}
+
+.search-seminars-section input{
+    border: none;
+    margin: 10px;
+    cursor:pointer;
+    background-color: #00BE39;
+    color: white;
 }
 
 .upcoming-seminars-section h1{

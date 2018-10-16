@@ -78,9 +78,9 @@
                         <div class='header-links'>
                             <ul class='nav-menu'>
                                 <li><a href='/'><li>Home</li></a></li>
-                                <li><a href="/seminar/register">Seminars</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="/seminar/allSeminars">Seminars</a></li>
+                                <li><a href='/'>About us</a></li>
+                                <li><a href='/'>Contact</a></li>
                             </ul>
                         </div>
             </div>
@@ -92,30 +92,6 @@
         </div>
     </div>
 </header>
-
-
-<form:form action="/" method="GET">
-    <!--<table>
-    <tr>
-        <td>
-            <select id="category" name="category">
-                <option>All</option>
-                <c:forEach items="${categories}" var="category">
-                    <c:if test="${category.equals(selected)}">
-                        <option selected="selected">${category}</option>
-                    </c:if>
-                    <c:if test="${not category.equals(selected)}">
-                        <option>${category}</option>
-                    </c:if>
-                </c:forEach>
-            </select>
-        </td>
-        <td>
-    <input type="submit" value="View By Category"/>
-        </td>
-    </tr>
-</table>-->
-</form:form>
 
 <div class="about-section">
     <div class="about-section-icon">
@@ -185,10 +161,10 @@
         <div class='footer-container-bottom'>
             <img src='img/logo.png'>
             <ul class='nav-menu'>
-                <a href=<%=home%>><li>Home</li></a>
-                <a href='/index'><li>About Us</li></a>
-                <a href="#"><li>Seminars</li></a>
-                <a href='/contact'><li>Contact</li></a>
+                <a href='/'><li>Home</li></a>
+                <a href='/'><li>About Us</li></a>
+                <a href="/seminar/allSeminars"><li>Seminars</li></a>
+                <a href='/'><li>Contact</li></a>
             </ul>
         </div>
     </div>

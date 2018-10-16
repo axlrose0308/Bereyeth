@@ -113,7 +113,7 @@
             <input type="submit" value="Confirm" class='create-seminar-button'/>
             </form:form>
         </div>
-        <a href="/seminar/attendees?seminarId=${seminar.id}"><button class='back-seminar-button'>Back</button></a>
+        <a href=<%=home%>><button class='back-seminar-button'>Back</button></a>
     </div>
 </div>
 
