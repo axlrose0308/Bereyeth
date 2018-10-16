@@ -118,21 +118,13 @@ public class SeminarController {
         }
     }
 
-//    @RequestMapping(value = {"/seminar"}, method = RequestMethod.GET)
-//    public String allSeminars(@RequestParam("seminarId") Integer seminarId, ModelMap modelMap) {
-//        Seminar seminar = seminarService.get(seminarId);
-//        modelMap.addAttribute("allSeminars", seminarService.get(seminarId));
-//        return "redirect:/seminar/";
-//    }
-//
-//    @RequestMapping(value = {"/allSeminars"}, method = RequestMethod.GET)
-//    public String allSeminars(@RequestParam(name = "id", required = false)Integer seminarId,
-//                              @RequestParam(name = "location", required = false)String location,
-//                              @RequestParam(name = "time", required = false)Time time,
-//                              @RequestParam(name = "duration", required = false)Time duration,
-//                              @RequestParam(name = "catagory", required = false)String catagory) {
-//
-//    }
+    @RequestMapping(value = {"/allSeminars"}, method = RequestMethod.GET)
+    public String allSeminars(HttpSession session, ModelMap modelMap) {
+        //Seminar seminar = (Seminar)session.getAttribute("seminar");
+        //modelMap.addAttribute("seminar", seminarService.get(id));
+        modelMap.addAttribute("seminars", seminarService.getAll());
+        return "allSeminars";
+    }
 
 
     @RequestMapping("/attendees/download")

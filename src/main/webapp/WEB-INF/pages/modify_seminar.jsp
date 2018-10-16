@@ -104,6 +104,11 @@
     <table>
         <tr>
             <td>
+                <input type="hidden" id="seminarId" name="seminarId" value="${seminar.id}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="subject">Seminar Title</label>
             </td>
             <td>

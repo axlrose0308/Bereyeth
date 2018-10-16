@@ -32,7 +32,7 @@
 <body>
 <div class="all-seminars">
     <h1>All Seminars</h1>
-
+<form:form action="/seminar/allSeminars" method="post" id="all-seminars-form" name="all-seminars-form">
     <c:if test="${empty seminars}">
         <p>There are no available seminars.</p>
     </c:if>
@@ -40,34 +40,29 @@
     <c:if test="${not empty seminars}">
         <table>
         <tr>
-        <th>Subject</th>
-        <th>Hold Date</th>
-        <th>Category</th>
-        <th></th>
-        </tr>-->
-            <tr>
-            <td >
-            ${seminar.subject}
-            </td>
-            <td>
-            ${seminar.holdDate}
-            </td>
-            <td>
-            ${seminar.category}
-            </td>
-            <td>
-            ${seminar.location}
-            </td>
-            <td>
-            ${seminar.time}
-            </td>
+            <c:forEach var="seminar" items="${seminars}">
+                <div class='individual-seminar-item'>
+                    <img src='/img/tech-banner.jpg' class='individual-seminar-item-banner'>
+                    <h2>${seminar.subject}</h2>
+                    <div class='individual-seminar-item-location'>
+                        <img src='/img/location-icon.png' class='location-icon'>
+                        <h4>${seminar.location}</h4>
+                    </div>
+                    <p>${seminar.holdDate} ${seminar.time}${seminar.duration} </p>
+                    <a href="/seminar/details?id=${seminar.id}"><button>Read more</button></a>
+                    <div class='individual-seminar-item-tags'>
+                        <p>${seminar.category}</p>
+                    </div>
+                </div>
+            </c:forEach>
             <td>
             <a href="/seminar/details?id=${seminar.id}">View detail</a>
+                <button type="submit"> submit </button>
             </td>
             </tr>
         </table>
     </c:if>
 </div>
-
+</form:form>
 </body>
 </html>

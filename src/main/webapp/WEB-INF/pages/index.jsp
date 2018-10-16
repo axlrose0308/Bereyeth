@@ -111,7 +111,7 @@
             </select>
         </td>
         <td>
-            <input type="submit" value="View By Category"/>
+    <input type="submit" value="View By Category"/>
         </td>
     </tr>
 </table>-->
@@ -142,7 +142,7 @@
     <img src="/img/seminars-banner.jpg">
     <div class="seminars-section-desc">
         <h1>Seminars</h1>
-        <a href="/redirect/allSeminars"><button><span>Click to search for seminars</span></button></a>
+        <a href="/seminar/allSeminars"><button><span>Click to search for seminars</span></button></a>
     </div>
 </div>
 
